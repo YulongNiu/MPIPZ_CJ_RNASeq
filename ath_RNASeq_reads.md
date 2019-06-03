@@ -16,6 +16,21 @@
 
 ## 2. subSeq
 
+* Col0_FeCl3_HK_Day8 vs. Col0_FeCl3_Live_Day8
+
+![Col0_FeCl3_HK_Day8_vs_Col0_FeCl3_Live_Day8](results/Col0_FeCl3_HK_Day8_vs_Col0_FeCl3_Live_Day8.jpg)
+
+* Col0_FeCl3_HK_Day15 vs. Col0_FeCl3_Live_Day15
+
+![Col0_FeCl3_HK_Day15_vs_Col0_FeCl3_Live_Day15](results/Col0_FeCl3_HK_Day15_vs_Col0_FeCl3_Live_Day15.jpg)
+
+* f6h1_FeCl3_HK_Day8 vs. f6h1_FeCl3_Live_Day8
+
+![f6h1_FeCl3_HK_Day8_vs_f6h1_FeCl3_Live_Day8](results/f6h1_FeCl3_HK_Day8_vs_f6h1_FeCl3_Live_Day8.jpg)
+
+* f6h1_FeCl3_HK_Day15 vs. f6h1_FeCl3_Live_Day15
+
+![f6h1_FeCl3_HK_Day15_vs_f6h1_FeCl3_Live_Day15](results/f6h1_FeCl3_HK_Day15_vs_f6h1_FeCl3_Live_Day15.jpg)
 
 
 ## 3. References
