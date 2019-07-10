@@ -104,6 +104,14 @@
 
 * Correlation matrix
 
+```
+  FeCl3 FeEDTA HK Live
+1     1      0  1    0
+2     1      0  0    1
+3     0      1  1    0
+4     0      1  0    1
+```
+
 ![kmeans_10_Col0Day15_trait](results/kmeans_10_Col0Day15_trait.jpg)
 
 ## 4. References
