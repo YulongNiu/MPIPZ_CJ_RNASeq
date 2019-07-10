@@ -98,13 +98,13 @@
 
 * Clusters
 
-![kmeans_10_Col0Day15.jpg](results/kmeans_10_Col0Day15)
+![kmeans_10_Col0Day15](results/kmeans_10_Col0Day15.jpg)
 
 ![kmeans_10_Col0Day15_genes](results/kmeans_10_Col0Day15_genes.jpg)
 
 * Correlation matrix
 
-![kmeans_10_Col0Day15_trait.jpg](results/kmeans_10_Col0Day15_trait)
+![kmeans_10_Col0Day15_trait](results/kmeans_10_Col0Day15_trait.jpg)
 
 ## 4. References
 
