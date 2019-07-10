@@ -1,4 +1,4 @@
-# Randomly drop RNA-Seq reads from CJ's datasets
+# Analysis of CJ's RNA-Seq datasets
 
 <!-- content start -->
 
@@ -6,7 +6,9 @@
 
 - [1. Alignment](#1-alignment)
 - [2. subSeq](#2-subseq)
-- [3. References](#2-references)
+- [3. Cluster](#3-cluster)
+    - [3.1 Col0Day15](#31-col0day15)
+- [4. References](#4-references)
 
 <!-- content end -->
 
@@ -82,6 +84,28 @@
 ![f6h1_FeCl3_HK_Day15_vs_f6h1_FeCl3_Live_Day15](results/f6h1_FeCl3_HK_Day15_vs_f6h1_FeCl3_Live_Day15.jpg)
 
 
-## 3. References
+## 3. Cluster
+
+### 3.1 Col0Day15
+
+* AIC
+
+![kmeans_AIC_Col0Day15](results/kmeans_AIC_Col0Day15.jpg)
+
+* SEE
+
+![kmeans_sse_Col0Day15](results/kmeans_sse_Col0Day15.jpg)
+
+* Clusters
+
+![kmeans_10_Col0Day15.jpg](results/kmeans_10_Col0Day15)
+
+![kmeans_10_Col0Day15_genes](results/kmeans_10_Col0Day15_genes.jpg)
+
+* Correlation matrix
+
+![kmeans_10_Col0Day15_trait.jpg](results/kmeans_10_Col0Day15_trait)
+
+## 4. References
 
 1. Robinson DG, Storey JD: **subSeq: determining appropriate sequencing depth through efficient read subsampling.** *Bioinformatics*. 2014;30(23):3424-6.
