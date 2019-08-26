@@ -1,5 +1,5 @@
 ###########################Raw reads######################
-rawpath <- '/netscratch/dep_psl/grp_rgo/yniu/CJFe/raw_data'
+rawpath <- '/netscratch/dep_psl/grp_rgo/yniu/CJFe/raw_data_1stadd'
 setwd(rawpath)
 
 library('magrittr')
@@ -36,7 +36,7 @@ snames <- fqs %>%
 
 tibble(sample = snames,
        rawfq = rn) %>%
-  write_csv('raw_seqnumber.csv')
+  write_csv('raw_seqnumber_1stadd.csv')
 ##########################################################
 
 #################extract Kallisto and HISAT2 output########
@@ -112,22 +112,18 @@ sampleAnno <- read_delim('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/sample_anno
   mutate(ID = ID %>% str_replace('\\.', '_'), SampleAnno = SampleAnno %>% str_replace('-', '_')) %>%
   arrange(ID)
 
-athout <- 'alignment_nohup.out' %>%
+athout <- 'alignment_nohup_1stadd.out' %>%
   readLines %>%
   KHoutput(type = 'PE', org = 'ath') %>%
   mutate(H_ath = round(hmap/trimfq, 3), K_ath = round(kmap/trimfq, 3)) %>%
   select(c(-hmap, -kmap, -org))
 
 ## raw reads
-rawrd <- read_csv('raw_seqnumber.csv')
+rawrd <- read_csv('raw_seqnumber_1stadd.csv')
 
 contam <- rawrd %>%
-  inner_join(athout) %>%
-  inner_join(sampleAnno, c('sample' = 'ID')) %>%
-  rename(anno = SampleAnno) %>%
-  select(sample, anno, everything()) %>%
-  arrange(anno)
+  inner_join(athout)
 
-write_csv(contam, 'ath_alignment.csv')
+write_csv(contam, 'ath_alignment_1stadd.csv')
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ######################################################

@@ -1,8 +1,8 @@
 date
 
 REF_PATH=/netscratch/dep_psl/grp_rgo/yniu/ref/ath
-CLEAN_PATH=/netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data
-ALIGN_PATH=/netscratch/dep_psl/grp_rgo/yniu/CJFe/align_data
+CLEAN_PATH=/netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd
+ALIGN_PATH=/netscratch/dep_psl/grp_rgo/yniu/CJFe/align_data_1stadd
 
 KALLISTO_PATH=/home/yniu/Biotools/kallisto_v0.45.1
 HISAT2_PATH=/home/yniu/Biotools/hisat2-2.1.0

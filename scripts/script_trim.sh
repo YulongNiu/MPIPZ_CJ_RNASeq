@@ -1,14 +1,13 @@
 date
 
-RAW_PATH=/netscratch/dep_psl/grp_rgo/yniu/CJFe/raw_data
-CLEAN_PATH=/netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data
+RAW_PATH=/netscratch/dep_psl/grp_rgo/yniu/CJFe/raw_data_1stadd
+CLEAN_PATH=/netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd
 
 FASTP_PATH=/home/yniu/Biotools
 
 CORENUM=16
 
 cd ${RAW_PATH}
-
 
 ## sample names
 fq=($(ls | grep fq.gz))

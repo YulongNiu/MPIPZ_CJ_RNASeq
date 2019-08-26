@@ -2,8 +2,8 @@ require('magrittr')
 require('doParallel')
 require('foreach')
 
-rawfqPath <- '/biodata/dep_psl/grp_rgo/yniu/CJ_201901_RNASeq'
-resFolder <- '/netscratch/dep_psl/grp_rgo/yniu/CJFe/raw_data'
+rawfqPath <- '/biodata/dep_psl/grp_rgo/yniu/CJ_raw_data_1stadd/'
+resFolder <- '/netscratch/dep_psl/grp_rgo/yniu/CJFe/raw_data_1stadd'
 zcatPath <- '/bin/cat'
 ncore <- 40
 
