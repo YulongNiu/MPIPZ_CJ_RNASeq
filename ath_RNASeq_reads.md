@@ -99,33 +99,33 @@
 
 ## 4. Cluster
 
-### 4.1 Col0Day15
+* Day 8
 
-* AIC
+![kmeans_10_Day8](results/kmeans_10_Day8.jpg)
 
-![kmeans_AIC_Col0Day15](results/kmeans_AIC_Col0Day15.jpg)
-
-* SEE
-
-![kmeans_sse_Col0Day15](results/kmeans_sse_Col0Day15.jpg)
-
-* Clusters
-
-![kmeans_10_Col0Day15](results/kmeans_10_Col0Day15.jpg)
-
-![kmeans_10_Col0Day15_genes](results/kmeans_10_Col0Day15_genes.jpg)
-
-* Correlation matrix
+![kmeans_10_Day8_genes](results/kmeans_10_Day8_genes.jpg)
 
 ```
-  FeCl3 FeEDTA HK Live
-1     1      0  1    0
-2     1      0  0    1
-3     0      1  1    0
-4     0      1  0    1
+  FeEDTA Live Col0
+1      0    0    1
+2      0    1    1
+3      1    0    1
+4      1    1    1
+5      0    0    0
+6      0    1    0
+7      1    0    0
+8      1    1    0
 ```
 
-![kmeans_10_Col0Day15_trait](results/kmeans_10_Col0Day15_trait.jpg)
+![kmeans_10_Day8_trait](results/kmeans_10_Day8_trait.jpg)
+
+* Day 14
+
+![kmeans_10_Day15](results/kmeans_10_Day15.jpg)
+
+![kmeans_10_Day15_genes](results/kmeans_10_Day15_genes.jpg)
+
+![kmeans_10_Day15_trait](results/kmeans_10_Day15_trait.jpg)
 
 ## 5. 1stadd
 

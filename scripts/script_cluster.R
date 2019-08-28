@@ -15,7 +15,7 @@ library('RColorBrewer')
 library('gridExtra')
 library('cluster')
 
-load('degres_Col0_Day15.RData')
+load('degres.RData')
 deganno <- read_csv('eachGroup_vs_Mock_k.csv',
                    col_types = cols(Chromosome = col_character()))
 
@@ -25,7 +25,7 @@ meanFe <- function(v) {
   require('magrittr')
 
   res <- v %>%
-    split(rep(1 : 4, each = 3)) %>%
+    split(rep(1 : 16, each = 3)) %>%
     sapply(mean, na.rm = TRUE)
 
   return(res)
@@ -50,19 +50,28 @@ corPvalueStudent <- function(cor, nSamples) {
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~~prepare counts~~~~~~~~~~~~~~~~~~~~~~~~~~
-rawCount <- counts(degresCol0Day15)
+rawCount <- counts(degres)
 
 ## mean value of normalized count
+sampleN <- colnames(degres) %>% substring(first = 1, last = nchar(.) - 5) %>% unique
 meanCount <- rawCount %>%
   apply(1, meanFe) %>%
   t
-colnames(meanCount) <- c('Col0_FeCl3_HK_Day15', 'Col0_FeCl3_Live_Day15', 'Col0_FeEDTA_HK_Day15', 'Col0_FeEDTA_Live_Day15')
+colnames(meanCount) <- sampleN
 
 scaleCount <- meanCount %>%
   t %>%
   scale %>%
   t
 scaleCount %<>% .[complete.cases(.), ]
+
+## Day8
+scaleCount %<>% .[, 1:8]
+rawCount %<>% .[, 1:8]
+
+## Day14
+scaleCount %<>% .[, 9:16]
+rawCount %<>% .[, 9:16]
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~K-means cluster~~~~~~~~~~~~~~~~~~~~~~
@@ -94,9 +103,8 @@ ggplot(tibble(k = 1:20, wss = wss), aes(k, wss)) +
   geom_line(linetype = 'dashed') +
   xlab('Number of clusters') +
   ylab('Sum of squared error')
-ggsave('kmeans_sse_Col0Day15.pdf')
-ggsave('kmeans_sse_Col0Day15.jpg')
-
+ggsave('kmeans_sse_Day15.pdf')
+ggsave('kmeans_sse_Day15.jpg')
 
 ## 2. Akaike information criterion
 kmeansAIC = function(fit){
@@ -118,8 +126,8 @@ ggplot(tibble(k = 1:20, aic = aic), aes(k, wss)) +
   geom_line(linetype = 'dashed') +
   xlab('Number of clusters') +
   ylab('Akaike information criterion')
-ggsave('kmeans_AIC_Col0Day15.pdf')
-ggsave('kmeans_AIC_Col0Day15.jpg')
+ggsave('kmeans_AIC_Day15.pdf')
+ggsave('kmeans_AIC_Day15.jpg')
 
 ## execute
 kClust10 <- kmeans(scaleCount, centers = 10, algorithm= 'MacQueen', nstart = 1000, iter.max = 20)
@@ -139,7 +147,7 @@ cl <- kmeansRes$clreal[match(names(kClust10$cluster), kmeansRes$ID)] %>%
 prefix <- 'kmeans_10'
 
 cl <- kClust10$cluster
-prefix <- 'kmeans_10'
+prefix <- 'kmeans_10_Day15'
 
 
 clusterGene <- scaleCount %>%
@@ -155,10 +163,10 @@ clusterGene <- scaleCount %>%
 ## plot core cluster
 clusterCore <- clusterGene %>%
   group_by(cl) %>%
-  summarise_at(2:5, mean, na.rm = TRUE) %>% ## mean of each cluster
+  summarise_at(-1, mean, na.rm = TRUE) %>% ## mean of each cluster
   mutate(cl = cl %>% paste0('cluster_', .)) %>%
-  gather(Sample, NorExpress, Col0_FeCl3_HK_Day15 : Col0_FeEDTA_Live_Day15)
-clusterCore$Sample %<>% factor(levels = c('Col0_FeEDTA_HK_Day15', 'Col0_FeEDTA_Live_Day15', 'Col0_FeCl3_HK_Day15', 'Col0_FeCl3_Live_Day15'), ordered = TRUE)
+  gather(Sample, NorExpress, -1)
+clusterCore$Sample %<>% factor(levels = sampleN[9:16], ordered = TRUE)
 
 ggplot(clusterCore, aes(Sample, NorExpress, col = cl, group = cl)) +
   geom_point() +
@@ -167,14 +175,14 @@ ggplot(clusterCore, aes(Sample, NorExpress, col = cl, group = cl)) +
   ylab('Scaled counts') +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   guides(colour = guide_legend(title = 'kmeans (k = 10)'))
-ggsave(paste0(prefix, '_Col0Day15.pdf'))
-ggsave(paste0(prefix, '_Col0Day15.jpg'))
+ggsave(paste0(prefix, '.pdf'))
+ggsave(paste0(prefix, '.jpg'))
 
 ## plot all genes
 clusterGenePlot <- clusterGene %>%
-  gather(Sample, NorExpress, Col0_FeCl3_HK_Day15 : Col0_FeEDTA_Live_Day15) %>%
+  gather(Sample, NorExpress, -ID, -cl) %>%
   mutate(cl = cl %>% paste0('cluster_', .))
-clusterGenePlot$Sample %<>% factor(levels = c('Col0_FeEDTA_HK_Day15', 'Col0_FeEDTA_Live_Day15', 'Col0_FeCl3_HK_Day15', 'Col0_FeCl3_Live_Day15'), ordered = TRUE)
+clusterGenePlot$Sample %<>% factor(levels = sampleN[9:16], ordered = TRUE)
 
 clusterCorePlot <- clusterCore %>% dplyr::mutate(ID = 1 : nrow(clusterCore))
 ggplot(clusterGenePlot, aes(Sample, NorExpress, group = ID)) +
@@ -185,19 +193,18 @@ ggplot(clusterGenePlot, aes(Sample, NorExpress, group = ID)) +
   ylab('Scaled counts') +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   guides(colour = guide_legend(title = 'kmeans (k=10)'))
-ggsave(paste0(prefix, '_Col0Day15_genes.pdf'), width = 10, dpi = 320)
-ggsave(paste0(prefix, '_Col0Day15_genes.jpg'), width = 10, dpi = 320)
+ggsave(paste0(prefix, '_genes.pdf'), width = 10, dpi = 320)
+ggsave(paste0(prefix, '_genes.jpg'), width = 10, dpi = 320)
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~cluster cor phenotype~~~~~~~~~~~~~~~~~
-traits <- data.frame(FeCl3 = c(1, 1, 0, 0),
-                     FeEDTA = c(0, 0, 1, 1),
-                     HK = c(1, 0, 1, 0),
-                     Live = c(0, 1, 0, 1))
+traits <- data.frame(FeEDTA = c(0, 0, 1, 1, 0, 0, 1, 1),
+                     Live = c(0, 1, 0, 1, 0, 1, 0, 1),
+                     Col0 = c(1, 1, 1, 1, 0, 0, 0, 0))
 
 cores <- clusterGene %>%
   group_by(cl) %>%
-  summarise_at(2:5, mean, na.rm = TRUE) %>%
+  summarise_at(-1, mean, na.rm = TRUE) %>%
   mutate(cl = cl %>% paste0('cluster_', .)) %>%
   column_to_rownames(var = 'cl') %>%
   t
@@ -208,13 +215,13 @@ moduleTraitPvalue <- corPvalueStudent(moduleTraitCor, nrow(traits))
 traitPPlot <- moduleTraitPvalue %>%
   as.data.frame %>%
   rownames_to_column('cluster') %>%
-  gather(trait, pvalue, FeCl3 : Live) %>%
+  gather(trait, pvalue, -1) %>%
   as_tibble
 
 traitCorPlot <- moduleTraitCor %>%
   as.data.frame %>%
   rownames_to_column('cluster') %>%
-  gather(trait, correlation, FeCl3 : Live) %>%
+  gather(trait, correlation, -1) %>%
   as_tibble %>%
   mutate(x = rep(0 : (ncol(traits) - 1), each = ncol(cores))) %>%
   mutate(y = rep((ncol(cores) - 1) : 0, ncol(traits))) %>%
@@ -232,12 +239,12 @@ ggplot(traitCorPlot, aes(x = x, y = y, fill = correlation)) +
                        labels = format(seq(-1, 1, 0.5)),
                        limits = c(-1, 1)) +
   geom_text(aes(label = addtext)) +
-  scale_x_continuous(breaks = 0 : (ncol(traits) - 1), labels = c('FeCl3', 'FeEDTA', 'HK', 'Live')) +
+  scale_x_continuous(breaks = 0 : (ncol(traits) - 1), labels = colnames(traits)) +
   scale_y_continuous(breaks = 0 : (ncol(cores) - 1), labels = paste0('cluster_', (ncol(cores)):1)) +
   xlab('Trait') +
   ylab('Cluster')
-ggsave(paste0(prefix, '_Col0Day15_trait.jpg'))
-ggsave(paste0(prefix, '_Col0Day15_trait.pdf'))
+ggsave(paste0(prefix, '_trait.jpg'))
+ggsave(paste0(prefix, '_trait.pdf'))
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~heat map~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
