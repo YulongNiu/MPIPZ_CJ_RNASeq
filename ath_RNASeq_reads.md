@@ -192,6 +192,35 @@
 
 ![PCA_Day14_1stadd](results/PCA_Day14_1stadd.jpg)
 
+### 5.3 Clusters
+
+* Day 8
+
+![kmeans_10_Day8_1stadd](results/kmeans_10_Day8_1stadd.jpg)
+
+![kmeans_10_Day8_genes_1stadd](results/kmeans_10_Day8_genes_1stadd.jpg)
+
+```
+  FeEDTA Live Col0
+1      0    0    1
+2      0    1    1
+3      1    0    1
+4      1    1    1
+5      0    0    0
+6      0    1    0
+7      1    0    0
+8      1    1    0
+```
+
+![kmeans_10_Day8_trait_1stadd](results/kmeans_10_Day8_trait_1stadd.jpg)
+
+* Day 14
+
+![](results/)
+
+![](results/)
+
+![](results/)
 
 ## References
 
