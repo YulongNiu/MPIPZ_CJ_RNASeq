@@ -74,7 +74,7 @@ degres %<>%
   apply(1, checkFe, 1) %>%
   degres[., ]
 ## degres <- degres[rowSums(counts(degres)) > 1, ]
-save(degres, file = 'degres_Col0_Day15.RData')
+save(degres, file = 'degres_1stadd.RData')
 
 degres <- DESeq(degres)
 ## resultsNames(degres)

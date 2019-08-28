@@ -10,7 +10,7 @@ checkFe <- function(v, threshold) {
   require('magrittr')
 
   res <- v %>%
-    split(rep(1 : 4, each = 3)) %>%
+    split(rep(1 : 16, each = 3)) %>%
     sapply(checkZeros, threshold) %>%
     all
 
@@ -38,13 +38,18 @@ anno <- read_csv('/extDisk1/RESEARCH/MPIPZ_KaWai_RNASeq/results/Ensembl_ath_Anno
 wd <- '/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/bamfiles'
 setwd(wd)
 
-labelanno <- read_csv('../results/ath_alignment.csv')
+labelanno <- read_csv('../results/LibraryIDs.csv') %>%
+  mutate(Days = rep(c(8, 15, 8, 14), each = 24)) %>%
+  filter(Sample %>% str_detect('3989')) %>%
+  arrange(Anno) %>%
+  arrange(Days)
 
-slabel <- labelanno$sample %>%
+slabel <- labelanno$Sample %>%
   paste0('_ath_kallisto')
 
 files <- file.path(wd, slabel, 'abundance.h5')
-names(files) <- labelanno$anno
+names(files) <- labelanno$Anno
+
 kres <- tximport(files, type = 'kallisto', txOut = TRUE)
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -52,24 +57,24 @@ kres <- tximport(files, type = 'kallisto', txOut = TRUE)
 setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/')
 
 ## sampleTable
-sampleTable <- data.frame(condition = labelanno$anno)
-## sampleTable$condition %<>% relevel(ref = 'Mock')
+condi <- labelanno$Anno %>% substring(first = 1, last = nchar(.) - 5) %>% unique
+sampleTable <- data.frame(condition = factor(rep(condi, each = 3), levels = condi))
 rownames(sampleTable) <- colnames(kres$counts)
+
 degres <- DESeqDataSetFromTximport(kres, sampleTable, ~condition)
 
-
-## Col0_Day15
-degresCol0Day15 <- str_detect(labelanno$anno, 'Col0.*Day15') %>%
-  degres[, .]
+## ## Col0_FeCl3_HK_Day8
+## degresCol0Day15 <- str_detect(labelanno$Anno, 'Col0.*Day8') %>%
+##   degres[, .]
 
 ## DEGs
-degresCol0Day15 %<>%
+degres %<>%
   estimateSizeFactors %>%
   counts(normalized = TRUE) %>%
   apply(1, checkFe, 1) %>%
-  degresCol0Day15[., ]
+  degres[., ]
 ## degres <- degres[rowSums(counts(degres)) > 1, ]
-save(degresCol0Day15, file = 'degres_Col0_Day15.RData')
+save(degres, file = '../results/degres.RData')
 
 degres <- DESeq(degres)
 ## resultsNames(degres)
@@ -206,22 +211,26 @@ res <- cbind.data.frame(as.matrix(mcols(degres)[, 1:10]), assay(ntd), stringsAsF
 write_csv(res, 'SynCom35_vs_SynCom33_k_full.csv')
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PCA~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PCA~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 library('directlabels')
 library('ggplot2')
 
-pca <- prcomp(t(assay(rld)))
+rldDay15 <- str_detect(colnames(rld), 'Day15') %>% rld[, .]
+
+pca <- prcomp(t(assay(rldDay15)))
 percentVar <- pca$sdev^2/sum(pca$sdev^2)
 percentVar <- round(100 * percentVar)
 pca1 <- pca$x[,1]
 pca2 <- pca$x[,2]
-pcaData <- data.frame(PC1 = pca1, PC2 = pca2, Group = colData(rld)[, 1], ID = rownames(colData(rld)))
-cairo_pdf('PCA.pdf', width = 12)
+pcaData <- data.frame(PC1 = pca1, PC2 = pca2, Group = colData(rldDay15)[, 1], ID = rownames(colData(rldDay15)))
+
 ggplot(pcaData, aes(x = PC1, y = PC2, colour = Group)) +
   geom_point(size = 3) +
   xlab(paste0("PC1: ",percentVar[1],"% variance")) +
   ylab(paste0("PC2: ",percentVar[2],"% variance")) +
   geom_dl(aes(label = ID, color = Group), method = 'smart.grid')
-dev.off()
+
+ggsave('../results/PCA_Day15.pdf', width = 12)
+ggsave('../results/PCA_Day15.jpg', width = 12)
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##################################################################
