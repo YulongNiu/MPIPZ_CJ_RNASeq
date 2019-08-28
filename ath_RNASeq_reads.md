@@ -6,10 +6,12 @@
 
 - [1. Alignment](#1-alignment)
 - [2. subSeq](#2-subseq)
-- [3. Cluster](#3-cluster)
-    - [3.1 Col0Day15](#31-col0day15)
-- [4. 1stadd](#4-1stadd)
-    - [4.1 Alignment](#41-alignment)
+- [3. DEGs](#3-degs)
+- [4. Cluster](#4-cluster)
+    - [4.1 Col0Day15](#41-col0day15)
+- [5. 1stadd](#5-1stadd)
+    - [5.1 Alignment](#51-alignment)
+    - [5.2 DEGs](#52-degs)
 - [References](#references)
 
 <!-- content end -->
@@ -85,10 +87,19 @@
 
 ![f6h1_FeCl3_HK_Day15_vs_f6h1_FeCl3_Live_Day15](results/f6h1_FeCl3_HK_Day15_vs_f6h1_FeCl3_Live_Day15.jpg)
 
+## 3. DEGs
 
-## 3. Cluster
+* PCA plot for day 8
 
-### 3.1 Col0Day15
+![PCA_Day8](results/PCA_Day8.jpg)
+
+* PCA plot for day 15
+
+![PCA_Day15](results/PCA_Day15.jpg)
+
+## 4. Cluster
+
+### 4.1 Col0Day15
 
 * AIC
 
@@ -116,9 +127,9 @@
 
 ![kmeans_10_Col0Day15_trait](results/kmeans_10_Col0Day15_trait.jpg)
 
-## 4. 1stadd
+## 5. 1stadd
 
-### 4.1 Alignment
+### 5.1 Alignment
 
 | sample  | rawfq   | trimfq  | H_ath | K_ath | 
 |---------|---------|---------|-------|-------| 
@@ -170,6 +181,17 @@
 | 4206_X  | 7338569 | 6779606 | 0.982 | 0.957 | 
 | 4206_Y  | 7901756 | 7293296 | 0.974 | 0.974 | 
 | 4206_Z  | 7517436 | 6833111 | 0.973 | 0.973 |
+
+### 5.2 DEGs
+
+* PCA plot for day 8
+
+![PCA_Day8_1stadd](results/PCA_Day8_1stadd.jpg)
+
+* PCA plot for day 14
+
+![PCA_Day14_1stadd](results/PCA_Day14_1stadd.jpg)
+
 
 ## References
 
