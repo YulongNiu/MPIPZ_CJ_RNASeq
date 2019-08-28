@@ -216,11 +216,11 @@
 
 * Day 14
 
-![](results/)
+![kmeans_10_Day14_1stadd](results/kmeans_10_Day14_1stadd.jpg)
 
-![](results/)
+![kmeans_10_Day14_genes_1stadd](results/kmeans_10_Day14_genes_1stadd.jpg)
 
-![](results/)
+![kmeans_10_Day14_trait_1stadd](results/kmeans_10_Day14_trait_1stadd.jpg)
 
 ## References
 

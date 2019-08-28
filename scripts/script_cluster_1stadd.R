@@ -67,7 +67,11 @@ scaleCount %<>% .[complete.cases(.), ]
 
 ## Day8
 scaleCount %<>% .[, 1:8]
-rawCount %<>% .[9:16, ]
+rawCount %<>% .[, 1:8]
+
+## Day14
+scaleCount %<>% .[, 9:16]
+rawCount %<>% .[, 9:16]
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~K-means cluster~~~~~~~~~~~~~~~~~~~~~~
@@ -86,8 +90,8 @@ ggplot(tibble(k = 1:20, wss = wss), aes(k, wss)) +
   geom_line(linetype = 'dashed') +
   xlab('Number of clusters') +
   ylab('Sum of squared error')
-ggsave('kmeans_sse_Day8_1stadd.pdf')
-ggsave('kmeans_sse_Day8_1stadd.jpg')
+ggsave('kmeans_sse_Day14_1stadd.pdf')
+ggsave('kmeans_sse_Day14_1stadd.jpg')
 
 
 ## 2. Akaike information criterion
@@ -110,8 +114,8 @@ ggplot(tibble(k = 1:20, aic = aic), aes(k, wss)) +
   geom_line(linetype = 'dashed') +
   xlab('Number of clusters') +
   ylab('Akaike information criterion')
-ggsave('kmeans_AIC_Day8_1stadd.pdf')
-ggsave('kmeans_AIC_Day8_1stadd.jpg')
+ggsave('kmeans_AIC_Day14_1stadd.pdf')
+ggsave('kmeans_AIC_Day14_1stadd.jpg')
 
 ## execute
 kClust10 <- kmeans(scaleCount, centers = 10, algorithm= 'MacQueen', nstart = 1000, iter.max = 20)
@@ -131,7 +135,7 @@ cl <- kmeansRes$clreal[match(names(kClust10$cluster), kmeansRes$ID)] %>%
 prefix <- 'kmeans_10'
 
 cl <- kClust10$cluster
-prefix <- 'kmeans_10_Day8'
+prefix <- 'kmeans_10_Day14'
 
 
 clusterGene <- scaleCount %>%
@@ -150,7 +154,7 @@ clusterCore <- clusterGene %>%
   summarise_at(-1, mean, na.rm = TRUE) %>% ## mean of each cluster
   mutate(cl = cl %>% paste0('cluster_', .)) %>%
   gather(Sample, NorExpress, -1)
-clusterCore$Sample %<>% factor(levels = sampleN[1:8], ordered = TRUE)
+clusterCore$Sample %<>% factor(levels = sampleN[9:16], ordered = TRUE)
 
 ggplot(clusterCore, aes(Sample, NorExpress, col = cl, group = cl)) +
   geom_point() +
@@ -166,7 +170,7 @@ ggsave(paste0(prefix, '_1stadd.jpg'))
 clusterGenePlot <- clusterGene %>%
   gather(Sample, NorExpress, -ID, -cl) %>%
   mutate(cl = cl %>% paste0('cluster_', .))
-clusterGenePlot$Sample %<>% factor(levels = sampleN[1:8], ordered = TRUE)
+clusterGenePlot$Sample %<>% factor(levels = sampleN[9:16], ordered = TRUE)
 
 clusterCorePlot <- clusterCore %>% dplyr::mutate(ID = 1 : nrow(clusterCore))
 ggplot(clusterGenePlot, aes(Sample, NorExpress, group = ID)) +
