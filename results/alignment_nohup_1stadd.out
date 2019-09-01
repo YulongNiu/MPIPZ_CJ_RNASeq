@@ -11,27 +11,27 @@ Kallisto using ath cDNA for 4206_A.
 [quant] will process pair 1: /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_A_R1.fq.gz
                              /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_A_R2.fq.gz
 [quant] finding pseudoalignments for the reads ... done
-[quant] processed 6,420,166 reads, 6,283,621 reads pseudoaligned
-[quant] estimated average fragment length: 275.985
+[quant] processed 9,823,025 reads, 9,614,090 reads pseudoaligned
+[quant] estimated average fragment length: 276.072
 [   em] quantifying the abundances ... done
-[   em] the Expectation-Maximization algorithm ran for 976 rounds
+[   em] the Expectation-Maximization algorithm ran for 1,007 rounds
 
 HISAT2 using ath genome for 4206_A.
-6420166 reads; of these:
-  6420166 (100.00%) were paired; of these:
-    230996 (3.60%) aligned concordantly 0 times
-    6048972 (94.22%) aligned concordantly exactly 1 time
-    140198 (2.18%) aligned concordantly >1 times
+9823025 reads; of these:
+  9823025 (100.00%) were paired; of these:
+    362804 (3.69%) aligned concordantly 0 times
+    9239632 (94.06%) aligned concordantly exactly 1 time
+    220589 (2.25%) aligned concordantly >1 times
     ----
-    230996 pairs aligned concordantly 0 times; of these:
-      4135 (1.79%) aligned discordantly 1 time
+    362804 pairs aligned concordantly 0 times; of these:
+      6025 (1.66%) aligned discordantly 1 time
     ----
-    226861 pairs aligned 0 times concordantly or discordantly; of these:
-      453722 mates make up the pairs; of these:
-        268973 (59.28%) aligned 0 times
-        176644 (38.93%) aligned exactly 1 time
-        8105 (1.79%) aligned >1 times
-97.91% overall alignment rate
+    356779 pairs aligned 0 times concordantly or discordantly; of these:
+      713558 mates make up the pairs; of these:
+        420809 (58.97%) aligned 0 times
+        279256 (39.14%) aligned exactly 1 time
+        13493 (1.89%) aligned >1 times
+97.86% overall alignment rate
 [bam_sort_core] merging from 0 files and 45 in-memory blocks...
 =====================================
 ====================================
@@ -501,28 +501,28 @@ Kallisto using ath cDNA for 4206_AN.
 [quant] will process pair 1: /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_AN_R1.fq.gz
                              /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_AN_R2.fq.gz
 [quant] finding pseudoalignments for the reads ... done
-[quant] processed 6,418,189 reads, 5,796,001 reads pseudoaligned
-[quant] estimated average fragment length: 264
+[quant] processed 9,990,486 reads, 9,018,378 reads pseudoaligned
+[quant] estimated average fragment length: 264.071
 [   em] quantifying the abundances ... done
-[   em] the Expectation-Maximization algorithm ran for 1,058 rounds
+[   em] the Expectation-Maximization algorithm ran for 1,142 rounds
 
 HISAT2 using ath genome for 4206_AN.
-6418189 reads; of these:
-  6418189 (100.00%) were paired; of these:
-    323954 (5.05%) aligned concordantly 0 times
-    5797488 (90.33%) aligned concordantly exactly 1 time
-    296747 (4.62%) aligned concordantly >1 times
+9990486 reads; of these:
+  9990486 (100.00%) were paired; of these:
+    506365 (5.07%) aligned concordantly 0 times
+    9017730 (90.26%) aligned concordantly exactly 1 time
+    466391 (4.67%) aligned concordantly >1 times
     ----
-    323954 pairs aligned concordantly 0 times; of these:
-      4472 (1.38%) aligned discordantly 1 time
+    506365 pairs aligned concordantly 0 times; of these:
+      6696 (1.32%) aligned discordantly 1 time
     ----
-    319482 pairs aligned 0 times concordantly or discordantly; of these:
-      638964 mates make up the pairs; of these:
-        469712 (73.51%) aligned 0 times
-        160258 (25.08%) aligned exactly 1 time
-        8994 (1.41%) aligned >1 times
-96.34% overall alignment rate
-[bam_sort_core] merging from 0 files and 45 in-memory blocks...
+    499669 pairs aligned 0 times concordantly or discordantly; of these:
+      999338 mates make up the pairs; of these:
+        733781 (73.43%) aligned 0 times
+        250960 (25.11%) aligned exactly 1 time
+        14597 (1.46%) aligned >1 times
+96.33% overall alignment rate
+[bam_sort_core] merging from 0 files and 45 in-memory blocks....
 =====================================
 ====================================
 Kallisto using ath cDNA for 4206_AO.
@@ -606,28 +606,28 @@ Kallisto using ath cDNA for 4206_AQ.
 [quant] will process pair 1: /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_AQ_R1.fq.gz
                              /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_AQ_R2.fq.gz
 [quant] finding pseudoalignments for the reads ... done
-[quant] processed 5,990,789 reads, 5,569,896 reads pseudoaligned
-[quant] estimated average fragment length: 265.277
+[quant] processed 11,119,672 reads, 10,330,836 reads pseudoaligned
+[quant] estimated average fragment length: 266.073
 [   em] quantifying the abundances ... done
-[   em] the Expectation-Maximization algorithm ran for 1,104 rounds
+[   em] the Expectation-Maximization algorithm ran for 1,167 rounds
 
 HISAT2 using ath genome for 4206_AQ.
-5990789 reads; of these:
-  5990789 (100.00%) were paired; of these:
-    238044 (3.97%) aligned concordantly 0 times
-    5512809 (92.02%) aligned concordantly exactly 1 time
-    239936 (4.01%) aligned concordantly >1 times
+11119672 reads; of these:
+  11119672 (100.00%) were paired; of these:
+    426206 (3.83%) aligned concordantly 0 times
+    10241887 (92.11%) aligned concordantly exactly 1 time
+    451579 (4.06%) aligned concordantly >1 times
     ----
-    238044 pairs aligned concordantly 0 times; of these:
-      4128 (1.73%) aligned discordantly 1 time
+    426206 pairs aligned concordantly 0 times; of these:
+      7146 (1.68%) aligned discordantly 1 time
     ----
-    233916 pairs aligned 0 times concordantly or discordantly; of these:
-      467832 mates make up the pairs; of these:
-        292254 (62.47%) aligned 0 times
-        168033 (35.92%) aligned exactly 1 time
-        7545 (1.61%) aligned >1 times
-97.56% overall alignment rate
-[bam_sort_core] merging from 0 files and 45 in-memory blocks...
+    419060 pairs aligned 0 times concordantly or discordantly; of these:
+      838120 mates make up the pairs; of these:
+        529240 (63.15%) aligned 0 times
+        295279 (35.23%) aligned exactly 1 time
+        13601 (1.62%) aligned >1 times
+97.62% overall alignment rate
+[bam_sort_core] merging from 0 files and 45 in-memory blocks..
 =====================================
 ====================================
 Kallisto using ath cDNA for 4206_AR.
@@ -711,27 +711,27 @@ Kallisto using ath cDNA for 4206_AT.
 [quant] will process pair 1: /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_AT_R1.fq.gz
                              /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_AT_R2.fq.gz
 [quant] finding pseudoalignments for the reads ... done
-[quant] processed 6,405,087 reads, 6,228,800 reads pseudoaligned
+[quant] processed 9,772,695 reads, 9,504,011 reads pseudoaligned
 [quant] estimated average fragment length: 269.51
 [   em] quantifying the abundances ... done
-[   em] the Expectation-Maximization algorithm ran for 1,110 rounds
+[   em] the Expectation-Maximization algorithm ran for 1,132 rounds
 
 HISAT2 using ath genome for 4206_AT.
-6405087 reads; of these:
-  6405087 (100.00%) were paired; of these:
-    251300 (3.92%) aligned concordantly 0 times
-    5983076 (93.41%) aligned concordantly exactly 1 time
-    170711 (2.67%) aligned concordantly >1 times
+9772695 reads; of these:
+  9772695 (100.00%) were paired; of these:
+    377056 (3.86%) aligned concordantly 0 times
+    9127504 (93.40%) aligned concordantly exactly 1 time
+    268135 (2.74%) aligned concordantly >1 times
     ----
-    251300 pairs aligned concordantly 0 times; of these:
-      4297 (1.71%) aligned discordantly 1 time
+    377056 pairs aligned concordantly 0 times; of these:
+      6251 (1.66%) aligned discordantly 1 time
     ----
-    247003 pairs aligned 0 times concordantly or discordantly; of these:
-      494006 mates make up the pairs; of these:
-        299811 (60.69%) aligned 0 times
-        183611 (37.17%) aligned exactly 1 time
-        10584 (2.14%) aligned >1 times
-97.66% overall alignment rate
+    370805 pairs aligned 0 times concordantly or discordantly; of these:
+      741610 mates make up the pairs; of these:
+        450273 (60.72%) aligned 0 times
+        274534 (37.02%) aligned exactly 1 time
+        16803 (2.27%) aligned >1 times
+97.70% overall alignment rate
 [bam_sort_core] merging from 0 files and 45 in-memory blocks...
 =====================================
 ====================================
@@ -886,27 +886,27 @@ Kallisto using ath cDNA for 4206_D.
 [quant] will process pair 1: /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_D_R1.fq.gz
                              /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_D_R2.fq.gz
 [quant] finding pseudoalignments for the reads ... done
-[quant] processed 6,153,325 reads, 6,007,574 reads pseudoaligned
-[quant] estimated average fragment length: 286.572
+[quant] processed 9,183,211 reads, 8,965,335 reads pseudoaligned
+[quant] estimated average fragment length: 286.604
 [   em] quantifying the abundances ... done
-[   em] the Expectation-Maximization algorithm ran for 1,081 rounds
+[   em] the Expectation-Maximization algorithm ran for 1,215 rounds
 
 HISAT2 using ath genome for 4206_D.
-6153325 reads; of these:
-  6153325 (100.00%) were paired; of these:
-    234813 (3.82%) aligned concordantly 0 times
-    5766613 (93.72%) aligned concordantly exactly 1 time
-    151899 (2.47%) aligned concordantly >1 times
+9183211 reads; of these:
+  9183211 (100.00%) were paired; of these:
+    352233 (3.84%) aligned concordantly 0 times
+    8597924 (93.63%) aligned concordantly exactly 1 time
+    233054 (2.54%) aligned concordantly >1 times
     ----
-    234813 pairs aligned concordantly 0 times; of these:
-      3470 (1.48%) aligned discordantly 1 time
+    352233 pairs aligned concordantly 0 times; of these:
+      5104 (1.45%) aligned discordantly 1 time
     ----
-    231343 pairs aligned 0 times concordantly or discordantly; of these:
-      462686 mates make up the pairs; of these:
-        263165 (56.88%) aligned 0 times
-        189815 (41.02%) aligned exactly 1 time
-        9706 (2.10%) aligned >1 times
-97.86% overall alignment rate
+    347129 pairs aligned 0 times concordantly or discordantly; of these:
+      694258 mates make up the pairs; of these:
+        394477 (56.82%) aligned 0 times
+        284348 (40.96%) aligned exactly 1 time
+        15433 (2.22%) aligned >1 times
+97.85% overall alignment rate
 [bam_sort_core] merging from 0 files and 45 in-memory blocks...
 =====================================
 ====================================
@@ -921,27 +921,27 @@ Kallisto using ath cDNA for 4206_E.
 [quant] will process pair 1: /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_E_R1.fq.gz
                              /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_E_R2.fq.gz
 [quant] finding pseudoalignments for the reads ... done
-[quant] processed 5,355,487 reads, 5,241,677 reads pseudoaligned
-[quant] estimated average fragment length: 286.593
+[quant] processed 7,728,495 reads, 7,564,339 reads pseudoaligned
+[quant] estimated average fragment length: 286.576
 [   em] quantifying the abundances ... done
-[   em] the Expectation-Maximization algorithm ran for 1,084 rounds
+[   em] the Expectation-Maximization algorithm ran for 1,120 rounds
 
 HISAT2 using ath genome for 4206_E.
-5355487 reads; of these:
-  5355487 (100.00%) were paired; of these:
-    220442 (4.12%) aligned concordantly 0 times
-    5017997 (93.70%) aligned concordantly exactly 1 time
-    117048 (2.19%) aligned concordantly >1 times
+7728495 reads; of these:
+  7728495 (100.00%) were paired; of these:
+    325106 (4.21%) aligned concordantly 0 times
+    7230682 (93.56%) aligned concordantly exactly 1 time
+    172707 (2.23%) aligned concordantly >1 times
     ----
-    220442 pairs aligned concordantly 0 times; of these:
-      3106 (1.41%) aligned discordantly 1 time
+    325106 pairs aligned concordantly 0 times; of these:
+      4344 (1.34%) aligned discordantly 1 time
     ----
-    217336 pairs aligned 0 times concordantly or discordantly; of these:
-      434672 mates make up the pairs; of these:
-        250351 (57.60%) aligned 0 times
-        176906 (40.70%) aligned exactly 1 time
-        7415 (1.71%) aligned >1 times
-97.66% overall alignment rate
+    320762 pairs aligned 0 times concordantly or discordantly; of these:
+      641524 mates make up the pairs; of these:
+        367863 (57.34%) aligned 0 times
+        262032 (40.85%) aligned exactly 1 time
+        11629 (1.81%) aligned >1 times
+97.62% overall alignment rate
 [bam_sort_core] merging from 0 files and 45 in-memory blocks...
 =====================================
 ====================================
@@ -1131,27 +1131,27 @@ Kallisto using ath cDNA for 4206_K.
 [quant] will process pair 1: /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_K_R1.fq.gz
                              /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_K_R2.fq.gz
 [quant] finding pseudoalignments for the reads ... done
-[quant] processed 6,295,663 reads, 6,143,582 reads pseudoaligned
-[quant] estimated average fragment length: 284.461
+[quant] processed 8,984,428 reads, 8,766,776 reads pseudoaligned
+[quant] estimated average fragment length: 284.33
 [   em] quantifying the abundances ... done
-[   em] the Expectation-Maximization algorithm ran for 1,074 rounds
+[   em] the Expectation-Maximization algorithm ran for 1,087 rounds
 
 HISAT2 using ath genome for 4206_K.
-6295663 reads; of these:
-  6295663 (100.00%) were paired; of these:
-    238453 (3.79%) aligned concordantly 0 times
-    5909385 (93.86%) aligned concordantly exactly 1 time
-    147825 (2.35%) aligned concordantly >1 times
+8984428 reads; of these:
+  8984428 (100.00%) were paired; of these:
+    342167 (3.81%) aligned concordantly 0 times
+    8425902 (93.78%) aligned concordantly exactly 1 time
+    216359 (2.41%) aligned concordantly >1 times
     ----
-    238453 pairs aligned concordantly 0 times; of these:
-      3882 (1.63%) aligned discordantly 1 time
+    342167 pairs aligned concordantly 0 times; of these:
+      5253 (1.54%) aligned discordantly 1 time
     ----
-    234571 pairs aligned 0 times concordantly or discordantly; of these:
-      469142 mates make up the pairs; of these:
-        259872 (55.39%) aligned 0 times
-        200919 (42.83%) aligned exactly 1 time
-        8351 (1.78%) aligned >1 times
-97.94% overall alignment rate
+    336914 pairs aligned 0 times concordantly or discordantly; of these:
+      673828 mates make up the pairs; of these:
+        372845 (55.33%) aligned 0 times
+        288477 (42.81%) aligned exactly 1 time
+        12506 (1.86%) aligned >1 times
+97.93% overall alignment rate
 [bam_sort_core] merging from 0 files and 45 in-memory blocks...
 =====================================
 ====================================
@@ -1201,27 +1201,27 @@ Kallisto using ath cDNA for 4206_M.
 [quant] will process pair 1: /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_M_R1.fq.gz
                              /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_M_R2.fq.gz
 [quant] finding pseudoalignments for the reads ... done
-[quant] processed 6,085,128 reads, 5,943,225 reads pseudoaligned
+[quant] processed 8,780,060 reads, 8,575,049 reads pseudoaligned
 [quant] estimated average fragment length: 293.32
 [   em] quantifying the abundances ... done
-[   em] the Expectation-Maximization algorithm ran for 1,101 rounds
+[   em] the Expectation-Maximization algorithm ran for 1,028 rounds
 
 HISAT2 using ath genome for 4206_M.
-6085128 reads; of these:
-  6085128 (100.00%) were paired; of these:
-    270143 (4.44%) aligned concordantly 0 times
-    5675059 (93.26%) aligned concordantly exactly 1 time
-    139926 (2.30%) aligned concordantly >1 times
+8780060 reads; of these:
+  8780060 (100.00%) were paired; of these:
+    393353 (4.48%) aligned concordantly 0 times
+    8180389 (93.17%) aligned concordantly exactly 1 time
+    206318 (2.35%) aligned concordantly >1 times
     ----
-    270143 pairs aligned concordantly 0 times; of these:
-      3602 (1.33%) aligned discordantly 1 time
+    393353 pairs aligned concordantly 0 times; of these:
+      4965 (1.26%) aligned discordantly 1 time
     ----
-    266541 pairs aligned 0 times concordantly or discordantly; of these:
-      533082 mates make up the pairs; of these:
-        311008 (58.34%) aligned 0 times
-        212188 (39.80%) aligned exactly 1 time
-        9886 (1.85%) aligned >1 times
-97.44% overall alignment rate
+    388388 pairs aligned 0 times concordantly or discordantly; of these:
+      776776 mates make up the pairs; of these:
+        451794 (58.16%) aligned 0 times
+        309904 (39.90%) aligned exactly 1 time
+        15078 (1.94%) aligned >1 times
+97.43% overall alignment rate
 [bam_sort_core] merging from 0 files and 45 in-memory blocks...
 =====================================
 ====================================
@@ -1516,27 +1516,27 @@ Kallisto using ath cDNA for 4206_V.
 [quant] will process pair 1: /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_V_R1.fq.gz
                              /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_V_R2.fq.gz
 [quant] finding pseudoalignments for the reads ... done
-[quant] processed 6,181,663 reads, 6,017,144 reads pseudoaligned
-[quant] estimated average fragment length: 286.365
+[quant] processed 9,098,018 reads, 8,855,740 reads pseudoaligned
+[quant] estimated average fragment length: 286.295
 [   em] quantifying the abundances ... done
-[   em] the Expectation-Maximization algorithm ran for 1,018 rounds
+[   em] the Expectation-Maximization algorithm ran for 969 rounds
 
 HISAT2 using ath genome for 4206_V.
-6181663 reads; of these:
-  6181663 (100.00%) were paired; of these:
-    226542 (3.66%) aligned concordantly 0 times
-    5793630 (93.72%) aligned concordantly exactly 1 time
-    161491 (2.61%) aligned concordantly >1 times
+9098018 reads; of these:
+  9098018 (100.00%) were paired; of these:
+    345117 (3.79%) aligned concordantly 0 times
+    8510861 (93.55%) aligned concordantly exactly 1 time
+    242040 (2.66%) aligned concordantly >1 times
     ----
-    226542 pairs aligned concordantly 0 times; of these:
-      2929 (1.29%) aligned discordantly 1 time
+    345117 pairs aligned concordantly 0 times; of these:
+      4257 (1.23%) aligned discordantly 1 time
     ----
-    223613 pairs aligned 0 times concordantly or discordantly; of these:
-      447226 mates make up the pairs; of these:
-        252912 (56.55%) aligned 0 times
-        185617 (41.50%) aligned exactly 1 time
-        8697 (1.94%) aligned >1 times
-97.95% overall alignment rate
+    340860 pairs aligned 0 times concordantly or discordantly; of these:
+      681720 mates make up the pairs; of these:
+        383983 (56.33%) aligned 0 times
+        283954 (41.65%) aligned exactly 1 time
+        13783 (2.02%) aligned >1 times
+97.89% overall alignment rate
 [bam_sort_core] merging from 0 files and 45 in-memory blocks...
 =====================================
 ====================================
@@ -1551,27 +1551,27 @@ Kallisto using ath cDNA for 4206_W.
 [quant] will process pair 1: /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_W_R1.fq.gz
                              /netscratch/dep_psl/grp_rgo/yniu/CJFe/clean_data_1stadd/4206_W_R2.fq.gz
 [quant] finding pseudoalignments for the reads ... done
-[quant] processed 6,274,839 reads, 6,085,483 reads pseudoaligned
+[quant] processed 9,398,733 reads, 9,113,932 reads pseudoaligned
 [quant] estimated average fragment length: 274.725
 [   em] quantifying the abundances ... done
-[   em] the Expectation-Maximization algorithm ran for 1,072 rounds
+[   em] the Expectation-Maximization algorithm ran for 1,104 rounds
 
 HISAT2 using ath genome for 4206_W.
-6274839 reads; of these:
-  6274839 (100.00%) were paired; of these:
-    210509 (3.35%) aligned concordantly 0 times
-    5901631 (94.05%) aligned concordantly exactly 1 time
-    162699 (2.59%) aligned concordantly >1 times
+9398733 reads; of these:
+  9398733 (100.00%) were paired; of these:
+    321491 (3.42%) aligned concordantly 0 times
+    8828336 (93.93%) aligned concordantly exactly 1 time
+    248906 (2.65%) aligned concordantly >1 times
     ----
-    210509 pairs aligned concordantly 0 times; of these:
-      3679 (1.75%) aligned discordantly 1 time
+    321491 pairs aligned concordantly 0 times; of these:
+      5283 (1.64%) aligned discordantly 1 time
     ----
-    206830 pairs aligned 0 times concordantly or discordantly; of these:
-      413660 mates make up the pairs; of these:
-        227029 (54.88%) aligned 0 times
-        179115 (43.30%) aligned exactly 1 time
-        7516 (1.82%) aligned >1 times
-98.19% overall alignment rate
+    316208 pairs aligned 0 times concordantly or discordantly; of these:
+      632416 mates make up the pairs; of these:
+        346409 (54.78%) aligned 0 times
+        274113 (43.34%) aligned exactly 1 time
+        11894 (1.88%) aligned >1 times
+98.16% overall alignment rate
 [bam_sort_core] merging from 0 files and 45 in-memory blocks...
 =====================================
 ====================================
