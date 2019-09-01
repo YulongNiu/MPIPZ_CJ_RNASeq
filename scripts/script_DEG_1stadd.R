@@ -215,14 +215,14 @@ write_csv(res, 'SynCom35_vs_SynCom33_k_full.csv')
 library('directlabels')
 library('ggplot2')
 
-rldDay8 <- str_detect(colnames(rld), 'Day8') %>% rld[, .]
+rldDay14 <- str_detect(colnames(rld), 'Day14') %>% rld[, .]
 
-pca <- prcomp(t(assay(rldDay8)))
+pca <- prcomp(t(assay(rldDay14)))
 percentVar <- pca$sdev^2/sum(pca$sdev^2)
 percentVar <- round(100 * percentVar)
 pca1 <- pca$x[,1]
 pca2 <- pca$x[,2]
-pcaData <- data.frame(PC1 = pca1, PC2 = pca2, Group = colData(rldDay8)[, 1], ID = rownames(colData(rldDay8)))
+pcaData <- data.frame(PC1 = pca1, PC2 = pca2, Group = colData(rldDay14)[, 1], ID = rownames(colData(rldDay14)))
 
 ggplot(pcaData, aes(x = PC1, y = PC2, colour = Group)) +
   geom_point(size = 3) +
@@ -230,7 +230,7 @@ ggplot(pcaData, aes(x = PC1, y = PC2, colour = Group)) +
   ylab(paste0("PC2: ",percentVar[2],"% variance")) +
   geom_dl(aes(label = ID, color = Group), method = 'smart.grid')
 
-ggsave('../results/PCA_Day8_1stadd.pdf', width = 12)
-ggsave('../results/PCA_Day8_1stadd.jpg', width = 12)
+ggsave('../results/PCA_Day14_1stadd.pdf', width = 12)
+ggsave('../results/PCA_Day14_1stadd.jpg', width = 12)
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##################################################################
