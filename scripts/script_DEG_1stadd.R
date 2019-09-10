@@ -214,21 +214,43 @@ write_csv(res, 'SynCom35_vs_SynCom33_k_full.csv')
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PCA~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 library('directlabels')
 library('ggplot2')
+library('RColorBrewer')
 
-rldDay14 <- str_detect(colnames(rld), 'Day14') %>% rld[, .]
+rldDay14 <- colData(rld)[, 1] %>%
+  as.character %>%
+  strsplit(split = '_', fixed = TRUE) %>%
+  do.call(rbind, .) %>%
+  set_colnames(c('Genotype', 'Iron', 'SynCom', 'Time')) %>%
+  as_tibble %>%
+  mutate(Conditions = paste(Iron, SynCom, sep = '_') %>%
+           factor,
+         Genotype = Genotype %<>% factor) %>%
+  filter(Time == 'Day14')
 
-pca <- prcomp(t(assay(rldDay14)))
+cols <- brewer.pal(4, name = 'Set1')
+cols[3:4] <- cols[4:3]
+
+pca <- prcomp(t(assay(str_detect(colnames(rld), 'Day14') %>% rld[, .])))
 percentVar <- pca$sdev^2/sum(pca$sdev^2)
 percentVar <- round(100 * percentVar)
 pca1 <- pca$x[,1]
 pca2 <- pca$x[,2]
-pcaData <- data.frame(PC1 = pca1, PC2 = pca2, Group = colData(rldDay14)[, 1], ID = rownames(colData(rldDay14)))
 
-ggplot(pcaData, aes(x = PC1, y = PC2, colour = Group)) +
-  geom_point(size = 3) +
-  xlab(paste0("PC1: ",percentVar[1],"% variance")) +
-  ylab(paste0("PC2: ",percentVar[2],"% variance")) +
-  geom_dl(aes(label = ID, color = Group), method = 'smart.grid')
+pcaData <- rldDay14 %>%
+  mutate(Colours = factor(Conditions, labels = cols)) %>%
+  select(Conditions, Genotype, Colours) %>%
+  mutate(PC1 = pca1, PC2 = pca2)
+
+ggplot(pcaData, aes(x = PC1, y = PC2, colour = Conditions)) +
+  geom_point(aes(shape = Genotype), size = 4) +
+  scale_colour_manual(values = levels(pcaData$Colours),
+                      name = 'Experimental\nCondition',
+                      labels = expression(FeCl[3]+HK, FeCl[3]+Live, FeEDTA+HK, FeEDTA+Live)) +
+  scale_shape_manual(values = c(15, 17)) +
+  xlab(paste0('PC1: ',percentVar[1],'% variance')) +
+  ylab(paste0('PC2: ',percentVar[2],'% variance')) +
+  ggtitle('Day14') +
+  theme(plot.title = element_text(hjust = 0.5, size = 12, face = 'bold'))
 
 ggsave('../results/PCA_Day14_1stadd.pdf', width = 12)
 ggsave('../results/PCA_Day14_1stadd.jpg', width = 12)
