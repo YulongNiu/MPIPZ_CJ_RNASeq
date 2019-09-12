@@ -16,7 +16,7 @@ library('gridExtra')
 library('cluster')
 
 load('degres.RData')
-deganno <- read_csv('eachGroup_vs_Mock_k.csv',
+deganno <- read_csv('eachGroup_vs_iron.csv',
                    col_types = cols(Chromosome = col_character()))
 
 ##~~~~~~~~~~~~~~~~~~~~~~useful funcs~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -69,7 +69,7 @@ scaleCount %<>% .[complete.cases(.), ]
 scaleCount %<>% .[, 1:8]
 rawCount %<>% .[, 1:8]
 
-## Day14
+## Day15
 scaleCount %<>% .[, 9:16]
 rawCount %<>% .[, 9:16]
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -103,8 +103,8 @@ ggplot(tibble(k = 1:20, wss = wss), aes(k, wss)) +
   geom_line(linetype = 'dashed') +
   xlab('Number of clusters') +
   ylab('Sum of squared error')
-ggsave('kmeans_sse_Day15.pdf')
-ggsave('kmeans_sse_Day15.jpg')
+ggsave('kmeans_sse_Day8.pdf')
+ggsave('kmeans_sse_Day8.jpg')
 
 ## 2. Akaike information criterion
 kmeansAIC = function(fit){
@@ -126,8 +126,8 @@ ggplot(tibble(k = 1:20, aic = aic), aes(k, wss)) +
   geom_line(linetype = 'dashed') +
   xlab('Number of clusters') +
   ylab('Akaike information criterion')
-ggsave('kmeans_AIC_Day15.pdf')
-ggsave('kmeans_AIC_Day15.jpg')
+ggsave('kmeans_AIC_Day8.pdf')
+ggsave('kmeans_AIC_Day8.jpg')
 
 ## execute
 kClust10 <- kmeans(scaleCount, centers = 10, algorithm= 'MacQueen', nstart = 1000, iter.max = 20)
@@ -147,7 +147,7 @@ cl <- kmeansRes$clreal[match(names(kClust10$cluster), kmeansRes$ID)] %>%
 prefix <- 'kmeans_10'
 
 cl <- kClust10$cluster
-prefix <- 'kmeans_10_Day15'
+prefix <- 'kmeans_10_Day8'
 
 
 clusterGene <- scaleCount %>%
@@ -166,7 +166,7 @@ clusterCore <- clusterGene %>%
   summarise_at(-1, mean, na.rm = TRUE) %>% ## mean of each cluster
   mutate(cl = cl %>% paste0('cluster_', .)) %>%
   gather(Sample, NorExpress, -1)
-clusterCore$Sample %<>% factor(levels = sampleN[9:16], ordered = TRUE)
+clusterCore$Sample %<>% factor(levels = sampleN[1:8], ordered = TRUE)
 
 ggplot(clusterCore, aes(Sample, NorExpress, col = cl, group = cl)) +
   geom_point() +
@@ -182,7 +182,7 @@ ggsave(paste0(prefix, '.jpg'))
 clusterGenePlot <- clusterGene %>%
   gather(Sample, NorExpress, -ID, -cl) %>%
   mutate(cl = cl %>% paste0('cluster_', .))
-clusterGenePlot$Sample %<>% factor(levels = sampleN[9:16], ordered = TRUE)
+clusterGenePlot$Sample %<>% factor(levels = sampleN[1:8], ordered = TRUE)
 
 clusterCorePlot <- clusterCore %>% dplyr::mutate(ID = 1 : nrow(clusterCore))
 ggplot(clusterGenePlot, aes(Sample, NorExpress, group = ID)) +
@@ -264,7 +264,7 @@ rawC <- rawCount %>%
   rename_at(-1, .funs = list(~paste0('Raw_', .)))
 
 degresC <- deganno %>%
-  select(ID, Flg22_vs_Mock_pvalue : Flg22_SynCom35_vs_Mock_log2FoldChange)
+  select(ID, Col0_FeEDTA_HK_Day15_vs_Col0_FeCl3_HK_Day15_pvalue : Col0_FeEDTA_Live_Day8_vs_Col0_FeCl3_Live_Day8_log2FoldChange)
 
 heatPlot <- rawC %>%
   inner_join(scaleC) %>%
@@ -276,6 +276,10 @@ heatPlot <- rawC %>%
   } %T>%
   {(sum(names(cl) == .$ID) == nrow(.)) %>% print} %>% ## check cl names and degresC row names
   slice(cl %>% order)
+
+inner_join(deganno, heatPlot) %>%
+  mutate_at(c('Gene', 'Description'), .funs = list(~if_else(is.na(.), '', .))) %>%
+  write_csv(paste0(prefix, '_1stadd.csv'))
 
 heatRawPlot <- heatPlot %>%
   select(ID, starts_with('Raw')) %>%
