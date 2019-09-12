@@ -504,6 +504,56 @@ inner_join(deganno, heatPlot) %>%
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #################################################################
 
+##########################plot genes############################
+setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/')
+
+library('ggplot2')
+library('readr')
+library('dplyr')
+library('magrittr')
+library('tidyr')
+
+anno <- read_csv('eachGroup_vs_Col0_FeCl3_HK_Day8_raw_k.csv',
+                 col_types = cols(Chromosome = col_character())) %>%
+  mutate(Gene = Gene %>% {if_else(is.na(.), '', .)}) %>%
+  mutate(Description = Description %>% {if_else(is.na(.), '', .)})
+
+cgenes <- read_csv('selected_genes.csv',
+                   col_types = cols(Chromosome = col_character()))
+
+genePlot <- anno %>%
+  inner_join(cgenes) %>%
+  mutate(Gene = paste(Gene_Symbol, ID, sep = '_')) %>%
+  select(Gene, Col0_FeCl3_HK_Day8_Rep1 : f6h1_FeEDTA_Live_Day15_Rep3) %>%
+  gather(ID, NormCount, -1) %>%
+  mutate(ID = ID %>%
+           substring(1, nchar(.) - 5)) %>%
+  mutate(Time = ID %>%
+           strsplit(split = '_', fixed = TRUE) %>%
+           sapply('[[', 4) %>%
+           factor(levels = c('Day8', 'Day15'))) %>%
+  mutate(Condi = ID %>%
+           strsplit(split = '_', fixed = TRUE) %>%
+           sapply(function(x) {paste(x[1:3], collapse = '_')})) %>%
+  mutate(ID = factor(ID)) %>%
+  mutate(Gene = factor(Gene))
+
+genes <- genePlot$Gene %>% unique %>% as.character
+
+for(i in genes) {
+
+  genePlot %>%
+    filter(Gene %in% i) %>%
+    ggplot(aes(x = Condi, y = NormCount)) +
+    geom_dotplot(binaxis='y', stackdir='center', dotsize = 0.7) +
+    stat_summary(fun.y = mean, geom = 'point', color='red', size = 3) +
+    facet_wrap(. ~ Time, ncol = 2) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+  ggsave(file = paste0('selectgenes/', i, '.pdf'))
+  ggsave(file = paste0('selectgenes/', i, '.jpg'))
+}
+##################################################################
 
 ########################separate DEGs############################
 library('tibble')

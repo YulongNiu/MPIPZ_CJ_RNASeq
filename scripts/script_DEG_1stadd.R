@@ -109,7 +109,7 @@ res <- cbind.data.frame(as.matrix(mcols(degres)[, 1:10]), assay(ntd), stringsAsF
 write_csv(res, 'eachGroup_vs_Col0_FeCl3_Live_Day14_k.csv')
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-##~~~~~~~~~~~~~~~~~~~~~merge pair-wise compare~~~~~~~~~~~~~~~~~~~~~~
+##~~~~~~~~~~~~~~~~~~~~~merge pair-wise comparison~~~~~~~~~~~~~~~~~~~~~~
 setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/')
 
 DEGf <- dir(pattern = 'eachGroup_vs')
