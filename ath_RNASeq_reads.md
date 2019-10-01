@@ -192,6 +192,11 @@
 
 ![PCA_Day14_1stadd](results/PCA_Day14_1stadd.jpg)
 
+* PCA plot for merged day8
+
+![PCA_mergeDay8](results/PCA_mergeDay8.jpg)
+ 
+
 ### 5.3 Clusters
 
 * Day 8
