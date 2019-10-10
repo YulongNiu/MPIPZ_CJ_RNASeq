@@ -61,7 +61,7 @@ setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/')
 ## sampleTable
 condi <- labelanno$Anno %>% substring(first = 1, last = nchar(.) - 5) %>% unique
 sampleTable <- data.frame(condition = factor(rep(condi, each = 3), levels = condi))
-sampleTable$condition %<>% relevel(ref = 'Col0_FeCl3_HK_Day15')
+sampleTable$condition %<>% relevel(ref = 'Col0_FeCl3_HK_Day8')
 rownames(sampleTable) <- colnames(kres$counts)
 
 degres <- DESeqDataSetFromTximport(kres, sampleTable, ~condition)
