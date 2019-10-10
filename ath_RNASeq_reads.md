@@ -194,7 +194,11 @@
 
 * PCA plot for merged day8
 
-![PCA_mergeDay8](results/PCA_mergeDay8.jpg)
+remove batch effects with `limma`
+
+![PCA_mergeDay8_brlimma](results/PCA_mergeDay8_brlimma.jpg)
+
+![PCA_mergeDay8_brsva](results/PCA_mergeDay8_brsva.jpg)
  
 
 ### 5.3 Clusters

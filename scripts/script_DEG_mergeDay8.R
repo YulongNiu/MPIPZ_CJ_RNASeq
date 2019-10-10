@@ -141,6 +141,7 @@ library('directlabels')
 library('ggplot2')
 library('RColorBrewer')
 library('limma')
+library('sva')
 
 rldDay8 <- colData(rld)[, 1] %>%
   as.character %>%
@@ -157,9 +158,15 @@ rldDay8 <- colData(rld)[, 1] %>%
 cols <- brewer.pal(4, name = 'Set1')
 cols[3:4] <- cols[4:3]
 
-## remove batch effect
+## limma: remove batch effect
 rldarray <- assay(str_detect(colnames(rld), 'Day8') %>% rld[, .]) %>%
   removeBatchEffect(rep(rep(1:2, each = 3), 8) %>% factor)
+
+## sva: remove batch effect
+modcombat <- model.matrix(~1, data = rldDay8)
+rldarray <- assay(str_detect(colnames(rld), 'Day8') %>% rld[, .]) %>%
+  ComBat(dat = ., batch = rep(rep(1:2, each = 3), 8) %>% factor, mod = modcombat, par.prior = TRUE, prior.plots = FALSE)
+
 
 pca <- prcomp(t(rldarray))
 percentVar <- pca$sdev^2/sum(pca$sdev^2)
@@ -184,7 +191,7 @@ ggplot(pcaData, aes(x = PC1, y = PC2, colour = Conditions)) +
   ggtitle('Day8') +
   theme(plot.title = element_text(hjust = 0.5, size = 12, face = 'bold'))
 
-ggsave('../results/PCA_mergeDay8.pdf', width = 12)
-ggsave('../results/PCA_mergeDay8.jpg', width = 12)
+ggsave('../results/PCA_mergeDay8_brlimma.pdf', width = 12)
+ggsave('../results/PCA_mergeDay8_brlimma.jpg', width = 12)
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##################################################################
