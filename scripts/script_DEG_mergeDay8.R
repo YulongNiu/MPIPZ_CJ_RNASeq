@@ -140,6 +140,7 @@ read_csv('eachGroup_vs_Col0_FeCl3_Live_Day8_k.csv',
 library('directlabels')
 library('ggplot2')
 library('RColorBrewer')
+library('limma')
 
 rldDay8 <- colData(rld)[, 1] %>%
   as.character %>%
@@ -156,7 +157,11 @@ rldDay8 <- colData(rld)[, 1] %>%
 cols <- brewer.pal(4, name = 'Set1')
 cols[3:4] <- cols[4:3]
 
-pca <- prcomp(t(assay(str_detect(colnames(rld), 'Day8') %>% rld[, .])))
+## remove batch effect
+rldarray <- assay(str_detect(colnames(rld), 'Day8') %>% rld[, .]) %>%
+  removeBatchEffect(rep(rep(1:2, each = 3), 8) %>% factor)
+
+pca <- prcomp(t(rldarray))
 percentVar <- pca$sdev^2/sum(pca$sdev^2)
 percentVar <- round(100 * percentVar)
 pca1 <- pca$x[,1]
