@@ -194,9 +194,11 @@
 
 * PCA plot for merged day8
 
-remove batch effects with `limma`
+Remove batch effects with `limma`
 
 ![PCA_mergeDay8_brlimma](results/PCA_mergeDay8_brlimma.jpg)
+
+Remove batch effects with `SVA`
 
 ![PCA_mergeDay8_brsva](results/PCA_mergeDay8_brsva.jpg)
  
