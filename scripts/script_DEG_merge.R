@@ -10,7 +10,7 @@ checkFe <- function(v, threshold) {
   require('magrittr')
 
   res <- v %>%
-    split(rep(1 : 24, each = 3)) %>%
+    split(rep(1 : 32, each = 3)) %>%
     sapply(checkZeros, threshold) %>%
     all
 
@@ -41,7 +41,6 @@ setwd(wd)
 
 labelanno <- read_csv('../results/LibraryIDs.csv') %>%
   mutate(Days = rep(c(8, 15, 8, 14), each = 24)) %>%
-  filter(Timepoint %>% str_detect('Day8|Day15')) %>%
   arrange(Anno) %>%
   arrange(Days)
 
@@ -59,7 +58,7 @@ setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/')
 
 ## sampleTable
 condi <- labelanno$Anno %>% substring(first = 1, last = nchar(.) - 5) %>% unique
-sampleTable <- data.frame(condition = factor(rep(condi, rep(c(6, 3), c(8, 8))), levels = condi))
+sampleTable <- data.frame(condition = factor(rep(condi, rep(c(6, 3), c(8, 16))), levels = condi))
 sampleTable$condition %<>% relevel(ref = 'Col0_FeCl3_HK_Day8')
 rownames(sampleTable) <- colnames(kres$counts)
 
@@ -72,7 +71,7 @@ degres %<>%
   apply(1, checkFe, 1) %>%
   degres[., ]
 ## degres <- degres[rowSums(counts(degres)) > 1, ]
-save(degres, file = 'degres_mergeday8.RData')
+save(degres, file = 'degres_merge.RData')
 
 degres <- DESeq(degres)
 ## resultsNames(degres)
@@ -143,6 +142,7 @@ library('RColorBrewer')
 library('limma')
 library('sva')
 
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Day8~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 rldDay8 <- colData(rld)[, 1] %>%
   as.character %>%
   strsplit(split = '_', fixed = TRUE) %>%
@@ -152,7 +152,7 @@ rldDay8 <- colData(rld)[, 1] %>%
   mutate(Conditions = paste(Iron, SynCom, sep = '_') %>%
            factor,
          Genotype = Genotype %<>% factor,
-         Batch = c(rep(rep(1:2, each = 3), 8), rep(1, 24))) %>%
+         Batch = c(rep(rep(1:2, each = 3), 8), rep(1, 24), rep(2, 24))) %>%
   filter(Time == 'Day8')
 
 cols <- brewer.pal(4, name = 'Set1')
@@ -195,5 +195,61 @@ ggplot(pcaData, aes(x = PC1, y = PC2, colour = Conditions)) +
 
 ggsave('../results/PCA_mergeDay8_raw.pdf', width = 12)
 ggsave('../results/PCA_mergeDay8_raw.jpg', width = 12)
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~~day 14/15~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rldDay14 <- colData(rld)[, 1] %>%
+  as.character %>%
+  strsplit(split = '_', fixed = TRUE) %>%
+  do.call(rbind, .) %>%
+  set_colnames(c('Genotype', 'Iron', 'SynCom', 'Time')) %>%
+  as_tibble %>%
+  mutate(Conditions = paste(Iron, SynCom, sep = '_') %>%
+           factor,
+         Genotype = Genotype %<>% factor,
+         Batch = c(rep(rep(1:2, each = 3), 8), rep(1, 24), rep(2, 24))) %>%
+  filter(Time %in% c('Day14', 'Day15'))
+
+cols <- brewer.pal(4, name = 'Set1')
+cols[3:4] <- cols[4:3]
+
+## raw
+rldarray <- assay(str_detect(colnames(rld), 'Day14|Day15') %>% rld[, .])
+
+## limma: remove batch effect
+rldarray <- assay(str_detect(colnames(rld), 'Day14|Day15') %>% rld[, .]) %>%
+  removeBatchEffect(rep(1:2, each = 24) %>% factor)
+
+## sva: remove batch effect
+modcombat <- model.matrix(~1, data = rldDay8)
+rldarray <- assay(str_detect(colnames(rld), 'Day14|Day15') %>% rld[, .]) %>%
+  ComBat(dat = ., batch = rep(1:2, each = 24) %>% factor, mod = modcombat, par.prior = TRUE, prior.plots = FALSE)
+
+pca <- prcomp(t(rldarray))
+percentVar <- pca$sdev^2/sum(pca$sdev^2)
+percentVar <- round(100 * percentVar)
+pca1 <- pca$x[,1]
+pca2 <- pca$x[,2]
+
+pcaData <- rldDay14 %>%
+  mutate(Colours = factor(Conditions, labels = cols)) %>%
+  select(Conditions, Genotype, Colours, Batch) %>%
+  mutate(PC1 = pca1, PC2 = pca2)
+
+ggplot(pcaData, aes(x = PC1, y = PC2, colour = Conditions)) +
+  geom_point(aes(shape = Genotype), size = 4) +
+  scale_colour_manual(values = levels(pcaData$Colours),
+                      name = 'Experimental\nCondition',
+                      labels = expression(FeCl[3]+HK, FeCl[3]+Live, FeEDTA+HK, FeEDTA+Live)) +
+  scale_shape_manual(values = c(15, 17)) +
+  geom_text(aes(label = Batch), hjust = -0.5, vjust = 0) +
+  xlab(paste0('PC1: ',percentVar[1],'% variance')) +
+  ylab(paste0('PC2: ',percentVar[2],'% variance')) +
+  ggtitle('Day14/15') +
+  theme(plot.title = element_text(hjust = 0.5, size = 12, face = 'bold'))
+
+ggsave('../results/PCA_mergeDay14_brsva.pdf', width = 12)
+ggsave('../results/PCA_mergeDay14_brsva.jpg', width = 12)
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##################################################################

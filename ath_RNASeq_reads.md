@@ -205,8 +205,21 @@ Remove batch effects with `limma`
 Remove batch effects with `SVA`
 
 ![PCA_mergeDay8_brsva](results/PCA_mergeDay8_brsva.jpg)
- 
 
+* PCA plot for merged day14/15
+
+Raw
+
+![PCA_mergeDay14_raw](results/PCA_mergeDay14_raw.jpg)
+
+Remove batch effects with `limma`
+
+![PCA_mergeDay14_brlimma](results/PCA_mergeDay14_brlimma.jpg)
+
+Remove batch effects with `SVA`
+
+![PCA_mergeDay14_brsva](results/PCA_mergeDay14_brsva.jpg)
+ 
 ### 5.3 Clusters
 
 * Day 8
