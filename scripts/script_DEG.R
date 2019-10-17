@@ -61,7 +61,6 @@ setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/')
 ## sampleTable
 condi <- labelanno$Anno %>% substring(first = 1, last = nchar(.) - 5) %>% unique
 sampleTable <- data.frame(condition = factor(rep(condi, each = 3), levels = condi))
-sampleTable$condition %<>% relevel(ref = 'Col0_FeCl3_HK_Day8')
 rownames(sampleTable) <- colnames(kres$counts)
 
 degres <- DESeqDataSetFromTximport(kres, sampleTable, ~condition)
@@ -83,19 +82,23 @@ rld <- rlog(degres)
 vst <- varianceStabilizingTransformation(degres)
 ntd <- normTransform(degres)
 
-cond <- degres %>%
-  resultsNames %>%
-  str_extract('(?<=condition_).*') %>%
-  .[!is.na(.)]
+cond <- list(c('Col0_FeCl3_HK_Day15', 'Col0_FeEDTA_HK_Day15'),
+             c('Col0_FeCl3_Live_Day15', 'Col0_FeEDTA_Live_Day15'),
+             c('f6h1_FeCl3_HK_Day15', 'f6h1_FeEDTA_HK_Day15'),
+             c('f6h1_FeCl3_Live_Day15', 'f6h1_FeEDTA_Live_Day15'),
+             c('Col0_FeEDTA_Live_Day15', 'Col0_FeEDTA_HK_Day15'),
+             c('Col0_FeCl3_Live_Day15', 'Col0_FeCl3_HK_Day15'),
+             c('f6h1_FeEDTA_Live_Day15', 'f6h1_FeEDTA_HK_Day15'),
+             c('f6h1_FeCl3_Live_Day15', 'f6h1_FeCl3_HK_Day15'))
 
 resRaw <- lapply(cond,
                  function(x) {
                    degres %>%
-                     results(name = paste0('condition_', x)) %T>%
+                     results(contrast = c('condition', x)) %T>%
                      summary %>%
                      as_tibble %>%
                      select(pvalue, padj, log2FoldChange) %>%
-                     rename_all(.funs = list(~paste0(x, '_', .)))
+                     rename_all(.funs = list(~paste0(paste(x, collapse = '_vs_'), '_', .)))
                  }) %>%
   bind_cols
 
@@ -104,57 +107,52 @@ res <- cbind.data.frame(as.matrix(mcols(degres)[, 1:10]), assay(ntd), stringsAsF
   as_tibble %>%
   bind_cols(resRaw) %>%
   inner_join(anno, by = 'ID') %>%
-  select(ID, Gene : Description, Col0_FeCl3_HK_Day8_Rep1 : f6h1_FeEDTA_Live_Day15_vs_Col0_FeCl3_HK_Day15_log2FoldChange) %>%
-  arrange(Col0_FeEDTA_Live_Day15_vs_Col0_FeCl3_HK_Day15_padj)
+  select(ID, Gene : Description, Col0_FeCl3_HK_Day15_Rep1 : f6h1_FeCl3_Live_Day15_vs_f6h1_FeCl3_HK_Day15_log2FoldChange) %>%
+  arrange(Col0_FeCl3_HK_Day15_vs_Col0_FeEDTA_HK_Day15_padj)
 
-write_csv(res, 'eachGroup_vs_Col0_FeCl3_HK_Day15_k.csv')
+write_csv(res, 'eachGroup_Day15_b1.csv')
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-##~~~~~~~~~~~~~~~~~~~~~merge pair-wise compare~~~~~~~~~~~~~~~~~~~~~~
-setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/')
-
-DEGf <- dir(pattern = 'eachGroup_vs')[c(1, 2, 5, 6)]
-
-mergeRes <- foreach(i = seq_along(DEGf), .combine = bind_cols) %do% {
-
-  eachpre <- DEGf[i] %>%
-    str_extract('(?<=vs_).*?(?=_k)') %>%
-    {
-      fpart <- str_replace(., 'FeCl3', 'FeEDTA')
-      cond <- paste(fpart, ., sep = '_vs_')
-    }
-
-  eachf <- read_csv(DEGf[i]) %>%
-    select(starts_with(eachpre))
-}
-
-read_csv('eachGroup_vs_Col0_FeCl3_Live_Day8_k.csv',
-         col_types = cols(Chromosome = col_character())) %>%
-  mutate(Gene = Gene %>% {if_else(is.na(.), '', .)}) %>%
-  mutate(Description = Description %>% {if_else(is.na(.), '', .)}) %>%
-  select(ID : f6h1_FeEDTA_Live_Day15_Rep3) %>%
-  bind_cols(mergeRes) %>%
-  write_csv('eachGroup_vs_iron.csv')
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PCA~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 library('directlabels')
 library('ggplot2')
+library('RColorBrewer')
 
-rldDay15 <- str_detect(colnames(rld), 'Day15') %>% rld[, .]
+rldDay15 <- colData(rld)[, 1] %>%
+  as.character %>%
+  strsplit(split = '_', fixed = TRUE) %>%
+  do.call(rbind, .) %>%
+  set_colnames(c('Genotype', 'Iron', 'SynCom', 'Time')) %>%
+  as_tibble %>%
+  mutate(Conditions = paste(Iron, SynCom, sep = '_') %>%
+           factor,
+         Genotype = Genotype %<>% factor) %>%
+  filter(Time == 'Day15')
 
-pca <- prcomp(t(assay(rldDay15)))
+cols <- brewer.pal(4, name = 'Set1')
+cols[3:4] <- cols[4:3]
+
+pca <- prcomp(t(assay(str_detect(colnames(rld), 'Day15') %>% rld[, .])))
 percentVar <- pca$sdev^2/sum(pca$sdev^2)
 percentVar <- round(100 * percentVar)
 pca1 <- pca$x[,1]
 pca2 <- pca$x[,2]
-pcaData <- data.frame(PC1 = pca1, PC2 = pca2, Group = colData(rldDay15)[, 1], ID = rownames(colData(rldDay15)))
 
-ggplot(pcaData, aes(x = PC1, y = PC2, colour = Group)) +
-  geom_point(size = 3) +
-  xlab(paste0("PC1: ",percentVar[1],"% variance")) +
-  ylab(paste0("PC2: ",percentVar[2],"% variance")) +
-  geom_dl(aes(label = ID, color = Group), method = 'smart.grid')
+pcaData <- rldDay15 %>%
+  mutate(Colours = factor(Conditions, labels = cols)) %>%
+  select(Conditions, Genotype, Colours) %>%
+  mutate(PC1 = pca1, PC2 = pca2)
+
+ggplot(pcaData, aes(x = PC1, y = PC2, colour = Conditions)) +
+  geom_point(aes(shape = Genotype), size = 4) +
+  scale_colour_manual(values = levels(pcaData$Colours),
+                      name = 'Experimental\nCondition',
+                      labels = expression(FeCl[3]+HK, FeCl[3]+Live, FeEDTA+HK, FeEDTA+Live)) +
+  scale_shape_manual(values = c(15, 17)) +
+  xlab(paste0('PC1: ',percentVar[1],'% variance')) +
+  ylab(paste0('PC2: ',percentVar[2],'% variance')) +
+  ggtitle('Day15') +
+  theme(plot.title = element_text(hjust = 0.5, size = 12, face = 'bold'))
 
 ggsave('../results/PCA_Day15.pdf', width = 12)
 ggsave('../results/PCA_Day15.jpg', width = 12)

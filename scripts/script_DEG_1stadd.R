@@ -41,7 +41,7 @@ setwd(wd)
 
 labelanno <- read_csv('../results/LibraryIDs.csv') %>%
   mutate(Days = rep(c(8, 15, 8, 14), each = 24)) %>%
-  filter(Sample %>% str_detect('4206')) %>%
+  filter(Sample %>% str_detect('4206'),  Timepoint %>% str_detect('Day14')) %>%
   arrange(Anno) %>%
   arrange(Days)
 
@@ -60,7 +60,6 @@ setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/')
 ## sampleTable
 condi <- labelanno$Anno %>% substring(first = 1, last = nchar(.) - 5) %>% unique
 sampleTable <- data.frame(condition = factor(rep(condi, each = 3), levels = condi))
-sampleTable$condition %<>% relevel(ref = 'Col0_FeCl3_Live_Day14')
 rownames(sampleTable) <- colnames(kres$counts)
 
 degres <- DESeqDataSetFromTximport(kres, sampleTable, ~condition)
@@ -87,14 +86,23 @@ cond <- degres %>%
   str_extract('(?<=condition_).*') %>%
   .[!is.na(.)]
 
+cond <- list(c('Col0_FeCl3_HK_Day14', 'Col0_FeEDTA_HK_Day14'),
+             c('Col0_FeCl3_Live_Day14', 'Col0_FeEDTA_Live_Day14'),
+             c('f6h1_FeCl3_HK_Day14', 'f6h1_FeEDTA_HK_Day14'),
+             c('f6h1_FeCl3_Live_Day14', 'f6h1_FeEDTA_Live_Day14'),
+             c('Col0_FeEDTA_Live_Day14', 'Col0_FeEDTA_HK_Day14'),
+             c('Col0_FeCl3_Live_Day14', 'Col0_FeCl3_HK_Day14'),
+             c('f6h1_FeEDTA_Live_Day14', 'f6h1_FeEDTA_HK_Day14'),
+             c('f6h1_FeCl3_Live_Day14', 'f6h1_FeCl3_HK_Day14'))
+
 resRaw <- lapply(cond,
                  function(x) {
                    degres %>%
-                     results(name = paste0('condition_', x)) %T>%
+                     results(contrast = c('condition', x)) %T>%
                      summary %>%
                      as_tibble %>%
                      select(pvalue, padj, log2FoldChange) %>%
-                     rename_all(.funs = list(~paste0(x, '_', .)))
+                     rename_all(.funs =  list(~paste0(paste(x, collapse = '_vs_'), '_', .)))
                  }) %>%
   bind_cols
 
@@ -103,38 +111,11 @@ res <- cbind.data.frame(as.matrix(mcols(degres)[, 1:10]), assay(ntd), stringsAsF
   as_tibble %>%
   bind_cols(resRaw) %>%
   inner_join(anno, by = 'ID') %>%
-  select(ID, Gene : Description, Col0_FeCl3_HK_Day8_Rep4 : f6h1_FeEDTA_Live_Day14_vs_Col0_FeCl3_Live_Day14_log2FoldChange) %>%
-  arrange(Col0_FeEDTA_Live_Day14_vs_Col0_FeCl3_Live_Day14_padj)
+  select(ID, Gene : Description, Col0_FeCl3_HK_Day14_Rep4 : f6h1_FeCl3_Live_Day14_vs_f6h1_FeCl3_HK_Day14_log2FoldChange) %>%
+  arrange(Col0_FeCl3_HK_Day14_vs_Col0_FeEDTA_HK_Day14_padj)
 
-write_csv(res, 'eachGroup_vs_Col0_FeCl3_Live_Day14_k.csv')
+write_csv(res, 'eachGroup_Day14_b2.csv')
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-##~~~~~~~~~~~~~~~~~~~~~merge pair-wise comparison~~~~~~~~~~~~~~~~~~~~~~
-setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/')
-
-DEGf <- dir(pattern = 'eachGroup_vs')
-
-mergeRes <- foreach(i = seq_along(DEGf), .combine = bind_cols) %do% {
-
-  eachpre <- DEGf[i] %>%
-    str_extract('(?<=vs_).*?(?=_k)') %>%
-    {
-      fpart <- str_replace(., 'FeCl3', 'FeEDTA')
-      cond <- paste(fpart, ., sep = '_vs_')
-    }
-
-  eachf <- read_csv(DEGf[i]) %>%
-    select(starts_with(eachpre))
-}
-
-read_csv('eachGroup_vs_Col0_FeCl3_Live_Day8_k.csv',
-         col_types = cols(Chromosome = col_character())) %>%
-  mutate(Gene = Gene %>% {if_else(is.na(.), '', .)}) %>%
-  mutate(Description = Description %>% {if_else(is.na(.), '', .)}) %>%
-  select(ID : f6h1_FeEDTA_Live_Day14_Rep6) %>%
-  bind_cols(mergeRes) %>%
-  write_csv('eachGroup_vs_iron.csv')
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PCA~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 library('directlabels')
