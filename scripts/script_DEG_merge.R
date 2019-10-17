@@ -10,7 +10,7 @@ checkFe <- function(v, threshold) {
   require('magrittr')
 
   res <- v %>%
-    split(rep(1 : 32, each = 3)) %>%
+    split(rep(1 : 16, each = 3)) %>%
     sapply(checkZeros, threshold) %>%
     all
 
@@ -40,7 +40,9 @@ wd <- '/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/bamfiles'
 setwd(wd)
 
 labelanno <- read_csv('../results/LibraryIDs.csv') %>%
-  mutate(Days = rep(c(8, 15, 8, 14), each = 24)) %>%
+  mutate_all(list(~ str_replace(., 'Day14', 'Day15'))) %>%
+  mutate(Days = rep(c(8, 15, 8, 15), each = 24)) %>%
+  filter(Timepoint %>% str_detect('Day15')) %>%
   arrange(Anno) %>%
   arrange(Days)
 
@@ -58,11 +60,10 @@ setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/')
 
 ## sampleTable
 condi <- labelanno$Anno %>% substring(first = 1, last = nchar(.) - 5) %>% unique
-sampleTable <- data.frame(condition = factor(rep(condi, rep(c(6, 3), c(8, 16))), levels = condi))
-sampleTable$condition %<>% relevel(ref = 'Col0_FeCl3_HK_Day8')
+sampleTable <- data.frame(condition = factor(rep(condi, each = 6), levels = condi), batch = factor(rep(rep(1 : 2, each = 3), 8)))
 rownames(sampleTable) <- colnames(kres$counts)
 
-degres <- DESeqDataSetFromTximport(kres, sampleTable, ~condition)
+degres <- DESeqDataSetFromTximport(kres, sampleTable, ~ condition)
 
 ## DEGs
 degres %<>%
@@ -81,19 +82,23 @@ rld <- rlog(degres)
 vst <- varianceStabilizingTransformation(degres)
 ntd <- normTransform(degres)
 
-cond <- degres %>%
-  resultsNames %>%
-  str_extract('(?<=condition_).*') %>%
-  .[!is.na(.)]
+cond <- list(c('Col0_FeCl3_HK_Day15', 'Col0_FeEDTA_HK_Day15'),
+             c('Col0_FeCl3_Live_Day15', 'Col0_FeEDTA_Live_Day15'),
+             c('f6h1_FeCl3_HK_Day15', 'f6h1_FeEDTA_HK_Day15'),
+             c('f6h1_FeCl3_Live_Day15', 'f6h1_FeEDTA_Live_Day15'),
+             c('Col0_FeEDTA_Live_Day15', 'Col0_FeEDTA_HK_Day15'),
+             c('Col0_FeCl3_Live_Day15', 'Col0_FeCl3_HK_Day15'),
+             c('f6h1_FeEDTA_Live_Day15', 'f6h1_FeEDTA_HK_Day15'),
+             c('f6h1_FeCl3_Live_Day15', 'f6h1_FeCl3_HK_Day15'))
 
 resRaw <- lapply(cond,
                  function(x) {
                    degres %>%
-                     results(name = paste0('condition_', x)) %T>%
+                     results(contrast = c('condition', x)) %T>%
                      summary %>%
                      as_tibble %>%
                      select(pvalue, padj, log2FoldChange) %>%
-                     rename_all(.funs = list(~paste0(x, '_', .)))
+                     rename_all(.funs =  list(~paste0(paste(x, collapse = '_vs_'), '_', .)))
                  }) %>%
   bind_cols
 
@@ -102,10 +107,10 @@ res <- cbind.data.frame(as.matrix(mcols(degres)[, 1:10]), assay(ntd), stringsAsF
   as_tibble %>%
   bind_cols(resRaw) %>%
   inner_join(anno, by = 'ID') %>%
-  select(ID, Gene : Description, Col0_FeCl3_HK_Day8_Rep4 : f6h1_FeEDTA_Live_Day14_vs_Col0_FeCl3_Live_Day14_log2FoldChange) %>%
-  arrange(Col0_FeEDTA_Live_Day14_vs_Col0_FeCl3_Live_Day14_padj)
+  select(ID, Gene : Description, Col0_FeCl3_HK_Day15_Rep1 : f6h1_FeCl3_Live_Day15_vs_f6h1_FeCl3_HK_Day15_log2FoldChange) %>%
+  arrange(Col0_FeCl3_HK_Day15_vs_Col0_FeEDTA_HK_Day15_padj)
 
-write_csv(res, 'eachGroup_vs_Col0_FeCl3_Live_Day14_k.csv')
+write_csv(res, 'eachGroup_mergeDay15.csv')
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~merge pair-wise comparison~~~~~~~~~~~~~~~~~~~~~~

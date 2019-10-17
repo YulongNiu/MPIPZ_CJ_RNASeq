@@ -81,11 +81,6 @@ rld <- rlog(degres)
 vst <- varianceStabilizingTransformation(degres)
 ntd <- normTransform(degres)
 
-cond <- degres %>%
-  resultsNames %>%
-  str_extract('(?<=condition_).*') %>%
-  .[!is.na(.)]
-
 cond <- list(c('Col0_FeCl3_HK_Day14', 'Col0_FeEDTA_HK_Day14'),
              c('Col0_FeCl3_Live_Day14', 'Col0_FeEDTA_Live_Day14'),
              c('f6h1_FeCl3_HK_Day14', 'f6h1_FeEDTA_HK_Day14'),
