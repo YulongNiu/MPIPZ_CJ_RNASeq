@@ -99,26 +99,6 @@
 
 ## 4. Cluster
 
-* Day 8
-
-![kmeans_10_Day8](results/kmeans_10_Day8.jpg)
-
-![kmeans_10_Day8_genes](results/kmeans_10_Day8_genes.jpg)
-
-```
-  FeEDTA Live Col0
-1      0    0    1
-2      0    1    1
-3      1    0    1
-4      1    1    1
-5      0    0    0
-6      0    1    0
-7      1    0    0
-8      1    1    0
-```
-
-![kmeans_10_Day8_trait](results/kmeans_10_Day8_trait.jpg)
-
 * Day 14
 
 ![kmeans_10_Day15](results/kmeans_10_Day15.jpg)
@@ -195,7 +175,12 @@ Remove batch effects with `SVA`
 ![auto_sv_day8](results/auto_sv_day8.jpg)
 
 ![PCA_mergeDay8_sva](results/PCA_mergeDay8_sva.jpg)
- 
+
+* Cluster
+
+![kmeans_10_Day8](results/kmeans_10_Day8.jpg)
+
+![kmeans_10_Day8_genes](results/kmeans_10_Day8_genes.jpg)
 
 ## References
 
