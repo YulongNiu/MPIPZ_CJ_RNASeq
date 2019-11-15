@@ -23,10 +23,7 @@ library('tximport')
 library('rhdf5')
 library('magrittr')
 library('DESeq2')
-library('tibble')
-library('readr')
-library('dplyr')
-library('stringr')
+library('tidyverse')
 library('foreach')
 
 anno <- read_csv('/extDisk1/RESEARCH/MPIPZ_KaWai_RNASeq/results/Ensembl_ath_Anno.csv',
@@ -42,7 +39,7 @@ setwd(wd)
 labelanno <- read_csv('../results/LibraryIDs.csv') %>%
   mutate_all(list(~ str_replace(., 'Day14', 'Day15'))) %>%
   mutate(Days = rep(c(8, 15, 8, 15), each = 24)) %>%
-  filter(Timepoint %>% str_detect('Day15')) %>%
+  filter(Timepoint %>% str_detect('Day8')) %>%
   arrange(Anno) %>%
   arrange(Days)
 
@@ -55,7 +52,7 @@ names(files) <- labelanno$Anno
 kres <- tximport(files, type = 'kallisto', txOut = TRUE)
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-##~~~~~~~~~~~~~~~~~~~~~~~~conditions~~~~~~~~~~~~~~~~~
+##~~~~~~~~~~~~~~~~~~~~~~~~normalization~~~~~~~~~~~~~~~~~
 setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/')
 
 ## sampleTable
@@ -71,25 +68,66 @@ degres %<>%
   counts(normalized = TRUE) %>%
   apply(1, checkFe, 1) %>%
   degres[., ]
-## degres <- degres[rowSums(counts(degres)) > 1, ]
-save(degres, file = 'degres_merge.RData')
 
 degres <- DESeq(degres)
 ## resultsNames(degres)
 
 ## count transformation
 rld <- rlog(degres)
-vst <- varianceStabilizingTransformation(degres)
 ntd <- normTransform(degres)
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-cond <- list(c('Col0_FeCl3_HK_Day15', 'Col0_FeEDTA_HK_Day15'),
-             c('Col0_FeCl3_Live_Day15', 'Col0_FeEDTA_Live_Day15'),
-             c('f6h1_FeCl3_HK_Day15', 'f6h1_FeEDTA_HK_Day15'),
-             c('f6h1_FeCl3_Live_Day15', 'f6h1_FeEDTA_Live_Day15'),
-             c('Col0_FeEDTA_Live_Day15', 'Col0_FeEDTA_HK_Day15'),
-             c('Col0_FeCl3_Live_Day15', 'Col0_FeCl3_HK_Day15'),
-             c('f6h1_FeEDTA_Live_Day15', 'f6h1_FeEDTA_HK_Day15'),
-             c('f6h1_FeCl3_Live_Day15', 'f6h1_FeCl3_HK_Day15'))
+##~~~~~~~~~~~~~~~~~~~~~~~~~~hidden batch effect~~~~~~~~~~~~~~~~~~~~~
+library('sva')
+library('ggplot2')
+
+dat <- rld %>%
+  assay %>%
+  {.[rowMeans(.) > 1, ]}
+mod <- model.matrix(~ condition, colData(degres))
+mod0 <- model.matrix(~ 1, colData(degres))
+
+## manual detect surrogate variance
+svnum <- 4
+svseq <- svaseq(dat, mod, mod0, n.sv = svnum)
+
+## auto detect sv
+svobj <- sva(dat, mod, mod0)
+svnum <- svobj$sv %>% ncol
+
+svobj$sv %>%
+  set_colnames(paste0('sv', seq_len(svnum))) %>%
+  as_tibble %>%
+  gather(key = 'sv', value = 'value') %>%
+  mutate(condition = colData(degres) %>%
+           .$condition %>%
+           rep(svnum) %>%
+           as.character,
+         sample = rep(colnames(degres), svnum)) %>%
+  mutate(group = paste(sv, condition, sep = '_')) %>%
+  ggplot(aes(sample, value, colour = sv, group = group)) +
+  geom_point() +
+  geom_line() +
+  theme(axis.text.x = element_text(angle = 90))
+ggsave('auto_sv_day8.jpg')
+ggsave('auto_sv_day8.pdf')
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+degres$sv1 <- svobj$sv[, 1]
+degres$sv2 <- svobj$sv[, 2]
+degres$sv3 <- svobj$sv[, 3]
+degres$sv4 <- svobj$sv[, 4]
+design(degres) <- ~sv1 + sv2 + sv3 + sv4 + condition
+
+cond <- list(c('Col0_FeCl3_HK_Day8', 'Col0_FeEDTA_HK_Day8'),
+             c('Col0_FeCl3_Live_Day8', 'Col0_FeEDTA_Live_Day8'),
+             c('f6h1_FeCl3_HK_Day8', 'f6h1_FeEDTA_HK_Day8'),
+             c('f6h1_FeCl3_Live_Day8', 'f6h1_FeEDTA_Live_Day8'),
+             c('Col0_FeEDTA_Live_Day8', 'Col0_FeEDTA_HK_Day8'),
+             c('Col0_FeCl3_Live_Day8', 'Col0_FeCl3_HK_Day8'),
+             c('f6h1_FeEDTA_Live_Day8', 'f6h1_FeEDTA_HK_Day8'),
+             c('f6h1_FeCl3_Live_Day8', 'f6h1_FeCl3_HK_Day8'))
 
 resRaw <- lapply(cond,
                  function(x) {
@@ -107,10 +145,11 @@ res <- cbind.data.frame(as.matrix(mcols(degres)[, 1:10]), assay(ntd), stringsAsF
   as_tibble %>%
   bind_cols(resRaw) %>%
   inner_join(anno, by = 'ID') %>%
-  select(ID, Gene : Description, Col0_FeCl3_HK_Day15_Rep1 : f6h1_FeCl3_Live_Day15_vs_f6h1_FeCl3_HK_Day15_log2FoldChange) %>%
-  arrange(Col0_FeCl3_HK_Day15_vs_Col0_FeEDTA_HK_Day15_padj)
+  select(ID, Gene : Description, Col0_FeCl3_HK_Day8_Rep1 : f6h1_FeCl3_Live_Day8_vs_f6h1_FeCl3_HK_Day8_log2FoldChange) %>%
+  arrange(Col0_FeCl3_HK_Day8_vs_Col0_FeEDTA_HK_Day8_padj)
 
-write_csv(res, 'eachGroup_mergeDay15.csv')
+write_csv(res, 'eachGroup_mergeDay8.csv')
+save(degres, rldData, file = 'eachGroup_mergeDay8.RData')
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~merge pair-wise comparison~~~~~~~~~~~~~~~~~~~~~~
@@ -157,25 +196,32 @@ rldDay8 <- colData(rld)[, 1] %>%
   mutate(Conditions = paste(Iron, SynCom, sep = '_') %>%
            factor,
          Genotype = Genotype %<>% factor,
-         Batch = c(rep(rep(1:2, each = 3), 8), rep(1, 24), rep(2, 24))) %>%
+         Batch = c(rep(rep(1:2, each = 3), 8))) %>%
   filter(Time == 'Day8')
 
 cols <- brewer.pal(4, name = 'Set1')
 cols[3:4] <- cols[4:3]
 
-## raw
-rldarray <- assay(str_detect(colnames(rld), 'Day8') %>% rld[, .])
+dat <- rld %>%
+  assay %>%
+  {.[rowMeans(.) > 1, ]}
 
-## limma: remove batch effect
-rldarray <- assay(str_detect(colnames(rld), 'Day8') %>% rld[, .]) %>%
-  removeBatchEffect(rep(rep(1:2, each = 3), 8) %>% factor)
+group <- sampleTable$condition
+design <- model.matrix(~ group)
+rldData <- dat %>%
+  removeBatchEffect(covariates = svobj$sv,
+                    design = design)
 
-## sva: remove batch effect
-modcombat <- model.matrix(~1, data = rldDay8)
-rldarray <- assay(str_detect(colnames(rld), 'Day8') %>% rld[, .]) %>%
-  ComBat(dat = ., batch = rep(rep(1:2, each = 3), 8) %>% factor, mod = modcombat, par.prior = TRUE, prior.plots = FALSE)
+## ## limma: remove batch effect
+## rldData <- assay(str_detect(colnames(rld), 'Day8') %>% rld[, .]) %>%
+##   removeBatchEffect(rep(rep(1:2, each = 3), 8) %>% factor)
 
-pca <- prcomp(t(rldarray))
+## ## sva: remove batch effect
+## modcombat <- model.matrix(~1, data = rldDay8)
+## rldData <- assay(str_detect(colnames(rld), 'Day8') %>% rld[, .]) %>%
+##   ComBat(dat = ., batch = rep(rep(1:2, each = 3), 8) %>% factor, mod = modcombat, par.prior = TRUE, prior.plots = FALSE)
+
+pca <- prcomp(t(rldData))
 percentVar <- pca$sdev^2/sum(pca$sdev^2)
 percentVar <- round(100 * percentVar)
 pca1 <- pca$x[,1]
@@ -198,8 +244,8 @@ ggplot(pcaData, aes(x = PC1, y = PC2, colour = Conditions)) +
   ggtitle('Day8') +
   theme(plot.title = element_text(hjust = 0.5, size = 12, face = 'bold'))
 
-ggsave('../results/PCA_mergeDay8_raw.pdf', width = 12)
-ggsave('../results/PCA_mergeDay8_raw.jpg', width = 12)
+ggsave('../results/PCA_mergeDay8_sva.pdf', width = 12)
+ggsave('../results/PCA_mergeDay8_sva.jpg', width = 12)
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~day 14/15~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

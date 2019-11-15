@@ -198,57 +198,12 @@ Raw
 
 ![PCA_mergeDay8_raw](results/PCA_mergeDay8_raw.jpg)
 
-Remove batch effects with `limma`
-
-![PCA_mergeDay8_brlimma](results/PCA_mergeDay8_brlimma.jpg)
-
 Remove batch effects with `SVA`
 
-![PCA_mergeDay8_brsva](results/PCA_mergeDay8_brsva.jpg)
+![auto_sv_day8](results/auto_sv_day8.jpg)
 
-* PCA plot for merged day14/15
-
-Raw
-
-![PCA_mergeDay14_raw](results/PCA_mergeDay14_raw.jpg)
-
-Remove batch effects with `limma`
-
-![PCA_mergeDay14_brlimma](results/PCA_mergeDay14_brlimma.jpg)
-
-Remove batch effects with `SVA`
-
-![PCA_mergeDay14_brsva](results/PCA_mergeDay14_brsva.jpg)
+![PCA_mergeDay8_sva](results/PCA_mergeDay8_sva.jpg)
  
-### 5.3 Clusters
-
-* Day 8
-
-![kmeans_10_Day8_1stadd](results/kmeans_10_Day8_1stadd.jpg)
-
-![kmeans_10_Day8_genes_1stadd](results/kmeans_10_Day8_genes_1stadd.jpg)
-
-```
-  FeEDTA Live Col0
-1      0    0    1
-2      0    1    1
-3      1    0    1
-4      1    1    1
-5      0    0    0
-6      0    1    0
-7      1    0    0
-8      1    1    0
-```
-
-![kmeans_10_Day8_trait_1stadd](results/kmeans_10_Day8_trait_1stadd.jpg)
-
-* Day 14
-
-![kmeans_10_Day14_1stadd](results/kmeans_10_Day14_1stadd.jpg)
-
-![kmeans_10_Day14_genes_1stadd](results/kmeans_10_Day14_genes_1stadd.jpg)
-
-![kmeans_10_Day14_trait_1stadd](results/kmeans_10_Day14_trait_1stadd.jpg)
 
 ## References
 
