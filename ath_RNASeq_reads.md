@@ -184,14 +184,6 @@
 
 ### 5.2 DEGs
 
-* PCA plot for day 8
-
-![PCA_Day8_1stadd](results/PCA_Day8_1stadd.jpg)
-
-* PCA plot for day 14
-
-![PCA_Day14_1stadd](results/PCA_Day14_1stadd.jpg)
-
 * PCA plot for merged day8
 
 Raw
