@@ -89,23 +89,19 @@
 
 ## 3. DEGs
 
-* PCA plot for day 8
+* PCA plot for merged day15
 
-![PCA_Day8](results/PCA_Day8.jpg)
+Raw
 
-* PCA plot for day 15
+![PCA_Day15_raw](results/PCA_Day15_raw.jpg)
 
-![PCA_Day15](results/PCA_Day15.jpg)
+Remove batch effects with `SVA`
+
+![auto_sv_day15](results/auto_sv_day15.jpg)
+
+![PCA_Day15_sva](results/PCA_Day15_sva.jpg)
 
 ## 4. Cluster
-
-* Day 14
-
-![kmeans_10_Day15](results/kmeans_10_Day15.jpg)
-
-![kmeans_10_Day15_genes](results/kmeans_10_Day15_genes.jpg)
-
-![kmeans_10_Day15_trait](results/kmeans_10_Day15_trait.jpg)
 
 ## 5. 1stadd
 
