@@ -201,5 +201,8 @@ ggplot(pcaData, aes(x = PC1, y = PC2, colour = Conditions)) +
 
 ggsave('../results/PCA_Day15_sva.pdf', width = 12)
 ggsave('../results/PCA_Day15_sva.jpg', width = 12)
+
+write_csv(res, 'eachGroup_Day15.csv')
+save(degres, rldData, file = 'eachGroup_Day15.RData')
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##################################################################
