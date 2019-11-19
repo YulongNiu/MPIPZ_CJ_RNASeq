@@ -174,9 +174,9 @@ Remove batch effects with `SVA`
 
 * Cluster
 
-![kmeans_10_Day8](results/kmeans_10_Day8.jpg)
+![kmeans_10_Day8](results/kmeans_10_mergeDay8.jpg)
 
-![kmeans_10_Day8_genes](results/kmeans_10_Day8_genes.jpg)
+![kmeans_10_Day8_genes](results/kmeans_10_mergeDay8_genes.jpg)
 
 ## References
 
