@@ -178,6 +178,8 @@ Remove batch effects with `SVA`
 
 ![kmeans_10_Day8_genes](results/kmeans_10_mergeDay8_genes.jpg)
 
+![kmeans_10_mergeDay8_trait](results/kmeans_10_mergeDay8_trait.jpg)
+
 ## References
 
 1. Robinson DG, Storey JD: **subSeq: determining appropriate sequencing depth through efficient read subsampling.** *Bioinformatics*. 2014;30(23):3424-6.
