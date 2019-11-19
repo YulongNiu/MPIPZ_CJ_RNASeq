@@ -6,12 +6,10 @@
 
 - [1. Alignment](#1-alignment)
 - [2. subSeq](#2-subseq)
-- [3. DEGs](#3-degs)
-- [4. Cluster](#4-cluster)
-    - [4.1 Col0Day15](#41-col0day15)
-- [5. 1stadd](#5-1stadd)
-    - [5.1 Alignment](#51-alignment)
-    - [5.2 DEGs](#52-degs)
+- [3. Cluster](#4-cluster)
+- [4. 1stadd](#5-1stadd)
+    - [4.1 Alignment](#51-alignment)
+    - [4.2 DEGs](#52-degs)
 - [References](#references)
 
 <!-- content end -->
@@ -87,7 +85,7 @@
 
 ![f6h1_FeCl3_HK_Day15_vs_f6h1_FeCl3_Live_Day15](results/f6h1_FeCl3_HK_Day15_vs_f6h1_FeCl3_Live_Day15.jpg)
 
-## 3. DEGs
+## 3. Cluster
 
 * PCA plot for merged day15
 
@@ -101,11 +99,47 @@ Remove batch effects with `SVA`
 
 ![PCA_Day15_sva](results/PCA_Day15_sva.jpg)
 
-## 4. Cluster
+| ID          | Gene    | Gene_Symbol  | cl | 
+|-------------|---------|--------------|----| 
+| AT2G28160.1 | FIT     | FIT1         | 1  | 
+| AT2G28160.2 | FIT     | FIT1         | 9  | 
+| AT5G01600.1 | FER1    | FER1         | 1  | 
+| AT3G47640.1 | BHLH47  | PYE          | 6  | 
+| AT3G18290.1 | BTS     | BTS          | 6  | 
+| AT5G04150.1 | BHLH101 | BHLH101      | 6  | 
+| AT5G04150.2 | BHLH101 | BHLH101      | 6  | 
+| AT5G54680.1 | ILR3    | bHLH105      | 6  | 
+| AT3G56970.1 | ORG2    | bHLH038_ORG2 | 6  | 
+| AT3G56980.1 | ORG3    | BHLH039_ORG3 | 6  | 
+| AT1G32640.1 | MYC2    | MYC2         | 4  | 
+| AT3G12820.1 | AtMYB10 | MYB10        | 6  | 
+| AT3G12820.2 | AtMYB10 | MYB10        | 8  | 
+| AT1G56160.1 | ATMYB72 | MYB72        | 6  | 
+| AT3G13610.1 | F6'H1   | F6'H1        | 3  | 
+| AT3G12900.1 | NA      | S8H          | 6  | 
+| AT3G53480.1 | ABCG37  | PDR9         | 6  | 
+| AT5G36890.2 | BGLU42  | BGLU42       | 7  | 
+| AT5G36890.1 | BGLU42  | BGLU42       | 8  | 
+| AT4G19690.2 | IRT1    | IRT1         | 6  | 
+| AT4G19690.1 | IRT1    | IRT1         | 7  | 
+| AT1G01580.1 | FRO2    | FRO2         | 6  | 
+| AT4G30190.1 | HA2     | AHA2         | 5  | 
+| AT4G30190.2 | HA2     | AHA2         | 5  | 
+| AT2G18960.2 | AHA1    | AHA1         | 6  | 
+| AT2G18960.1 | AHA1    | AHA1         | 1  | 
+| AT2G18960.3 | AHA1    | AHA1         | 6  | 
+| AT5G57350.1 | AHA3    | AHA3         | 8  | 
+| AT5G57350.2 | AHA3    | AHA3         | 6  | 
+| AT5G57350.4 | AHA3    | AHA3         | 6  | 
+| AT1G55290.1 | F6'H2   | F6'H2        | 1  | 
 
-## 5. 1stadd
+![kmeans_10_Day15](results/kmeans_10_Day15.jpg)
 
-### 5.1 Alignment
+![kmeans_10_Day15_genes](results/kmeans_10_Day15_genes.jpg)
+
+## 4. 1stadd
+
+### 4.1 Alignment
 
 | sample  | rawfq    | trimfq   | H_ath | K_ath | 
 |---------|----------|----------|-------|-------| 
@@ -158,7 +192,7 @@ Remove batch effects with `SVA`
 | 4206_Y  | 7901756  | 7293296  | 0.974 | 0.974 | 
 | 4206_Z  | 7517436  | 6833111  | 0.973 | 0.973 | 
 
-### 5.2 DEGs
+### 4.2 DEGs
 
 * PCA plot for merged day8
 

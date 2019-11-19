@@ -131,7 +131,6 @@ read_csv('selected_genes.csv') %>%
   filter(!is.na(cl)) %>%
   select(ID, Gene, Gene_Symbol, cl) %>%
   write_csv('tmp1.csv')
-
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
