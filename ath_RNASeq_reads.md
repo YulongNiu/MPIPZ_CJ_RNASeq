@@ -174,9 +174,53 @@ Remove batch effects with `SVA`
 
 * Cluster
 
+| ID          | Gene    | Gene_Symbol  | cl | 
+|-------------|---------|--------------|----| 
+| AT2G28160.1 | FIT     | FIT1         | 4  | 
+| AT5G01600.1 | FER1    | FER1         | 8  | 
+| AT3G47640.1 | BHLH47  | PYE          | 4  | 
+| AT3G18290.1 | BTS     | BTS          | 4  | 
+| AT2G41240.1 | BHLH100 | BHLH100      | 4  | 
+| AT5G04150.1 | BHLH101 | BHLH101      | 4  | 
+| AT5G04150.2 | BHLH101 | BHLH101      | 4  | 
+| AT5G54680.1 | ILR3    | bHLH105      | 4  | 
+| AT3G56970.1 | ORG2    | bHLH038_ORG2 | 4  | 
+| AT3G56980.1 | ORG3    | BHLH039_ORG3 | 4  | 
+| AT1G32640.1 | MYC2    | MYC2         | 10 | 
+| AT3G12820.1 | AtMYB10 | MYB10        | 4  | 
+| AT1G56160.1 | ATMYB72 | MYB72        | 4  | 
+| AT3G13610.1 | F6'H1   | F6'H1        | 7  | 
+| AT3G12900.1 | NA      | S8H          | 4  | 
+| AT3G53480.1 | ABCG37  | PDR9         | 4  | 
+| AT5G36890.2 | BGLU42  | BGLU42       | 4  | 
+| AT5G36890.1 | BGLU42  | BGLU42       | 4  | 
+| AT4G19690.2 | IRT1    | IRT1         | 4  | 
+| AT1G01580.2 | FRO2    | FRO2         | 4  | 
+| AT1G01580.1 | FRO2    | FRO2         | 4  | 
+| AT4G30190.1 | HA2     | AHA2         | 4  | 
+| AT4G30190.2 | HA2     | AHA2         | 2  | 
+| AT2G18960.2 | AHA1    | AHA1         | 8  | 
+| AT2G18960.1 | AHA1    | AHA1         | 10 | 
+| AT2G18960.3 | AHA1    | AHA1         | 8  | 
+| AT5G57350.1 | AHA3    | AHA3         | 6  | 
+| AT5G57350.2 | AHA3    | AHA3         | 2  | 
+| AT1G55290.1 | F6'H2   | F6'H2        | 2  | 
+
 ![kmeans_10_Day8](results/kmeans_10_mergeDay8.jpg)
 
 ![kmeans_10_Day8_genes](results/kmeans_10_mergeDay8_genes.jpg)
+
+```
+  FeEDTA Live Col0 IronStarvation
+1      0    0    1              1
+2      0    1    1              0
+3      1    0    1              0
+4      1    1    1              0
+5      0    0    0              1
+6      0    1    0              1
+7      1    0    0              0
+8      1    1    0              0
+```
 
 ![kmeans_10_mergeDay8_trait](results/kmeans_10_mergeDay8_trait.jpg)
 

@@ -96,8 +96,8 @@ ggplot(tibble(k = 1:20, wss = wss), aes(k, wss)) +
   geom_line(linetype = 'dashed') +
   xlab('Number of clusters') +
   ylab('Sum of squared error')
-ggsave('kmeans_sse_Day8.pdf')
-ggsave('kmeans_sse_Day8.jpg')
+ggsave('kmeans_sse_mergeDay8.pdf')
+ggsave('kmeans_sse_mergeDay8.jpg')
 
 ## 2. Akaike information criterion
 kmeansAIC = function(fit){
@@ -119,11 +119,19 @@ ggplot(tibble(k = 1:20, aic = aic), aes(k, wss)) +
   geom_line(linetype = 'dashed') +
   xlab('Number of clusters') +
   ylab('Akaike information criterion')
-ggsave('kmeans_AIC_Day8.pdf')
-ggsave('kmeans_AIC_Day8.jpg')
+ggsave('kmeans_AIC_mergeDay8.pdf')
+ggsave('kmeans_AIC_mergeDay8.jpg')
 
-## execute
+## cluster
 kClust10 <- kmeans(scaleCount, centers = 10, algorithm= 'MacQueen', nstart = 1000, iter.max = 20)
+
+## selected genes
+read_csv('selected_genes.csv') %>%
+  mutate(cl = ID %>% kClust10$cluster[.]) %>%
+  filter(!is.na(cl)) %>%
+  select(ID, Gene, Gene_Symbol, cl) %>%
+  write_csv('tmp1.csv')
+
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
