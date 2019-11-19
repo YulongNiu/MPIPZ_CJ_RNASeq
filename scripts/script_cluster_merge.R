@@ -14,6 +14,7 @@ library('dplyr')
 library('RColorBrewer')
 library('gridExtra')
 library('cluster')
+library('scales')
 
 load('eachGroup_mergeDay8.RData')
 deganno <- read_csv('eachGroup_mergeDay8.csv',
@@ -69,7 +70,7 @@ scaleCount %<>% .[complete.cases(.), ]
 ##~~~~~~~~~~~~~~~~~~~~~~~~~K-means cluster~~~~~~~~~~~~~~~~~~~~~~
 z_var <- apply(meanCount, 1, var)
 z_mean <- apply(meanCount, 1, mean)
-plot(log2(z_mean), log2(z_var), pch = '.')
+plot(z_mean, z_var, pch = '.')
 abline(h = 1, col='red')
 abline(v = 1, col='red')
 text(x = 13,
@@ -128,7 +129,7 @@ kClust10 <- kmeans(scaleCount, centers = 10, algorithm= 'MacQueen', nstart = 100
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~plot patterns~~~~~~~~~~~~~~~~~~~~~~~~
 cl <- kClust10$cluster
-prefix <- 'kmeans_10_Day8'
+prefix <- 'kmeans_10_mergeDay8'
 
 clusterGene <- scaleCount %>%
   as.data.frame %>%
@@ -144,25 +145,37 @@ clusterGene <- scaleCount %>%
 clusterCore <- clusterGene %>%
   group_by(cl) %>%
   summarise_at(-1, mean, na.rm = TRUE) %>% ## mean of each cluster
-  mutate(cl = cl %>% paste0('cluster_', .)) %>%
-  gather(Sample, NorExpress, -1)
-clusterCore$Sample %<>% factor(levels = sampleN[1:8], ordered = TRUE)
+  mutate(cl = paste0('cluster_', cl) %>%
+           factor(levels = paste0('cluster_', cl))) %>%
+  gather(Sample, NorExpress, -1) %>%
+  mutate(Sample = Sample %>% factor(levels = sampleN, ordered = TRUE))
 
+## ## choose colors
+## show_col(hue_pal()(4))
 ggplot(clusterCore, aes(Sample, NorExpress, col = cl, group = cl)) +
   geom_point() +
   geom_line() +
   facet_wrap(. ~ cl, ncol = 2) +
   ylab('Scaled counts') +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  guides(colour = guide_legend(title = 'kmeans (k = 10)'))
+  scale_color_manual(values = hue_pal()(10),
+    breaks = kClust10$cluster %>%
+                       table %>%
+                       names %>%
+                       paste0('cluster_', .),
+    labels = kClust10$cluster %>%
+                       table %>%
+                       {paste0('cluster_', names(.), ' ', .)},
+    guide = guide_legend(title = 'kmeans (k = 10)')) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ggsave(paste0(prefix, '.pdf'))
 ggsave(paste0(prefix, '.jpg'))
 
 ## plot all genes
 clusterGenePlot <- clusterGene %>%
   gather(Sample, NorExpress, -ID, -cl) %>%
-  mutate(cl = cl %>% paste0('cluster_', .))
-clusterGenePlot$Sample %<>% factor(levels = sampleN[1:8], ordered = TRUE)
+  mutate(cl = paste0('cluster_', cl) %>%
+           factor(levels = paste0('cluster_', sort(unique(cl))))) %>%
+  mutate(Sample = Sample %>% factor(levels = sampleN, ordered = TRUE))
 
 clusterCorePlot <- clusterCore %>% dplyr::mutate(ID = 1 : nrow(clusterCore))
 ggplot(clusterGenePlot, aes(Sample, NorExpress, group = ID)) +
@@ -180,7 +193,8 @@ ggsave(paste0(prefix, '_genes.jpg'), width = 10, dpi = 320)
 ##~~~~~~~~~~~~~~~~~~~~~~~~cluster cor phenotype~~~~~~~~~~~~~~~~~
 traits <- data.frame(FeEDTA = c(0, 0, 1, 1, 0, 0, 1, 1),
                      Live = c(0, 1, 0, 1, 0, 1, 0, 1),
-                     Col0 = c(1, 1, 1, 1, 0, 0, 0, 0))
+                     Col0 = c(1, 1, 1, 1, 0, 0, 0, 0),
+                     IronStarvation = c(1, 0, 0, 0, 1, 1, 0, 0))
 
 cores <- clusterGene %>%
   group_by(cl) %>%
