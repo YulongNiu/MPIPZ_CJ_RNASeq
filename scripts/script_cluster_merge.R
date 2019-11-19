@@ -266,7 +266,7 @@ rawC <- rawCount %>%
   rename_at(-1, .funs = list(~paste0('Raw_', .)))
 
 degresC <- deganno %>%
-  select(ID, Col0_FeEDTA_HK_Day15_vs_Col0_FeCl3_HK_Day15_pvalue : Col0_FeEDTA_Live_Day8_vs_Col0_FeCl3_Live_Day8_log2FoldChange)
+  select(ID, Col0_FeCl3_HK_Day8_vs_Col0_FeEDTA_HK_Day8_pvalue : f6h1_FeCl3_Live_Day8_vs_f6h1_FeCl3_HK_Day8_log2FoldChange)
 
 heatPlot <- rawC %>%
   inner_join(scaleC) %>%
@@ -281,19 +281,19 @@ heatPlot <- rawC %>%
 
 inner_join(deganno, heatPlot) %>%
   mutate_at(c('Gene', 'Description'), .funs = list(~if_else(is.na(.), '', .))) %>%
-  write_csv(paste0(prefix, '_1stadd.csv'))
+  write_csv(paste0(prefix, '.csv'))
 
 heatRawPlot <- heatPlot %>%
   select(ID, starts_with('Raw')) %>%
-  gather(sample, raw, Raw_Mock_1 : Raw_Flg22_SynCom35_3) %>%
-  mutate(x = rep(0 : 11, each = nrow(heatPlot))) %>%
-  mutate(y = rep(0 : (nrow(heatPlot) - 1), 12))
+  gather(sample, raw, -1) %>%
+  mutate(x = rep(0 : 47, each = nrow(heatPlot))) %>%
+  mutate(y = rep(0 : (nrow(heatPlot) - 1), 48))
 
 heatScalePlot <- heatPlot %>%
   select(ID, starts_with('Scale')) %>%
-  gather(sample, scale, Scale_Mock_1 : Scale_Flg22_SynCom35_3) %>%
-  mutate(x = rep(0 : 11, each = nrow(heatPlot))) %>%
-  mutate(y = rep(0 : (nrow(heatPlot) - 1), 12))
+  gather(sample, scale, -1) %>%
+  mutate(x = rep(0 : 47, each = nrow(heatPlot))) %>%
+  mutate(y = rep(0 : (nrow(heatPlot) - 1), 48))
 
 heatlog2FCPlot <- heatPlot %>%
   select(ID, ends_with('FoldChange')) %>%
@@ -344,9 +344,9 @@ theme_flg22 <- function(...) {
 ggplot(heatRawPlot, aes(x = x, y = y, fill = log2(raw))) +
   geom_tile() +
   scale_fill_gradientn(colours = colorRampPalette(brewer.pal(n = 7, name = 'GnBu'))(100), name = 'log2(count)') +
-  scale_x_continuous(breaks = 0 : 11,
-                     labels = rep(c('Mock', 'flg22', 'flg22_SynCom33', 'flg22_SynCom35'), each = 3) %>%
-                       paste(rep(1 : 3, 4), sep = '_')) +
+  scale_x_continuous(breaks = 0 : 47,
+                     labels = rep(sampleN, each = 6) %>%
+                       paste(rep(1 : 6, 8), sep = '_')) +
   theme_flg22(legend.position = 'left',
               axis.text.x = element_text(angle = 90, hjust = 1))
 ggsave(paste0(prefix, '_heatmap_raw.jpg'))
@@ -354,10 +354,10 @@ ggsave(paste0(prefix, '_heatmap_raw.pdf'))
 
 ggplot(heatScalePlot, aes(x = x, y = y, fill = scale)) +
   geom_tile() +
-  scale_fill_gradientn(colours = colorRampPalette(rev(brewer.pal(n = 7, name = 'RdYlBu')))(100), name = 'scale(count)') +
-  scale_x_continuous(breaks = 0 : 11,
-                     labels = rep(c('Mock', 'flg22', 'flg22_SynCom33', 'flg22_SynCom35'), each = 3) %>%
-                       paste(rep(1 : 3, 4), sep = '_')) +
+  scale_fill_gradientn(colours = colorRampPalette(rev(brewer.pal(n = 10, name = 'Spectral')))(100), name = 'scale(count)') +
+  scale_x_continuous(breaks = 0 : 47,
+                     labels = rep(sampleN, each = 6) %>%
+                       paste(rep(1 : 6, 8), sep = '_')) +
   theme_flg22(legend.position = 'left',
               axis.text.x = element_text(angle = 90, hjust = 1))
 ggsave(paste0(prefix, '_heatmap_scale.jpg'))
@@ -424,7 +424,7 @@ rawe <- ggplot(heatRawPlot, aes(x = x, y = y, fill = log2(raw))) +
 
 scalee <- ggplot(heatScalePlot, aes(x = x, y = y, fill = scale)) +
   geom_tile() +
-  scale_fill_gradientn(colours = colorRampPalette(rev(brewer.pal(n = 7, name = 'RdYlBu')))(100), name = 'scale(count)') +
+  scale_fill_gradientn(colours = colorRampPalette(rev(brewer.pal(n = 10, name = 'Spectral')))(10), name = 'scale(count)') +
   labs(x = NULL, y = NULL) +
   scale_y_continuous(expand = c(0, 0), breaks = NULL) +
   scale_x_continuous(expand = c(0, 0), breaks = NULL) +
@@ -485,22 +485,31 @@ blanke <- ggplot(tibble(x = 0, y = 0 : (nrow(heatPlot) - 1)),
   theme_flg22(title = element_blank(),
               legend.position = 'none')
 
-cairo_pdf(paste0(prefix, '_heatmap_merge.pdf'), width = 15)
-grid.arrange(groupne,
-             groupe,
-             blanke,
-             rawe,
-             blanke,
-             scalee,
-             blanke,
-             fce,
-             blanke,
-             sige,
-             sigte,
-             nrow = 1,
-             ncol = 11,
-             widths = c(3.5, 1, 0.5, 13, 0.5, 13, 0.5, 3, 0.5, 3, 10) %>% {. / sum(.)})
-dev.off()
+g <- grid.arrange(groupne,
+                  groupe,
+                  blanke,
+                  rawe,
+                  blanke,
+                  scalee,
+                  blanke,
+                  fce,
+                  blanke,
+                  sige,
+                  nrow = 1,
+                  ncol = 10,
+                  widths = c(3.5, 1, 0.5, 13, 0.5, 13, 0.5, 3, 0.5, 3) %>% {. / sum(.)})
+ggsave(file = paste0(prefix, '_heatmap_merge_1stadd.pdf'), plot = g)
+ggsave(file = paste0(prefix, '_heatmap_merge_1stadd.jpg'), plot = g)
+
+g <- grid.arrange(groupne,
+                  groupe,
+                  blanke,
+                  scalee,
+                  nrow = 1,
+                  ncol = 4,
+                  widths = c(3.5, 1, 0.5, 13) %>% {. / sum(.)})
+ggsave(file = paste0(prefix, '_heatmap_all.pdf'), plot = g)
+ggsave(file = paste0(prefix, '_heatmap_all.jpg'), plot = g)
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## write the cluster file
