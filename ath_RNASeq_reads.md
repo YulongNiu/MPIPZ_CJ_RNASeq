@@ -210,7 +210,7 @@ Remove batch effects with `SVA`
 
 ![kmeans_10_Day8_genes](results/kmeans_10_mergeDay8_genes.jpg)
 
-![kmeans_10_mergeDay8_heatmap_all_600den](kmeans_10_mergeDay8_heatmap_all_600den.jpg)
+![kmeans_10_mergeDay8_heatmap_all_600den](results/kmeans_10_mergeDay8_heatmap_all_600den.jpg)
 
 ```
   FeEDTA Live Col0 IronStarvation
