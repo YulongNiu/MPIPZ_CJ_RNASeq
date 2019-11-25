@@ -350,7 +350,7 @@ ggplot(heatRawPlot, aes(x = x, y = y, fill = log2(raw))) +
 ggsave(paste0(prefix, '_heatmap_raw.jpg'))
 ggsave(paste0(prefix, '_heatmap_raw.pdf'))
 
-ggplot(heatScalePlot, aes(x = x, y = y, fill = scale)) +
+ggplot(heatScalePlot, aes(x = x, y = y, fill = scale)) +i
   geom_tile() +
   scale_fill_gradientn(colours = colorRampPalette(rev(brewer.pal(n = 10, name = 'Spectral')))(100), name = 'scale(count)') +
   scale_x_continuous(breaks = 0 : 23,
@@ -422,7 +422,7 @@ rawe <- ggplot(heatRawPlot, aes(x = x, y = y, fill = log2(raw))) +
 
 scalee <- ggplot(heatScalePlot, aes(x = x, y = y, fill = scale)) +
   geom_tile() +
-  scale_fill_gradientn(colours = colorRampPalette(rev(brewer.pal(n = 7, name = 'RdYlBu')))(100), name = 'scale(count)') +
+  scale_fill_gradientn(colours = colorRampPalette(rev(brewer.pal(n = 10, name = 'Spectral')))(10), name = 'scale(count)') +
   labs(x = NULL, y = NULL) +
   scale_y_continuous(expand = c(0, 0), breaks = NULL) +
   scale_x_continuous(expand = c(0, 0), breaks = NULL) +
@@ -499,6 +499,16 @@ grid.arrange(groupne,
              ncol = 11,
              widths = c(3.5, 1, 0.5, 13, 0.5, 13, 0.5, 3, 0.5, 3, 10) %>% {. / sum(.)})
 dev.off()
+
+g <- grid.arrange(groupne,
+                  groupe,
+                  blanke,
+                  scalee,
+                  nrow = 1,
+                  ncol = 4,
+                  widths = c(3.5, 1, 0.5, 13) %>% {. / sum(.)})
+ggsave(file = paste0(prefix, '_heatmap_all.pdf'), plot = g)
+ggsave(file = paste0(prefix, '_heatmap_all.jpg'), plot = g)
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## write the cluster file
