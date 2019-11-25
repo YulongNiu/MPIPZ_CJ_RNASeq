@@ -264,7 +264,7 @@ rawC <- rawCount %>%
   rename_at(-1, .funs = list(~paste0('Raw_', .)))
 
 degresC <- deganno %>%
-  select(ID, Col0_FeEDTA_HK_Day15_vs_Col0_FeCl3_HK_Day15_pvalue : Col0_FeEDTA_Live_Day8_vs_Col0_FeCl3_Live_Day8_log2FoldChange)
+  select(ID, Col0_FeCl3_HK_Day15_vs_Col0_FeEDTA_HK_Day15_pvalue : f6h1_FeCl3_Live_Day15_vs_f6h1_FeCl3_HK_Day15_log2FoldChange)
 
 heatPlot <- rawC %>%
   inner_join(scaleC) %>%
@@ -279,19 +279,19 @@ heatPlot <- rawC %>%
 
 inner_join(deganno, heatPlot) %>%
   mutate_at(c('Gene', 'Description'), .funs = list(~if_else(is.na(.), '', .))) %>%
-  write_csv(paste0(prefix, '_1stadd.csv'))
+  write_csv(paste0(prefix, '.csv'))
 
 heatRawPlot <- heatPlot %>%
   select(ID, starts_with('Raw')) %>%
-  gather(sample, raw, Raw_Mock_1 : Raw_Flg22_SynCom35_3) %>%
-  mutate(x = rep(0 : 11, each = nrow(heatPlot))) %>%
-  mutate(y = rep(0 : (nrow(heatPlot) - 1), 12))
+  gather(sample, raw, -1) %>%
+  mutate(x = rep(0 : 23, each = nrow(heatPlot))) %>%
+  mutate(y = rep(0 : (nrow(heatPlot) - 1), 24))
 
 heatScalePlot <- heatPlot %>%
   select(ID, starts_with('Scale')) %>%
-  gather(sample, scale, Scale_Mock_1 : Scale_Flg22_SynCom35_3) %>%
-  mutate(x = rep(0 : 11, each = nrow(heatPlot))) %>%
-  mutate(y = rep(0 : (nrow(heatPlot) - 1), 12))
+  gather(sample, scale, -1) %>%
+  mutate(x = rep(0 : 23, each = nrow(heatPlot))) %>%
+  mutate(y = rep(0 : (nrow(heatPlot) - 1), 24))
 
 heatlog2FCPlot <- heatPlot %>%
   select(ID, ends_with('FoldChange')) %>%
@@ -342,9 +342,9 @@ theme_flg22 <- function(...) {
 ggplot(heatRawPlot, aes(x = x, y = y, fill = log2(raw))) +
   geom_tile() +
   scale_fill_gradientn(colours = colorRampPalette(brewer.pal(n = 7, name = 'GnBu'))(100), name = 'log2(count)') +
-  scale_x_continuous(breaks = 0 : 11,
-                     labels = rep(c('Mock', 'flg22', 'flg22_SynCom33', 'flg22_SynCom35'), each = 3) %>%
-                       paste(rep(1 : 3, 4), sep = '_')) +
+  scale_x_continuous(breaks = 0 : 23,
+                     labels = rep(sampleN, each = 3) %>%
+                       paste(rep(1 : 3, 8), sep = '_')) +
   theme_flg22(legend.position = 'left',
               axis.text.x = element_text(angle = 90, hjust = 1))
 ggsave(paste0(prefix, '_heatmap_raw.jpg'))
@@ -352,10 +352,10 @@ ggsave(paste0(prefix, '_heatmap_raw.pdf'))
 
 ggplot(heatScalePlot, aes(x = x, y = y, fill = scale)) +
   geom_tile() +
-  scale_fill_gradientn(colours = colorRampPalette(rev(brewer.pal(n = 7, name = 'RdYlBu')))(100), name = 'scale(count)') +
-  scale_x_continuous(breaks = 0 : 11,
-                     labels = rep(c('Mock', 'flg22', 'flg22_SynCom33', 'flg22_SynCom35'), each = 3) %>%
-                       paste(rep(1 : 3, 4), sep = '_')) +
+  scale_fill_gradientn(colours = colorRampPalette(rev(brewer.pal(n = 10, name = 'Spectral')))(100), name = 'scale(count)') +
+  scale_x_continuous(breaks = 0 : 23,
+                     labels = rep(sampleN, each = 3) %>%
+                       paste(rep(1 : 3, 8), sep = '_')) +
   theme_flg22(legend.position = 'left',
               axis.text.x = element_text(angle = 90, hjust = 1))
 ggsave(paste0(prefix, '_heatmap_scale.jpg'))
