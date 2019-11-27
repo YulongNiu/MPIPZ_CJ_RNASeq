@@ -147,9 +147,6 @@ res <- cbind.data.frame(as.matrix(mcols(degres)[, 1:10]), assay(ntd), stringsAsF
   inner_join(anno, by = 'ID') %>%
   select(ID, Gene : Description, Col0_FeCl3_HK_Day8_Rep1 : f6h1_FeCl3_Live_Day8_vs_f6h1_FeCl3_HK_Day8_log2FoldChange) %>%
   arrange(Col0_FeCl3_HK_Day8_vs_Col0_FeEDTA_HK_Day8_padj)
-
-write_csv(res, 'eachGroup_mergeDay8.csv')
-save(degres, rldData, file = 'eachGroup_mergeDay8.RData')
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~merge pair-wise comparison~~~~~~~~~~~~~~~~~~~~~~
@@ -246,6 +243,9 @@ ggplot(pcaData, aes(x = PC1, y = PC2, colour = Conditions)) +
 
 ggsave('../results/PCA_mergeDay8_sva.pdf', width = 12)
 ggsave('../results/PCA_mergeDay8_sva.jpg', width = 12)
+
+write_csv(res, 'eachGroup_mergeDay8.csv')
+save(degres, rldData, file = 'eachGroup_mergeDay8.RData')
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~day 14/15~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
