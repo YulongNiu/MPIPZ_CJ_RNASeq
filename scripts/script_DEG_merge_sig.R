@@ -52,7 +52,7 @@ kres <- tximport(files, type = 'kallisto', txOut = TRUE)
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~normalization~~~~~~~~~~~~~~~~~
-setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/')
+setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results_sig/')
 
 ## sampleTable
 condi <- labelanno$Anno %>% substring(first = 1, last = nchar(.) - 5) %>% unique
@@ -220,7 +220,7 @@ pca2 <- pca$x[,2]
 pcaData <- colData(rld) %>%
   as_tibble %>%
   mutate(Colours = factor(Treatment, labels = cols)) %>%
-  select(Genotype, Colours, Batch) %>%
+  select(Conditions, Genotype, Colours, Batch) %>%
   mutate(PC1 = pca1, PC2 = pca2)
 
 ggplot(pcaData, aes(x = PC1, y = PC2, colour = Colours)) +
@@ -229,14 +229,14 @@ ggplot(pcaData, aes(x = PC1, y = PC2, colour = Colours)) +
                       name = 'Experimental\nCondition',
                       labels = expression(FeCl[3]+HK, FeCl[3]+Live, FeEDTA+HK, FeEDTA+Live)) +
   scale_shape_manual(values = c(15, 17)) +
-  geom_text(aes(label = Batch), hjust = -0.5, vjust = 0) +
+  stat_ellipse(aes(x = PC1, y = PC2, group = Conditions), type = 't', linetype = 2) +
   xlab(paste0('PC1: ',percentVar[1],'% variance')) +
   ylab(paste0('PC2: ',percentVar[2],'% variance')) +
-  ggtitle('Day8') +
-  theme(plot.title = element_text(hjust = 0.5, size = 12, face = 'bold'))
+  theme(plot.title = element_text(hjust = 0.5, size = 12, face = 'bold')) +
+  theme_linedraw()
 
-ggsave('../results/PCA_mergeDay8_sva.pdf', width = 12)
-ggsave('../results/PCA_mergeDay8_sva.jpg', width = 12)
+ggsave('PCA_mergeDay8_sva.pdf', width = 12)
+ggsave('PCA_mergeDay8_sva.jpg', width = 12)
 
 write_csv(res, 'eachGroup_mergeDay8.csv')
 save(degres, rldData, file = 'eachGroup_mergeDay8.RData')
