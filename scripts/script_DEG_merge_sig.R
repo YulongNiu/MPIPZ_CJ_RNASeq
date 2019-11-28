@@ -18,7 +18,6 @@ checkFe <- function(v, threshold) {
 }
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
 library('tximport')
 library('rhdf5')
 library('magrittr')
@@ -64,21 +63,25 @@ sampleTable <- factor(rep(condi, each = 6), levels = condi) %>%
   do.call(rbind, .) %>%
   set_colnames(c('Genotype', 'Iron', 'SynCom', 'Time')) %>%
   as_tibble %>%
-  mutate(Conditions = paste(Iron, SynCom, sep = '_') %>%
+  mutate(Conditions = paste(Genotype, Iron, SynCom, sep = '_') %>%
+           factor,
+         Treatment = paste(Iron, SynCom, sep = '_') %>%
            factor,
          Genotype = Genotype %<>% factor,
+         SynCom = SynCom %<>% factor,
+         Iron = Iron %<>% factor,
          Batch = c(rep(rep(1:2, each = 3), 8))) %>%
   as.data.frame %>%
   set_rownames(colnames(kres$counts))
 
-degres <- DESeqDataSetFromTximport(kres, sampleTable, ~ condition)
+degres <- DESeqDataSetFromTximport(kres, sampleTable, ~ Conditions)
 
-## DEGs
-degres %<>%
-  estimateSizeFactors %>%
-  counts(normalized = TRUE) %>%
-  apply(1, checkFe, 1) %>%
-  degres[., ]
+## ## DEGs
+## degres %<>%
+##   estimateSizeFactors %>%
+##   counts(normalized = TRUE) %>%
+##   apply(1, checkFe, 1) %>%
+##   degres[., ]
 
 degres <- DESeq(degres)
 ## resultsNames(degres)
@@ -95,7 +98,7 @@ library('ggplot2')
 dat <- rld %>%
   assay %>%
   {.[rowMeans(.) > 1, ]}
-mod <- model.matrix(~ condition, colData(degres))
+mod <- model.matrix(~ Conditions, colData(degres))
 mod0 <- model.matrix(~ 1, colData(degres))
 
 ## manual detect surrogate variance
@@ -111,7 +114,7 @@ svobj$sv %>%
   as_tibble %>%
   gather(key = 'sv', value = 'value') %>%
   mutate(condition = colData(degres) %>%
-           .$condition %>%
+           .$Conditions %>%
            rep(svnum) %>%
            as.character,
          sample = rep(colnames(degres), svnum)) %>%
@@ -195,18 +198,6 @@ library('limma')
 library('sva')
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Day8~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-rldDay8 <- colData(rld)[, 1] %>%
-  as.character %>%
-  strsplit(split = '_', fixed = TRUE) %>%
-  do.call(rbind, .) %>%
-  set_colnames(c('Genotype', 'Iron', 'SynCom', 'Time')) %>%
-  as_tibble %>%
-  mutate(Conditions = paste(Iron, SynCom, sep = '_') %>%
-           factor,
-         Genotype = Genotype %<>% factor,
-         Batch = c(rep(rep(1:2, each = 3), 8))) %>%
-  filter(Time == 'Day8')
-
 cols <- brewer.pal(4, name = 'Set1')
 cols[3:4] <- cols[4:3]
 
@@ -214,20 +205,11 @@ dat <- rld %>%
   assay %>%
   {.[rowMeans(.) > 1, ]}
 
-group <- sampleTable$condition
+group <- sampleTable$Conditions
 design <- model.matrix(~ group)
 rldData <- dat %>%
   removeBatchEffect(covariates = svobj$sv,
                     design = design)
-
-## ## limma: remove batch effect
-## rldData <- assay(str_detect(colnames(rld), 'Day8') %>% rld[, .]) %>%
-##   removeBatchEffect(rep(rep(1:2, each = 3), 8) %>% factor)
-
-## ## sva: remove batch effect
-## modcombat <- model.matrix(~1, data = rldDay8)
-## rldData <- assay(str_detect(colnames(rld), 'Day8') %>% rld[, .]) %>%
-##   ComBat(dat = ., batch = rep(rep(1:2, each = 3), 8) %>% factor, mod = modcombat, par.prior = TRUE, prior.plots = FALSE)
 
 pca <- prcomp(t(rldData))
 percentVar <- pca$sdev^2/sum(pca$sdev^2)
@@ -235,12 +217,13 @@ percentVar <- round(100 * percentVar)
 pca1 <- pca$x[,1]
 pca2 <- pca$x[,2]
 
-pcaData <- rldDay8 %>%
-  mutate(Colours = factor(Conditions, labels = cols)) %>%
-  select(Conditions, Genotype, Colours, Batch) %>%
+pcaData <- colData(rld) %>%
+  as_tibble %>%
+  mutate(Colours = factor(Treatment, labels = cols)) %>%
+  select(Genotype, Colours, Batch) %>%
   mutate(PC1 = pca1, PC2 = pca2)
 
-ggplot(pcaData, aes(x = PC1, y = PC2, colour = Conditions)) +
+ggplot(pcaData, aes(x = PC1, y = PC2, colour = Colours)) +
   geom_point(aes(shape = Genotype), size = 4) +
   scale_colour_manual(values = levels(pcaData$Colours),
                       name = 'Experimental\nCondition',
@@ -258,60 +241,5 @@ ggsave('../results/PCA_mergeDay8_sva.jpg', width = 12)
 write_csv(res, 'eachGroup_mergeDay8.csv')
 save(degres, rldData, file = 'eachGroup_mergeDay8.RData')
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-##~~~~~~~~~~~~~~~~~~~~~~~~~~day 14/15~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-rldDay14 <- colData(rld)[, 1] %>%
-  as.character %>%
-  strsplit(split = '_', fixed = TRUE) %>%
-  do.call(rbind, .) %>%
-  set_colnames(c('Genotype', 'Iron', 'SynCom', 'Time')) %>%
-  as_tibble %>%
-  mutate(Conditions = paste(Iron, SynCom, sep = '_') %>%
-           factor,
-         Genotype = Genotype %<>% factor,
-         Batch = c(rep(rep(1:2, each = 3), 8), rep(1, 24), rep(2, 24))) %>%
-  filter(Time %in% c('Day14', 'Day15'))
-
-cols <- brewer.pal(4, name = 'Set1')
-cols[3:4] <- cols[4:3]
-
-## raw
-rldarray <- assay(str_detect(colnames(rld), 'Day14|Day15') %>% rld[, .])
-
-## limma: remove batch effect
-rldarray <- assay(str_detect(colnames(rld), 'Day14|Day15') %>% rld[, .]) %>%
-  removeBatchEffect(rep(1:2, each = 24) %>% factor)
-
-## sva: remove batch effect
-modcombat <- model.matrix(~1, data = rldDay8)
-rldarray <- assay(str_detect(colnames(rld), 'Day14|Day15') %>% rld[, .]) %>%
-  ComBat(dat = ., batch = rep(1:2, each = 24) %>% factor, mod = modcombat, par.prior = TRUE, prior.plots = FALSE)
-
-pca <- prcomp(t(rldarray))
-percentVar <- pca$sdev^2/sum(pca$sdev^2)
-percentVar <- round(100 * percentVar)
-pca1 <- pca$x[,1]
-pca2 <- pca$x[,2]
-
-pcaData <- rldDay14 %>%
-  mutate(Colours = factor(Conditions, labels = cols)) %>%
-  select(Conditions, Genotype, Colours, Batch) %>%
-  mutate(PC1 = pca1, PC2 = pca2)
-
-ggplot(pcaData, aes(x = PC1, y = PC2, colour = Conditions)) +
-  geom_point(aes(shape = Genotype), size = 4) +
-  scale_colour_manual(values = levels(pcaData$Colours),
-                      name = 'Experimental\nCondition',
-                      labels = expression(FeCl[3]+HK, FeCl[3]+Live, FeEDTA+HK, FeEDTA+Live)) +
-  scale_shape_manual(values = c(15, 17)) +
-  geom_text(aes(label = Batch), hjust = -0.5, vjust = 0) +
-  xlab(paste0('PC1: ',percentVar[1],'% variance')) +
-  ylab(paste0('PC2: ',percentVar[2],'% variance')) +
-  ggtitle('Day14/15') +
-  theme(plot.title = element_text(hjust = 0.5, size = 12, face = 'bold'))
-
-ggsave('../results/PCA_mergeDay14_brsva.pdf', width = 12)
-ggsave('../results/PCA_mergeDay14_brsva.jpg', width = 12)
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##################################################################
