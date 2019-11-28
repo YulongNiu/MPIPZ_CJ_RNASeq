@@ -198,8 +198,7 @@ library('limma')
 library('sva')
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Day8~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-cols <- brewer.pal(4, name = 'Set1')
-cols[3:4] <- cols[4:3]
+cols <- brewer.pal(3, name = 'Set1')[2:3]
 
 dat <- rld %>%
   assay %>%
@@ -219,16 +218,19 @@ pca2 <- pca$x[,2]
 
 pcaData <- colData(rld) %>%
   as_tibble %>%
-  mutate(Colours = factor(Treatment, labels = cols)) %>%
-  select(Conditions, Genotype, Colours, Batch) %>%
+  mutate(Colours = factor(Iron, labels = cols)) %>%
+  mutate(Exp = paste(Genotype, SynCom, sep = '_') %>% factor) %>%
+  select(Conditions, Genotype, Colours, Exp, Batch) %>%
   mutate(PC1 = pca1, PC2 = pca2)
 
 ggplot(pcaData, aes(x = PC1, y = PC2, colour = Colours)) +
-  geom_point(aes(shape = Genotype), size = 4) +
+  geom_point(aes(shape = Exp), size = 4) +
   scale_colour_manual(values = levels(pcaData$Colours),
-                      name = 'Experimental\nCondition',
-                      labels = expression(FeCl[3]+HK, FeCl[3]+Live, FeEDTA+HK, FeEDTA+Live)) +
-  scale_shape_manual(values = c(15, 17)) +
+                      name = 'Iron',
+                      labels = expression(FeCl[3], FeEDTA)) +
+  scale_shape_manual(values = c(1, 16, 2, 17),
+                     name = 'Experimental\nConditions',
+                     labels = c('Col0+HK', 'Col0+Live', 'f6h1+HK', 'f6h1+Live')) +
   stat_ellipse(aes(x = PC1, y = PC2, group = Conditions), type = 't', linetype = 2) +
   xlab(paste0('PC1: ',percentVar[1],'% variance')) +
   ylab(paste0('PC2: ',percentVar[2],'% variance')) +
