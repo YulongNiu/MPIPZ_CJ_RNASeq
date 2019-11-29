@@ -198,7 +198,7 @@ library('limma')
 library('sva')
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Day8~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-cols <- brewer.pal(3, name = 'Set1')[2:3]
+cols <- c('#1b9e77', '#d95f02')
 
 dat <- rld %>%
   assay %>%
@@ -218,24 +218,25 @@ pca2 <- pca$x[,2]
 
 pcaData <- colData(rld) %>%
   as_tibble %>%
-  mutate(Colours = factor(Iron, labels = cols)) %>%
-  mutate(Exp = paste(Genotype, SynCom, sep = '_') %>% factor) %>%
+  mutate(Colours = factor(Genotype, labels = cols)) %>%
+  mutate(Exp = paste(Iron, SynCom, sep = '_') %>% factor) %>%
   select(Conditions, Genotype, Colours, Exp, Batch) %>%
   mutate(PC1 = pca1, PC2 = pca2)
 
 ggplot(pcaData, aes(x = PC1, y = PC2, colour = Colours)) +
   geom_point(aes(shape = Exp), size = 4) +
   scale_colour_manual(values = levels(pcaData$Colours),
-                      name = 'Iron',
-                      labels = expression(FeCl[3], FeEDTA)) +
-  scale_shape_manual(values = c(1, 16, 2, 17),
+                      name = 'Genotype',
+                      labels = c('Col0',  'f6\'h1')) +
+  scale_shape_manual(values = c(2, 17, 1, 16),
                      name = 'Experimental\nConditions',
-                     labels = c('Col0+HK', 'Col0+Live', 'f6h1+HK', 'f6h1+Live')) +
+                     labels = expression(FeCl[3]+HK, FeCl[3]+Live, FeEDTA+HK, FeEDTA+Live)) +
   stat_ellipse(aes(x = PC1, y = PC2, group = Conditions), type = 't', linetype = 2) +
+  coord_fixed(1) +
   xlab(paste0('PC1: ',percentVar[1],'% variance')) +
   ylab(paste0('PC2: ',percentVar[2],'% variance')) +
   theme(plot.title = element_text(hjust = 0.5, size = 12, face = 'bold')) +
-  theme_linedraw()
+  theme_classic()
 
 ggsave('PCA_mergeDay8_sva.pdf', width = 12)
 ggsave('PCA_mergeDay8_sva.jpg', width = 12)
