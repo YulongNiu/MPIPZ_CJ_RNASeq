@@ -227,7 +227,7 @@ ggplot(pcaData, aes(x = PC1, y = PC2, colour = Colours)) +
   geom_point(aes(shape = Exp), size = 4) +
   scale_colour_manual(values = levels(pcaData$Colours),
                       name = 'Genotype',
-                      labels = c('Col0',  'f6\'h1')) +
+                      labels = expression('Col-0',  italic("f6\'h1"))) +
   scale_shape_manual(values = c(2, 17, 1, 16),
                      name = 'Experimental\nConditions',
                      labels = expression(FeCl[3]+HK, FeCl[3]+Live, FeEDTA+HK, FeEDTA+Live)) +
@@ -235,8 +235,11 @@ ggplot(pcaData, aes(x = PC1, y = PC2, colour = Colours)) +
   coord_fixed(1) +
   xlab(paste0('PC1: ',percentVar[1],'% variance')) +
   ylab(paste0('PC2: ',percentVar[2],'% variance')) +
-  theme(plot.title = element_text(hjust = 0.5, size = 12, face = 'bold')) +
-  theme_classic()
+  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5, size = 12, face = 'bold'),
+        legend.text.align = 0,
+        axis.text = element_text(size = 13),
+        axis.title = element_text(size = 14))
 
 ggsave('PCA_mergeDay8_sva.pdf', width = 12)
 ggsave('PCA_mergeDay8_sva.jpg', width = 12)
