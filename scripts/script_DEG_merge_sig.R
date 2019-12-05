@@ -1,23 +1,4 @@
 ###########################DEGs##################################
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~useful funcs~~~~~~~~~~~~~~~~~~~~~~~~
-checkZeros <- function(v, threshold) {
-  res <- ifelse(sum(v == 0) > threshold, FALSE, TRUE)
-  return(res)
-}
-
-checkFe <- function(v, threshold) {
-
-  require('magrittr')
-
-  res <- v %>%
-    split(rep(1 : 16, each = 3)) %>%
-    sapply(checkZeros, threshold) %>%
-    all
-
-  return(res)
-}
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 library('tximport')
 library('rhdf5')
 library('magrittr')
@@ -75,13 +56,6 @@ sampleTable <- factor(rep(condi, each = 6), levels = condi) %>%
   set_rownames(colnames(kres$counts))
 
 degres <- DESeqDataSetFromTximport(kres, sampleTable, ~ Conditions)
-
-## ## DEGs
-## degres %<>%
-##   estimateSizeFactors %>%
-##   counts(normalized = TRUE) %>%
-##   apply(1, checkFe, 1) %>%
-##   degres[., ]
 
 degres <- DESeq(degres)
 ## resultsNames(degres)
@@ -239,7 +213,9 @@ ggplot(pcaData, aes(x = PC1, y = PC2, colour = Colours)) +
   theme(plot.title = element_text(hjust = 0.5, size = 12, face = 'bold'),
         legend.text.align = 0,
         axis.text = element_text(size = 13),
-        axis.title = element_text(size = 14))
+        axis.title = element_text(size = 14),
+        legend.text=element_text(size= 13),
+        legend.title = element_text(size = 14))
 
 ggsave('PCA_mergeDay8_sva.pdf', width = 12)
 ggsave('PCA_mergeDay8_sva.jpg', width = 12)
