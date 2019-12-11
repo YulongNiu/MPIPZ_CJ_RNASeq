@@ -221,7 +221,7 @@ Remove batch effects with `SVA`
 
 ![auto_sv_day8](results/auto_sv_day8.jpg)
 
-![PCA_mergeDay8_sva](results/PCA_mergeDay8_sva.jpg)
+![PCA_mergeDay8_sva](results_sig/PCA_mergeDay8_sva.jpg)
 
 * Cluster
 
