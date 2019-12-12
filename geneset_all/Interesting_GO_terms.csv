@@ -1,0 +1,26 @@
+category,numInCat,Annotation,ontology
+GO:0071281,37,cellular response to iron ion,BP
+GO:0055072,37,iron ion homeostasis,BP
+GO:0010106,7,cellular response to iron ion starvation,BP
+GO:1990641,13,response to iron ion starvation,BP
+GO:0033215,12,iron assimilation by reduction and transport,BP
+GO:0006878,17,cellular copper ion homeostasis,BP
+GO:0010043,59,response to zinc ion,BP
+GO:0030001,90,metal ion transport,BP
+GO:0006826,16,iron ion transport,BP
+GO:0046686,464,response to cadmium ion,BP
+GO:0009698,23,phenylpropanoid metabolic process,BP
+GO:0006952,622,defense response,BP
+GO:0009626,92,plant-type hypersensitive response,BP
+GO:0006955,18,immune response,BP
+GO:1901672,6,positive regulation of systemic acquired resistance,BP
+GO:0042742,373,defense response to bacterium,BP
+GO:0009617,122,response to bacterium,BP
+GO:0009723,152,response to ethylene,BP
+GO:0009753,176,response to jasmonic acid,BP
+GO:0009682,18,induced systemic resistance,BP
+GO:0009626,92,plant-type hypersensitive response,BP
+GO:0045087,84,innate immune response,BP
+GO:0031347,65,regulation of defense response,BP
+GO:0009870,26,"defense response signaling pathway, resistance gene-dependent",BP
+GO:0009751,176,response to salicylic acid,BP

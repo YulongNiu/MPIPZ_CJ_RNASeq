@@ -1,0 +1,632 @@
+digraph {
+1 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Molecular_function", color="transparent"];
+2 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Catalytic
+Activity", color="transparent"];
+3 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Hydrolase
+Activity", color="transparent"];
+4 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Peptidase
+Activity, Acting
+On L amino Acid
+Peptides", color="transparent"];
+5 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Endopeptidase
+Activity", color="transparent"];
+6 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Threonine type
+Peptidase
+Activity", color="transparent"];
+7 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Threonine type
+Endopeptidase
+Activity", color="transparent"];
+8 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Binding", color="transparent"];
+9 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Macromolecular
+Complex Binding", color="transparent"];
+10 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Chromatin Binding", color="transparent"];
+11 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="DNA Binding", color="transparent"];
+12 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Chromatin DNA
+Binding", color="transparent"];
+13 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Nucleosome
+Binding", color="transparent"];
+14 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Nucleosomal DNA
+Binding", color="transparent"];
+15 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Protein Binding", color="transparent"];
+16 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Protein
+Heterodimerization
+Activity", color="transparent"];
+17 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Transferase
+Activity", color="transparent"];
+18 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Transferase
+Activity,
+Transferring
+Alkyl Or Aryl
+(other Than
+Methyl) Groups", color="transparent"];
+19 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Methionine
+Adenosyltransferase
+Activity", color="transparent"];
+20 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Hydrolase
+Activity, Acting
+On Acid
+Anhydrides", color="transparent"];
+21 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="ATPase Activity,
+Coupled", color="transparent"];
+22 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Proteasome
+activating ATPase
+Activity", color="transparent"];
+23 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Transaminase
+Activity", color="transparent"];
+24 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="L tryptophan:2
+oxoglutarate
+Aminotransferase
+Activity", color="transparent"];
+25 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Hydrolase
+Activity,
+Hydrolyzing O
+glycosyl
+Compounds", color="transparent"];
+26 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Beta
+fructofuranosidase
+Activity", color="transparent"];
+27 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Alpha glucosidase
+Activity", color="transparent"];
+28 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Sucrose Alpha
+glucosidase
+Activity", color="transparent"];
+29 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Transcription
+Regulatory Region
+DNA Binding", color="transparent"];
+30 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Transcription
+Regulatory Region
+Sequence specific
+DNA Binding", color="transparent"];
+31 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="RNA Polymerase II
+Regulatory Region
+DNA Binding", color="transparent"];
+32 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="RNA Polymerase II
+Regulatory Region
+Sequence specific
+DNA Binding", color="transparent"];
+33 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Oxidoreductase
+Activity", color="transparent"];
+34 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Ferric chelate
+Reductase
+Activity", color="transparent"];
+35 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Lyase Activity", color="transparent"];
+36 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Phenylalanine
+Ammonia lyase
+Activity", color="transparent"];
+37 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Transferase
+Activity,
+Transferring Acyl
+Groups Other Than
+Amino acyl Groups", color="transparent"];
+38 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="S acyltransferase
+Activity", color="transparent"];
+39 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Dihydrolipoyllysine
+residue
+Succinyltransferase
+Activity", color="transparent"];
+40 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Transmembrane
+Transporter
+Activity", color="transparent"];
+41 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Active
+Transmembrane
+Transporter
+Activity", color="transparent"];
+42 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Antiporter
+Activity", color="transparent"];
+43 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Oxidoreductase
+Activity, Acting
+On CH OH Group Of
+Donors", color="transparent"];
+44 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Methionine oxo
+acid Transaminase
+Activity", color="transparent"];
+45 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Hydrolase
+Activity, Acting
+On Ester Bonds", color="transparent"];
+46 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Phosphatase
+Activity", color="transparent"];
+47 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Thiol dependent
+Ubiquitin
+specific Protease
+Activity", color="transparent"];
+48 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Enzyme Binding", color="transparent"];
+49 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Kinase Binding", color="transparent"];
+50 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Polyubiquitin
+Binding", color="transparent"];
+51 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="L tyrosine:2
+oxoglutarate
+Aminotransferase
+Activity", color="transparent"];
+52 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Zinc Ion Binding", color="transparent"];
+53 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Transferase
+Activity,
+Transferring
+Phosphorus
+containing Groups", color="transparent"];
+54 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Phosphotransferase
+Activity, Alcohol
+Group As Acceptor", color="transparent"];
+55 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Kinase Activity", color="transparent"];
+56 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Phosphofructokinase
+Activity", color="transparent"];
+57 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Diphosphate
+fructose 6
+phosphate 1
+phosphotransferase
+Activity", color="transparent"];
+58 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Acireductone
+Synthase Activity", color="transparent"];
+59 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Hydro lyase
+Activity", color="transparent"];
+60 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Methylthioribulose
+1 phosphate
+Dehydratase
+Activity", color="transparent"];
+61 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Substrate
+specific
+Transmembrane
+Transporter
+Activity", color="transparent"];
+62 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Ion Transmembrane
+Transporter
+Activity", color="transparent"];
+63 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Cation
+Transmembrane
+Transporter
+Activity", color="transparent"];
+64 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Inorganic Cation
+Transmembrane
+Transporter
+Activity", color="transparent"];
+65 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Metal Ion
+Transmembrane
+Transporter
+Activity", color="transparent"];
+66 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Transition Metal
+Ion Transmembrane
+Transporter
+Activity", color="transparent"];
+67 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Divalent
+Inorganic Cation
+Transmembrane
+Transporter
+Activity", color="transparent"];
+68 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Cadmium Ion
+Transmembrane
+Transporter
+Activity", color="transparent"];
+69 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Monovalent
+Inorganic Cation
+Transmembrane
+Transporter
+Activity", color="transparent"];
+70 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Adenine
+Phosphoribosyltransferase
+Activity", color="transparent"];
+71 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Basal RNA
+Polymerase II
+Transcription
+Machinery Binding", color="transparent"];
+72 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Protein Complex
+Binding", color="transparent"];
+73 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="RNA Polymerase
+Core Enzyme
+Binding", color="transparent"];
+74 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="RNA Polymerase II
+Core Binding", color="transparent"];
+75 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Glycopeptide
+Alpha N
+acetylgalactosaminidase
+Activity", color="transparent"];
+76 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Ubiquitin like
+Protein
+Transferase
+Activity", color="transparent"];
+77 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Ubiquitin protein
+Transferase
+Activity", color="transparent"];
+78 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Ubiquitin like
+Protein
+Conjugating
+Enzyme Activity", color="transparent"];
+79 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Ubiquitin
+Conjugating
+Enzyme Activity", color="transparent"];
+80 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Selenium Binding", color="transparent"];
+81 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Nickel Cation
+Transmembrane
+Transporter
+Activity", color="transparent"];
+82 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Phosphotransferase
+Activity,
+Carboxyl Group As
+Acceptor", color="transparent"];
+83 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Phosphoglycerate
+Kinase Activity", color="transparent"];
+84 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Carboxylic Acid
+Transmembrane
+Transporter
+Activity", color="transparent"];
+85 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Anion
+Transmembrane
+Transporter
+Activity", color="transparent"];
+86 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="C4 dicarboxylate
+Transmembrane
+Transporter
+Activity", color="transparent"];
+87 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Malate
+Transmembrane
+Transporter
+Activity", color="transparent"];
+88 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Ion Antiporter
+Activity", color="transparent"];
+89 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Anion:anion
+Antiporter
+Activity", color="transparent"];
+90 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Oxoglutarate:malate
+Antiporter
+Activity", color="transparent"];
+91 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Nucleotide sugar
+Transmembrane
+Transporter
+Activity", color="transparent"];
+92 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Pyrimidine
+Nucleotide sugar
+Transmembrane
+Transporter
+Activity", color="transparent"];
+93 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Enzyme Regulator
+Activity", color="transparent"];
+94 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Phospholipase
+Activator
+Activity", color="transparent"];
+95 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Zinc Ion
+Transmembrane
+Transporter
+Activity", color="transparent"];
+96 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Sodium Ion
+Transmembrane
+Transporter
+Activity", color="transparent"];
+97 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Solute:cation
+Antiporter
+Activity", color="transparent"];
+98 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Solute:proton
+Antiporter
+Activity", color="transparent"];
+99 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Cation:cation
+Antiporter
+Activity", color="transparent"];
+100 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Monovalent
+Cation:proton
+Antiporter
+Activity", color="transparent"];
+101 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Potassium Ion
+Transmembrane
+Transporter
+Activity", color="transparent"];
+102 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Potassium Ion
+Antiporter
+Activity", color="transparent"];
+103 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Potassium:proton
+Antiporter
+Activity", color="transparent"];
+104 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Protein
+Phosphatase
+Regulator
+Activity", color="transparent"];
+105 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Peptide
+methionine (S) S
+oxide Reductase
+Activity", color="transparent"];
+106 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Transcription
+Factor Binding", color="transparent"];
+107 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="NAD(P)H
+Dehydrogenase
+(quinone)
+Activity", color="transparent"];
+108 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Cytidylate Kinase
+Activity", color="transparent"];
+109 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Hydroxyacylglutathione
+Hydrolase
+Activity", color="transparent"];
+110 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Shikimate Kinase
+Activity", color="transparent"];
+111 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Nicotinamide
+nucleotide
+Adenylyltransferase
+Activity", color="transparent"];
+112 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Active Ion
+Transmembrane
+Transporter
+Activity", color="transparent"];
+113 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Hydrolase
+Activity, Acting
+On Acid
+Anhydrides,
+Catalyzing
+Transmembrane
+Movement Of
+Substances", color="transparent"];
+114 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="ATPase Activity,
+Coupled To
+Transmembrane
+Movement Of
+Substances", color="transparent"];
+115 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="ATPase Coupled
+Ion Transmembrane
+Transporter
+Activity", color="transparent"];
+116 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="ATPase Activity,
+Coupled To
+Transmembrane
+Movement Of Ions,
+Phosphorylative
+Mechanism", color="transparent"];
+117 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Cation
+transporting
+ATPase Activity", color="transparent"];
+118 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Cadmium exporting
+ATPase Activity", color="transparent"];
+119 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Cadmium
+transporting
+ATPase Activity", color="transparent"];
+120 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Palmitoyltransferase
+Activity", color="transparent"];
+121 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Protein cysteine
+S acyltransferase
+Activity", color="transparent"];
+122 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Protein cysteine
+S
+palmitoyltransferase
+Activity", color="transparent"];
+123 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Protein Kinase
+Regulator
+Activity", color="transparent"];
+124 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Nicotianamine
+Synthase Activity", color="transparent"];
+125 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Isomerase
+Activity", color="transparent"];
+126 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Ribose 5
+phosphate
+Isomerase
+Activity", color="transparent"];
+127 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Gibberellin 20
+oxidase Activity", color="transparent"];
+128 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Chalcone
+Isomerase
+Activity", color="transparent"];
+129 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Basic Amino Acid
+Transmembrane
+Transporter
+Activity", color="transparent"];
+130 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Protein Kinase
+Activity", color="transparent"];
+131 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="AMP activated
+Protein Kinase
+Activity", color="transparent"];
+132 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Transcriptional
+Repressor
+Activity, RNA
+Polymerase II
+Transcription
+Regulatory Region
+Sequence specific
+Binding", color="transparent"];
+133 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="CTD Phosphatase
+Activity", color="transparent"];
+134 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Protein N
+terminal
+Asparagine
+Amidohydrolase
+Activity", color="transparent"];
+135 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Prenyltransferase
+Activity", color="transparent"];
+136 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Protein
+Farnesyltransferase
+Activity", color="transparent"];
+137 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Spermine:oxygen
+Oxidoreductase
+(spermidine
+forming) Activity", color="transparent"];
+138 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Polyprenyltransferase
+Activity", color="transparent"];
+139 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="4 hydroxybenzoate
+Decaprenyltransferase
+Activity", color="transparent"];
+140 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="4 hydroxybenzoate
+Nonaprenyltransferase
+Activity", color="transparent"];
+141 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Prephenate
+Dehydratase
+Activity", color="transparent"];
+142 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Arogenate
+Dehydratase
+Activity", color="transparent"];
+143 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="GDP fucose
+Transmembrane
+Transporter
+Activity", color="transparent"];
+144 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Phosphoenolpyruvate
+Carboxylase
+Activity", color="transparent"];
+1 -> 2 [color="#000000", lty="solid"];
+2 -> 3 [color="#000000", lty="solid"];
+3 -> 4 [color="#000000", lty="solid"];
+4 -> 5 [color="#000000", lty="solid"];
+4 -> 6 [color="#000000", lty="solid"];
+5 -> 7 [color="#000000", lty="solid"];
+6 -> 7 [color="#000000", lty="solid"];
+1 -> 8 [color="#000000", lty="solid"];
+8 -> 9 [color="#000000", lty="solid"];
+9 -> 10 [color="#000000", lty="solid"];
+8 -> 11 [color="#000000", lty="solid"];
+10 -> 12 [color="#000000", lty="solid"];
+11 -> 12 [color="#000000", lty="solid"];
+10 -> 13 [color="#000000", lty="solid"];
+12 -> 14 [color="#000000", lty="solid"];
+13 -> 14 [color="#000000", lty="solid"];
+8 -> 15 [color="#000000", lty="solid"];
+15 -> 16 [color="#000000", lty="solid"];
+2 -> 17 [color="#000000", lty="solid"];
+17 -> 18 [color="#000000", lty="solid"];
+18 -> 19 [color="#000000", lty="solid"];
+3 -> 20 [color="#000000", lty="solid"];
+20 -> 21 [color="#000000", lty="solid"];
+21 -> 22 [color="#000000", lty="solid"];
+17 -> 23 [color="#000000", lty="solid"];
+23 -> 24 [color="#000000", lty="solid"];
+3 -> 25 [color="#000000", lty="solid"];
+25 -> 26 [color="#000000", lty="solid"];
+25 -> 27 [color="#000000", lty="solid"];
+26 -> 28 [color="#000000", lty="solid"];
+27 -> 28 [color="#000000", lty="solid"];
+11 -> 29 [color="#000000", lty="solid"];
+29 -> 30 [color="#000000", lty="solid"];
+29 -> 31 [color="#000000", lty="solid"];
+30 -> 32 [color="#000000", lty="solid"];
+31 -> 32 [color="#000000", lty="solid"];
+2 -> 33 [color="#000000", lty="solid"];
+33 -> 34 [color="#000000", lty="solid"];
+2 -> 35 [color="#000000", lty="solid"];
+35 -> 36 [color="#000000", lty="solid"];
+17 -> 37 [color="#000000", lty="solid"];
+37 -> 38 [color="#000000", lty="solid"];
+38 -> 39 [color="#000000", lty="solid"];
+1 -> 40 [color="#000000", lty="solid"];
+40 -> 41 [color="#000000", lty="solid"];
+41 -> 42 [color="#000000", lty="solid"];
+33 -> 43 [color="#000000", lty="solid"];
+23 -> 44 [color="#000000", lty="solid"];
+3 -> 45 [color="#000000", lty="solid"];
+45 -> 46 [color="#000000", lty="solid"];
+4 -> 47 [color="#000000", lty="solid"];
+15 -> 48 [color="#000000", lty="solid"];
+48 -> 49 [color="#000000", lty="solid"];
+15 -> 50 [color="#000000", lty="solid"];
+23 -> 51 [color="#000000", lty="solid"];
+8 -> 52 [color="#000000", lty="solid"];
+17 -> 53 [color="#000000", lty="solid"];
+53 -> 54 [color="#000000", lty="solid"];
+53 -> 55 [color="#000000", lty="solid"];
+54 -> 56 [color="#000000", lty="solid"];
+55 -> 56 [color="#000000", lty="solid"];
+56 -> 57 [color="#000000", lty="solid"];
+46 -> 58 [color="#000000", lty="solid"];
+35 -> 59 [color="#000000", lty="solid"];
+59 -> 60 [color="#000000", lty="solid"];
+40 -> 61 [color="#000000", lty="solid"];
+61 -> 62 [color="#000000", lty="solid"];
+62 -> 63 [color="#000000", lty="solid"];
+63 -> 64 [color="#000000", lty="solid"];
+64 -> 65 [color="#000000", lty="solid"];
+65 -> 66 [color="#000000", lty="solid"];
+64 -> 67 [color="#000000", lty="solid"];
+66 -> 68 [color="#000000", lty="solid"];
+67 -> 68 [color="#000000", lty="solid"];
+64 -> 69 [color="#000000", lty="solid"];
+17 -> 70 [color="#000000", lty="solid"];
+15 -> 71 [color="#000000", lty="solid"];
+9 -> 72 [color="#000000", lty="solid"];
+15 -> 72 [color="#000000", lty="solid"];
+48 -> 73 [color="#000000", lty="solid"];
+71 -> 74 [color="#000000", lty="solid"];
+72 -> 74 [color="#000000", lty="solid"];
+73 -> 74 [color="#000000", lty="solid"];
+25 -> 75 [color="#000000", lty="solid"];
+17 -> 76 [color="#000000", lty="solid"];
+76 -> 77 [color="#000000", lty="solid"];
+76 -> 78 [color="#000000", lty="solid"];
+77 -> 79 [color="#000000", lty="solid"];
+78 -> 79 [color="#000000", lty="solid"];
+8 -> 80 [color="#000000", lty="solid"];
+66 -> 81 [color="#000000", lty="solid"];
+53 -> 82 [color="#000000", lty="solid"];
+55 -> 83 [color="#000000", lty="solid"];
+82 -> 83 [color="#000000", lty="solid"];
+61 -> 84 [color="#000000", lty="solid"];
+62 -> 85 [color="#000000", lty="solid"];
+84 -> 86 [color="#000000", lty="solid"];
+85 -> 86 [color="#000000", lty="solid"];
+86 -> 87 [color="#000000", lty="solid"];
+42 -> 88 [color="#000000", lty="solid"];
+62 -> 88 [color="#000000", lty="solid"];
+85 -> 89 [color="#000000", lty="solid"];
+88 -> 89 [color="#000000", lty="solid"];
+87 -> 90 [color="#000000", lty="solid"];
+89 -> 90 [color="#000000", lty="solid"];
+61 -> 91 [color="#000000", lty="solid"];
+91 -> 92 [color="#000000", lty="solid"];
+1 -> 93 [color="#000000", lty="solid"];
+93 -> 94 [color="#000000", lty="solid"];
+66 -> 95 [color="#000000", lty="solid"];
+67 -> 95 [color="#000000", lty="solid"];
+65 -> 96 [color="#000000", lty="solid"];
+69 -> 96 [color="#000000", lty="solid"];
+42 -> 97 [color="#000000", lty="solid"];
+63 -> 97 [color="#000000", lty="solid"];
+69 -> 98 [color="#000000", lty="solid"];
+97 -> 98 [color="#000000", lty="solid"];
+88 -> 99 [color="#000000", lty="solid"];
+97 -> 99 [color="#000000", lty="solid"];
+98 -> 100 [color="#000000", lty="solid"];
+99 -> 100 [color="#000000", lty="solid"];
+65 -> 101 [color="#000000", lty="solid"];
+69 -> 101 [color="#000000", lty="solid"];
+42 -> 102 [color="#000000", lty="solid"];
+101 -> 102 [color="#000000", lty="solid"];
+100 -> 103 [color="#000000", lty="solid"];
+102 -> 103 [color="#000000", lty="solid"];
+93 -> 104 [color="#000000", lty="solid"];
+33 -> 105 [color="#000000", lty="solid"];
+15 -> 106 [color="#000000", lty="solid"];
+33 -> 107 [color="#000000", lty="solid"];
+55 -> 108 [color="#000000", lty="solid"];
+45 -> 109 [color="#000000", lty="solid"];
+54 -> 110 [color="#000000", lty="solid"];
+55 -> 110 [color="#000000", lty="solid"];
+53 -> 111 [color="#000000", lty="solid"];
+41 -> 112 [color="#000000", lty="solid"];
+62 -> 112 [color="#000000", lty="solid"];
+20 -> 113 [color="#000000", lty="solid"];
+41 -> 113 [color="#000000", lty="solid"];
+21 -> 114 [color="#000000", lty="solid"];
+113 -> 114 [color="#000000", lty="solid"];
+112 -> 115 [color="#000000", lty="solid"];
+114 -> 115 [color="#000000", lty="solid"];
+115 -> 116 [color="#000000", lty="solid"];
+63 -> 117 [color="#000000", lty="solid"];
+115 -> 117 [color="#000000", lty="solid"];
+68 -> 118 [color="#000000", lty="solid"];
+116 -> 118 [color="#000000", lty="solid"];
+117 -> 118 [color="#000000", lty="solid"];
+68 -> 119 [color="#000000", lty="solid"];
+37 -> 120 [color="#000000", lty="solid"];
+38 -> 121 [color="#000000", lty="solid"];
+120 -> 122 [color="#000000", lty="solid"];
+121 -> 122 [color="#000000", lty="solid"];
+93 -> 123 [color="#000000", lty="solid"];
+18 -> 124 [color="#000000", lty="solid"];
+2 -> 125 [color="#000000", lty="solid"];
+125 -> 126 [color="#000000", lty="solid"];
+33 -> 127 [color="#000000", lty="solid"];
+125 -> 128 [color="#000000", lty="solid"];
+84 -> 129 [color="#000000", lty="solid"];
+54 -> 130 [color="#000000", lty="solid"];
+55 -> 130 [color="#000000", lty="solid"];
+130 -> 131 [color="#000000", lty="solid"];
+1 -> 132 [color="#000000", lty="solid"];
+46 -> 133 [color="#000000", lty="solid"];
+3 -> 134 [color="#000000", lty="solid"];
+18 -> 135 [color="#000000", lty="solid"];
+135 -> 136 [color="#000000", lty="solid"];
+33 -> 137 [color="#000000", lty="solid"];
+135 -> 138 [color="#000000", lty="solid"];
+138 -> 139 [color="#000000", lty="solid"];
+138 -> 140 [color="#000000", lty="solid"];
+59 -> 141 [color="#000000", lty="solid"];
+59 -> 142 [color="#000000", lty="solid"];
+91 -> 143 [color="#000000", lty="solid"];
+35 -> 144 [color="#000000", lty="solid"];
+}

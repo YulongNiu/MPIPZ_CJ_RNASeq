@@ -1,0 +1,330 @@
+digraph {
+1 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Cellular_component", color="transparent"];
+2 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Cell Part", color="transparent"];
+3 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Intracellular
+Part", color="transparent"];
+4 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Intracellular
+Organelle", color="transparent"];
+5 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Intracellular
+Membrane bounded
+Organelle", color="transparent"];
+6 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Cytoplasmic Part", color="transparent"];
+7 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Plastid", color="transparent"];
+8 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Chloroplast", color="transparent"];
+9 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Macromolecular
+Complex", color="transparent"];
+10 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Catalytic Complex", color="transparent"];
+11 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Transferase
+Complex", color="transparent"];
+12 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Ubiquitin Ligase
+Complex", color="transparent"];
+13 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Organelle Part", color="transparent"];
+14 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Intracellular
+Organelle Part", color="transparent"];
+15 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Nuclear Part", color="transparent"];
+16 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Nuclear Ubiquitin
+Ligase Complex", color="transparent"];
+17 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Protein Complex", color="transparent"];
+18 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="PcG Protein
+Complex", color="transparent"];
+19 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="PRC1 Complex", color="transparent"];
+20 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Nucleus", color="transparent"];
+21 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Nucleoplasm Part", color="transparent"];
+22 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Transcription
+Factor Complex", color="transparent"];
+23 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Nuclear
+Transcription
+Factor Complex", color="transparent"];
+24 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="RNA Polymerase II
+Transcription
+Factor Complex", color="transparent"];
+25 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Transcription
+Factor TFIIA
+Complex", color="transparent"];
+26 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Elongator
+Holoenzyme
+Complex", color="transparent"];
+27 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Prp19 Complex", color="transparent"];
+28 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Intracellular
+Ribonucleoprotein
+Complex", color="transparent"];
+29 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Spliceosomal
+Complex", color="transparent"];
+30 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="U2 type
+Spliceosomal
+Complex", color="transparent"];
+31 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Catalytic Step 1
+Spliceosome", color="transparent"];
+32 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="U2 type Catalytic
+Step 1
+Spliceosome", color="transparent"];
+33 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Catalytic Step 2
+Spliceosome", color="transparent"];
+34 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Cullin RING
+Ubiquitin Ligase
+Complex", color="transparent"];
+35 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Cul4 RING E3
+Ubiquitin Ligase
+Complex", color="transparent"];
+36 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Endoplasmic
+Reticulum Part", color="transparent"];
+37 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Membrane Part", color="transparent"];
+38 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Membrane Protein
+Complex", color="transparent"];
+39 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="UDP N
+acetylglucosamine
+Transferase
+Complex", color="transparent"];
+40 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Cytoskeletal Part", color="transparent"];
+41 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Microtubule
+Organizing Center", color="transparent"];
+42 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Cell Division
+Site Part", color="transparent"];
+43 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Equatorial
+Microtubule
+Organizing Center", color="transparent"];
+44 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Mitochondrion", color="transparent"];
+45 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Eukaryotic
+Translation
+Initiation Factor
+3 Complex", color="transparent"];
+46 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="SWI/SNF
+Superfamily type
+Complex", color="transparent"];
+47 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="SWI/SNF Complex", color="transparent"];
+48 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Plastid Part", color="transparent"];
+49 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Plastid Thylakoid
+Lumen", color="transparent"];
+50 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Chloroplast Part", color="transparent"];
+51 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Chloroplast
+Thylakoid Lumen", color="transparent"];
+52 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Holliday Junction
+Resolvase Complex", color="transparent"];
+53 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Microtubule
+Organizing Center
+Part", color="transparent"];
+54 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Gamma tubulin
+Complex", color="transparent"];
+55 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Gamma tubulin
+Small Complex", color="transparent"];
+56 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Intracellular Non
+membrane bounded
+Organelle", color="transparent"];
+57 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Cell Cortex Part", color="transparent"];
+58 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Cortical
+Cytoskeleton", color="transparent"];
+59 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Cortical
+Microtubule
+Cytoskeleton", color="transparent"];
+60 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Anaphase
+promoting Complex", color="transparent"];
+61 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Tic Complex", color="transparent"];
+62 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Intrinsic
+Component Of
+Organelle
+Membrane", color="transparent"];
+63 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Intrinsic
+Component Of
+Plastid Membrane", color="transparent"];
+64 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Intrinsic
+Component Of
+Plastid Outer
+Membrane", color="transparent"];
+65 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Integral
+Component Of
+Plastid Outer
+Membrane", color="transparent"];
+66 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Intrinsic
+Component Of
+Chloroplast Outer
+Membrane", color="transparent"];
+67 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Integral
+Component Of
+Chloroplast Outer
+Membrane", color="transparent"];
+68 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Nucleoid", color="transparent"];
+69 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Mitochondrial
+Part", color="transparent"];
+70 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Mitochondrial
+Nucleoid", color="transparent"];
+71 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Endoplasmic
+Reticulum Tubular
+Network", color="transparent"];
+72 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Cortical
+Endoplasmic
+Reticulum", color="transparent"];
+73 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="SCF Ubiquitin
+Ligase Complex", color="transparent"];
+74 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="EKC/KEOPS Complex", color="transparent"];
+75 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="RNA Polymerase
+Complex", color="transparent"];
+76 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Nuclear DNA
+directed RNA
+Polymerase
+Complex", color="transparent"];
+77 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="DNA directed RNA
+Polymerase V
+Complex", color="transparent"];
+78 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="DNA directed RNA
+Polymerase II,
+Holoenzyme", color="transparent"];
+79 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Chromatin", color="transparent"];
+80 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Euchromatin", color="transparent"];
+81 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Mismatch Repair
+Complex", color="transparent"];
+82 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="MutLalpha Complex", color="transparent"];
+83 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Protein
+Acetyltransferase
+Complex", color="transparent"];
+84 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Histone
+Acetyltransferase
+Complex", color="transparent"];
+85 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="SAGA type Complex", color="transparent"];
+86 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Peptidase Complex", color="transparent"];
+87 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="SAGA Complex", color="transparent"];
+88 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="powderblue", label="Small Nuclear
+Ribonucleoprotein
+Complex", color="transparent"];
+89 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="U1 SnRNP", color="transparent"];
+90 [style="filled", fixedsize="true", fontsize="10", shape="circle", width="0.75", fillcolor="orange", label="Plastid Stroma", color="transparent"];
+1 -> 2 [color="#000000", lty="solid"];
+2 -> 3 [color="#000000", lty="solid"];
+3 -> 4 [color="#000000", lty="solid"];
+4 -> 5 [color="#000000", lty="solid"];
+3 -> 6 [color="#000000", lty="solid"];
+5 -> 7 [color="#000000", lty="solid"];
+6 -> 7 [color="#000000", lty="solid"];
+7 -> 8 [color="#000000", lty="solid"];
+1 -> 9 [color="#000000", lty="solid"];
+9 -> 10 [color="#000000", lty="solid"];
+10 -> 11 [color="#000000", lty="solid"];
+3 -> 12 [color="#000000", lty="solid"];
+11 -> 12 [color="#000000", lty="solid"];
+1 -> 13 [color="#000000", lty="solid"];
+3 -> 14 [color="#000000", lty="solid"];
+13 -> 14 [color="#000000", lty="solid"];
+14 -> 15 [color="#000000", lty="solid"];
+12 -> 16 [color="#000000", lty="solid"];
+15 -> 16 [color="#000000", lty="solid"];
+9 -> 17 [color="#000000", lty="solid"];
+15 -> 18 [color="#000000", lty="solid"];
+17 -> 18 [color="#000000", lty="solid"];
+16 -> 19 [color="#000000", lty="solid"];
+18 -> 19 [color="#000000", lty="solid"];
+5 -> 20 [color="#000000", lty="solid"];
+15 -> 21 [color="#000000", lty="solid"];
+3 -> 22 [color="#000000", lty="solid"];
+17 -> 22 [color="#000000", lty="solid"];
+15 -> 23 [color="#000000", lty="solid"];
+22 -> 23 [color="#000000", lty="solid"];
+23 -> 24 [color="#000000", lty="solid"];
+21 -> 25 [color="#000000", lty="solid"];
+24 -> 25 [color="#000000", lty="solid"];
+3 -> 26 [color="#000000", lty="solid"];
+17 -> 26 [color="#000000", lty="solid"];
+17 -> 27 [color="#000000", lty="solid"];
+3 -> 28 [color="#000000", lty="solid"];
+9 -> 28 [color="#000000", lty="solid"];
+15 -> 29 [color="#000000", lty="solid"];
+28 -> 29 [color="#000000", lty="solid"];
+29 -> 30 [color="#000000", lty="solid"];
+10 -> 31 [color="#000000", lty="solid"];
+29 -> 31 [color="#000000", lty="solid"];
+30 -> 32 [color="#000000", lty="solid"];
+31 -> 32 [color="#000000", lty="solid"];
+10 -> 33 [color="#000000", lty="solid"];
+29 -> 33 [color="#000000", lty="solid"];
+12 -> 34 [color="#000000", lty="solid"];
+34 -> 35 [color="#000000", lty="solid"];
+6 -> 36 [color="#000000", lty="solid"];
+14 -> 36 [color="#000000", lty="solid"];
+1 -> 37 [color="#000000", lty="solid"];
+17 -> 38 [color="#000000", lty="solid"];
+37 -> 38 [color="#000000", lty="solid"];
+36 -> 39 [color="#000000", lty="solid"];
+38 -> 39 [color="#000000", lty="solid"];
+14 -> 40 [color="#000000", lty="solid"];
+40 -> 41 [color="#000000", lty="solid"];
+2 -> 42 [color="#000000", lty="solid"];
+41 -> 43 [color="#000000", lty="solid"];
+42 -> 43 [color="#000000", lty="solid"];
+5 -> 44 [color="#000000", lty="solid"];
+6 -> 44 [color="#000000", lty="solid"];
+6 -> 45 [color="#000000", lty="solid"];
+17 -> 45 [color="#000000", lty="solid"];
+15 -> 46 [color="#000000", lty="solid"];
+17 -> 46 [color="#000000", lty="solid"];
+46 -> 47 [color="#000000", lty="solid"];
+6 -> 48 [color="#000000", lty="solid"];
+14 -> 48 [color="#000000", lty="solid"];
+48 -> 49 [color="#000000", lty="solid"];
+48 -> 50 [color="#000000", lty="solid"];
+49 -> 51 [color="#000000", lty="solid"];
+50 -> 51 [color="#000000", lty="solid"];
+3 -> 52 [color="#000000", lty="solid"];
+17 -> 52 [color="#000000", lty="solid"];
+6 -> 53 [color="#000000", lty="solid"];
+40 -> 53 [color="#000000", lty="solid"];
+17 -> 54 [color="#000000", lty="solid"];
+53 -> 54 [color="#000000", lty="solid"];
+54 -> 55 [color="#000000", lty="solid"];
+4 -> 56 [color="#000000", lty="solid"];
+6 -> 57 [color="#000000", lty="solid"];
+56 -> 58 [color="#000000", lty="solid"];
+57 -> 58 [color="#000000", lty="solid"];
+40 -> 59 [color="#000000", lty="solid"];
+58 -> 59 [color="#000000", lty="solid"];
+16 -> 60 [color="#000000", lty="solid"];
+34 -> 60 [color="#000000", lty="solid"];
+38 -> 61 [color="#000000", lty="solid"];
+50 -> 61 [color="#000000", lty="solid"];
+13 -> 62 [color="#000000", lty="solid"];
+37 -> 62 [color="#000000", lty="solid"];
+48 -> 63 [color="#000000", lty="solid"];
+62 -> 63 [color="#000000", lty="solid"];
+63 -> 64 [color="#000000", lty="solid"];
+64 -> 65 [color="#000000", lty="solid"];
+50 -> 66 [color="#000000", lty="solid"];
+64 -> 66 [color="#000000", lty="solid"];
+65 -> 67 [color="#000000", lty="solid"];
+66 -> 67 [color="#000000", lty="solid"];
+1 -> 68 [color="#000000", lty="solid"];
+6 -> 69 [color="#000000", lty="solid"];
+14 -> 69 [color="#000000", lty="solid"];
+56 -> 70 [color="#000000", lty="solid"];
+68 -> 70 [color="#000000", lty="solid"];
+69 -> 70 [color="#000000", lty="solid"];
+36 -> 71 [color="#000000", lty="solid"];
+57 -> 72 [color="#000000", lty="solid"];
+71 -> 72 [color="#000000", lty="solid"];
+34 -> 73 [color="#000000", lty="solid"];
+3 -> 74 [color="#000000", lty="solid"];
+17 -> 74 [color="#000000", lty="solid"];
+3 -> 75 [color="#000000", lty="solid"];
+11 -> 75 [color="#000000", lty="solid"];
+15 -> 76 [color="#000000", lty="solid"];
+75 -> 76 [color="#000000", lty="solid"];
+76 -> 77 [color="#000000", lty="solid"];
+21 -> 78 [color="#000000", lty="solid"];
+76 -> 78 [color="#000000", lty="solid"];
+9 -> 79 [color="#000000", lty="solid"];
+14 -> 79 [color="#000000", lty="solid"];
+79 -> 80 [color="#000000", lty="solid"];
+3 -> 81 [color="#000000", lty="solid"];
+17 -> 81 [color="#000000", lty="solid"];
+15 -> 82 [color="#000000", lty="solid"];
+81 -> 82 [color="#000000", lty="solid"];
+3 -> 83 [color="#000000", lty="solid"];
+11 -> 83 [color="#000000", lty="solid"];
+21 -> 84 [color="#000000", lty="solid"];
+83 -> 84 [color="#000000", lty="solid"];
+17 -> 85 [color="#000000", lty="solid"];
+84 -> 85 [color="#000000", lty="solid"];
+10 -> 86 [color="#000000", lty="solid"];
+85 -> 87 [color="#000000", lty="solid"];
+86 -> 87 [color="#000000", lty="solid"];
+15 -> 88 [color="#000000", lty="solid"];
+28 -> 88 [color="#000000", lty="solid"];
+88 -> 89 [color="#000000", lty="solid"];
+48 -> 90 [color="#000000", lty="solid"];
+}

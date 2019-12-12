@@ -20,7 +20,7 @@ load(file.path(gsetPath, 'athGO.RData'))
 load(file.path(gsetPath, 'athKEGG.RData'))
 load(file.path(gsetPath, 'athBioCyc.RData'))
 
-kmeansRes <- read_csv('../results/kmeans_10_Day15.csv',
+kmeansRes <- read_csv('../results/eachGroup_mergeDay8_deg.csv',
                       col_types = cols(Chromosome = col_character()))
 
 ##~~~~~~~~~~~~~~~select genesets~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -62,7 +62,7 @@ BioCycMat <- foreach(i = 1:length(athBioCyc), .combine = rbind) %dopar% {
 ##~~~~~~~~~~~~~~~~~~~whole cluster gene-set~~~~~~~~~~~~~~~~~~~~
 for (i in kmeansRes$cl %>% unique) {
 
-  prefix <- 'kmeans_10_Day15'
+  prefix <- 'kmeans_10_mergeDay8'
 
   degVec <- (kmeansRes$cl == i) %>%
     as.integer %>%
@@ -73,8 +73,7 @@ for (i in kmeansRes$cl %>% unique) {
   ## GO
   GOTestWithCat <- goseq(pwf, gene2cat = GOMat, use_genes_without_cat = FALSE) %>%
     as_tibble %>%
-    filter(!is.na(ontology)) %>%
-    rename(Annotation = term)
+    filter(!is.na(ontology))
 
   termCat <- c('BP', 'MF', 'CC')
   for (j in termCat) {
@@ -95,18 +94,18 @@ for (i in kmeansRes$cl %>% unique) {
   write.csv(KEGGTestWithCat,
             paste0(prefix, '_cluster', i, '_KEGG.csv') %>% file.path(getwd(), .))
 
-  ## BioCyc
-  pathAnno <- getCycPathway('ARA') %>%
-    rename(Annotation = pathAnno) %>%
-    mutate(Annotation = Annotation %>% str_replace_all('<.*?>', ''))
+  ## ## BioCyc
+  ## pathAnno <- getCycPathway('ARA') %>%
+  ##   rename(Annotation = pathAnno) %>%
+  ##   mutate(Annotation = Annotation %>% str_replace_all('<.*?>', ''))
 
-  BioCycTestWithCat <- goseq(pwf, gene2cat = BioCycMat, use_genes_without_cat = FALSE) %>%
-    as_tibble %>%
-    inner_join(., pathAnno, by = c('category' = 'pathID')) %>%
-    mutate(ontology = 'BioCyc')
+  ## BioCycTestWithCat <- goseq(pwf, gene2cat = BioCycMat, use_genes_without_cat = FALSE) %>%
+  ##   as_tibble %>%
+  ##   inner_join(., pathAnno, by = c('category' = 'pathID')) %>%
+  ##   mutate(ontology = 'BioCyc')
 
-  write.csv(BioCycTestWithCat,
-            paste0(prefix, '_cluster', i, '_BioCyc.csv') %>% file.path(getwd(), .))
+  ## write.csv(BioCycTestWithCat,
+  ##           paste0(prefix, '_cluster', i, '_BioCyc.csv') %>% file.path(getwd(), .))
 }
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
