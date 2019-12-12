@@ -106,21 +106,36 @@ degres$sv1 <- svobj$sv[, 1]
 degres$sv2 <- svobj$sv[, 2]
 degres$sv3 <- svobj$sv[, 3]
 degres$sv4 <- svobj$sv[, 4]
-design(degres) <- ~sv1 + sv2 + sv3 + sv4 + condition
+design(degres) <- ~sv1 + sv2 + sv3 + sv4 + Conditions
 
-cond <- list(c('Col0_FeCl3_HK_Day8', 'Col0_FeEDTA_HK_Day8'),
-             c('Col0_FeCl3_Live_Day8', 'Col0_FeEDTA_Live_Day8'),
-             c('f6h1_FeCl3_HK_Day8', 'f6h1_FeEDTA_HK_Day8'),
-             c('f6h1_FeCl3_Live_Day8', 'f6h1_FeEDTA_Live_Day8'),
-             c('Col0_FeEDTA_Live_Day8', 'Col0_FeEDTA_HK_Day8'),
-             c('Col0_FeCl3_Live_Day8', 'Col0_FeCl3_HK_Day8'),
-             c('f6h1_FeEDTA_Live_Day8', 'f6h1_FeEDTA_HK_Day8'),
-             c('f6h1_FeCl3_Live_Day8', 'f6h1_FeCl3_HK_Day8'))
+## colnames(svobj$sv) <- c('sv1', 'sv2', 'sv3', 'sv4')
+## sampleTable2 <- cbind(sampleTable, svobj$sv)
+## degres <- DESeqDataSetFromTximport(kres, sampleTable2, ~sv1 + sv2 + sv3 + sv4 + Genotype + Iron + SynCom)
+## design(degres) <- ~sv1 + sv2 + sv3 + sv4 + Genotype + Iron + SynCom
+
+## remove genes with zero expression
+dat <- rld %>%
+  assay %>%
+  {.[rowMeans(.) > 1, ]}
+degresRmZero <- degres[rownames(degres) %in% rownames(dat), ]
+
+degresRmZero <- DESeq(degresRmZero)
+
+resultsNames(degresRmZero)
+
+cond <- list(c('Col0_FeCl3_HK', 'Col0_FeEDTA_HK'),
+             c('Col0_FeCl3_Live', 'Col0_FeEDTA_Live'),
+             c('f6h1_FeCl3_HK', 'f6h1_FeEDTA_HK'),
+             c('f6h1_FeCl3_Live', 'f6h1_FeEDTA_Live'),
+             c('Col0_FeEDTA_Live', 'Col0_FeEDTA_HK'),
+             c('Col0_FeCl3_Live', 'Col0_FeCl3_HK'),
+             c('f6h1_FeEDTA_Live', 'f6h1_FeEDTA_HK'),
+             c('f6h1_FeCl3_Live', 'f6h1_FeCl3_HK'))
 
 resRaw <- lapply(cond,
                  function(x) {
-                   degres %>%
-                     results(contrast = c('condition', x)) %T>%
+                   degresRmZero %>%
+                     results(contrast = c('Conditions', x)) %T>%
                      summary %>%
                      as_tibble %>%
                      select(pvalue, padj, log2FoldChange) %>%
@@ -128,41 +143,18 @@ resRaw <- lapply(cond,
                  }) %>%
   bind_cols
 
-res <- cbind.data.frame(as.matrix(mcols(degres)[, 1:10]), assay(ntd), stringsAsFactors = FALSE) %>%
+res <- cbind.data.frame(as.matrix(mcols(degresRmZero)[, 1:10]), dat, stringsAsFactors = FALSE) %>%
   rownames_to_column(., var = 'ID') %>%
   as_tibble %>%
   bind_cols(resRaw) %>%
   inner_join(anno, by = 'ID') %>%
-  select(ID, Gene : Description, Col0_FeCl3_HK_Day8_Rep1 : f6h1_FeCl3_Live_Day8_vs_f6h1_FeCl3_HK_Day8_log2FoldChange) %>%
-  arrange(Col0_FeCl3_HK_Day8_vs_Col0_FeEDTA_HK_Day8_padj)
+  select(ID, Gene : Description, Col0_FeCl3_HK_Day8_Rep1 : f6h1_FeCl3_Live_vs_f6h1_FeCl3_HK_log2FoldChange) %>%
+  arrange(Col0_FeCl3_HK_vs_Col0_FeEDTA_HK_padj)
+
+## selected genes
+read_csv('../results/selected_genes.csv') %>%
+  inner_join(res, by = c('ID' = 'ID'))
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-##~~~~~~~~~~~~~~~~~~~~~merge pair-wise comparison~~~~~~~~~~~~~~~~~~~~~~
-setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/')
-
-DEGf <- dir(pattern = 'eachGroup_vs')
-
-mergeRes <- foreach(i = seq_along(DEGf), .combine = bind_cols) %do% {
-
-  eachpre <- DEGf[i] %>%
-    str_extract('(?<=vs_).*?(?=_k)') %>%
-    {
-      fpart <- str_replace(., 'FeCl3', 'FeEDTA')
-      cond <- paste(fpart, ., sep = '_vs_')
-    }
-
-  eachf <- read_csv(DEGf[i]) %>%
-    select(starts_with(eachpre))
-}
-
-read_csv('eachGroup_vs_Col0_FeCl3_Live_Day8_k.csv',
-         col_types = cols(Chromosome = col_character())) %>%
-  mutate(Gene = Gene %>% {if_else(is.na(.), '', .)}) %>%
-  mutate(Description = Description %>% {if_else(is.na(.), '', .)}) %>%
-  select(ID : f6h1_FeEDTA_Live_Day14_Rep6) %>%
-  bind_cols(mergeRes) %>%
-  write_csv('eachGroup_vs_iron.csv')
-##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PCA~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 library('directlabels')
@@ -173,10 +165,6 @@ library('sva')
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Day8~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 cols <- c('#1b9e77', '#d95f02')
-
-dat <- rld %>%
-  assay %>%
-  {.[rowMeans(.) > 1, ]}
 
 group <- sampleTable$Conditions
 design <- model.matrix(~ group)
@@ -190,7 +178,7 @@ percentVar <- round(100 * percentVar)
 pca1 <- pca$x[,1]
 pca2 <- pca$x[,2]
 
-pcaData <- colData(rld) %>%
+pcaData <- colData(degresRmZero) %>%
   as_tibble %>%
   mutate(Colours = factor(Genotype, labels = cols)) %>%
   mutate(Exp = paste(Iron, SynCom, sep = '_') %>% factor) %>%
@@ -221,7 +209,7 @@ ggsave('PCA_mergeDay8_sva.pdf', width = 12)
 ggsave('PCA_mergeDay8_sva.jpg', width = 12)
 
 write_csv(res, 'eachGroup_mergeDay8.csv')
-save(degres, rldData, file = 'eachGroup_mergeDay8.RData')
+save(degresRmZero, file = 'eachGroup_mergeDay8.RData')
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##################################################################
