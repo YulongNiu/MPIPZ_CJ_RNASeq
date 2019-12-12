@@ -1,5 +1,5 @@
 #######################GO analysis############################
-setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/geneset/')
+setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/geneset_background/')
 
 library('goseq')
 library('GO.db')
@@ -22,10 +22,12 @@ load(file.path(gsetPath, 'athBioCyc.RData'))
 
 kmeansRes <- read_csv('../results/eachGroup_mergeDay8_deg.csv',
                       col_types = cols(Chromosome = col_character()))
+kmeansBkg <- read_csv('../results/kmeans_10_mergeDay8.csv',
+                      col_types = cols(Chromosome = col_character()))
 
 ##~~~~~~~~~~~~~~~select genesets~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 athGO %<>%
-  lapply(function(x) {x[x %in% kmeansRes$ID]}) %>%
+  lapply(function(x) {x[x %in% kmeansBkg$ID]}) %>%
   {
     l <- sapply(., length) > 0
     .[l]
@@ -36,7 +38,7 @@ GOMat <- foreach(i = 1:length(athGO), .combine = rbind) %dopar% {
 } %>% as.data.frame
 
 athKEGG %<>%
-  lapply(function(x) {x[x %in% kmeansRes$ID]}) %>%
+  lapply(function(x) {x[x %in% kmeansBkg$ID]}) %>%
   {
     l <- sapply(., length) > 0
     .[l]
@@ -48,7 +50,7 @@ KEGGMat <- foreach(i = 1:length(athKEGG), .combine = rbind) %dopar% {
 
 
 athBioCyc %<>%
-  lapply(function(x) {x[x %in% kmeansRes$ID]}) %>%
+  lapply(function(x) {x[x %in% kmeansBkg$ID]}) %>%
   {
     l <- sapply(., length) > 0
     .[l]
@@ -59,7 +61,68 @@ BioCycMat <- foreach(i = 1:length(athBioCyc), .combine = rbind) %dopar% {
 } %>% as.data.frame
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-##~~~~~~~~~~~~~~~~~~~whole cluster gene-set~~~~~~~~~~~~~~~~~~~~
+##~~~~~~~~~~~~~~~~~~~whole cluster gene-set with background~~~~~~~~~~
+for (i in kmeansRes$cl %>% unique) {
+
+  prefix <- 'kmeans_10_mergeDay8'
+
+  eachRes <- kmeansRes %>%
+    filter(cl == i) %>%
+    {.$ID}
+  eachBkg <- kmeansBkg %>%
+    filter(cl == i) %>%
+    {.$ID}
+  eachLength <- kmeansBkg %>%
+    filter(cl == i) %>%
+    {.$Length}
+
+  degVec <- rep(0, length(eachBkg)) %>%
+    set_names(eachBkg)
+  degVec[match(eachRes, eachBkg)] <- 1
+
+  pwf <- nullp(degVec, bias.data = eachLength)
+
+  ## GO
+  GOTestWithCat <- goseq(pwf, gene2cat = GOMat, use_genes_without_cat = FALSE) %>%
+    as_tibble %>%
+    filter(!is.na(ontology))
+
+  termCat <- c('BP', 'MF', 'CC')
+  for (j in termCat) {
+    write.csv(GOTestWithCat %>% filter(ontology == j),
+              paste0(prefix, '_cluster', i, '_', j, '.csv') %>% file.path(getwd(), .))
+  }
+
+  ## KEGG
+  pathAnno <- getKEGGPathAnno('ath') %>%
+    as_tibble %>%
+    mutate(Annotation = Annotation %>% substr(., 1, nchar(.) - 37))
+
+  KEGGTestWithCat <- goseq(pwf, gene2cat = KEGGMat, use_genes_without_cat = FALSE) %>%
+    as_tibble %>%
+    inner_join(., pathAnno, by = c('category' = 'pathID')) %>%
+    mutate(ontology = 'KEGG')
+
+  write.csv(KEGGTestWithCat,
+            paste0(prefix, '_cluster', i, '_KEGG.csv') %>% file.path(getwd(), .))
+
+  ## ## BioCyc
+  ## pathAnno <- getCycPathway('ARA') %>%
+  ##   rename(Annotation = pathAnno) %>%
+  ##   mutate(Annotation = Annotation %>% str_replace_all('<.*?>', ''))
+
+  ## BioCycTestWithCat <- goseq(pwf, gene2cat = BioCycMat, use_genes_without_cat = FALSE) %>%
+  ##   as_tibble %>%
+  ##   inner_join(., pathAnno, by = c('category' = 'pathID')) %>%
+  ##   mutate(ontology = 'BioCyc')
+
+  ## write.csv(BioCycTestWithCat,
+  ##           paste0(prefix, '_cluster', i, '_BioCyc.csv') %>% file.path(getwd(), .))
+}
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+##~~~~~~~~~~~~~~~~~~~whole cluster gene-set~~~~~~~~~~~~~~~~~
 for (i in kmeansRes$cl %>% unique) {
 
   prefix <- 'kmeans_10_mergeDay8'
