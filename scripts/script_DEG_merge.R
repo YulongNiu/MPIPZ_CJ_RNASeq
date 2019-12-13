@@ -211,6 +211,6 @@ ggsave('PCA_mergeDay8_sva.pdf', width = 12)
 ggsave('PCA_mergeDay8_sva.jpg', width = 12)
 
 write_csv(res, 'eachGroup_mergeDay8.csv')
-save(degres, file = 'eachGroup_mergeDay8.RData')
+save(degres, rldData, file = 'eachGroup_mergeDay8.RData')
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ##################################################################

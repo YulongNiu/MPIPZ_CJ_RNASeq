@@ -249,7 +249,9 @@ ggsave(paste0(prefix, '_trait.pdf'))
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##~~~~~~~~~~~~~~~~~~~~~~~~heat map~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+degs <- read_csv('eachGroup_mergeDay8_deg.csv')
 scaleC <- rawCount %>%
+  .[rownames(rawCount) %in% degs$ID, , drop = FALSE] %>%
   t %>%
   scale %>%
   t %>%
@@ -259,21 +261,23 @@ scaleC <- rawCount %>%
   rename_at(-1, .funs = list(~paste0('Scale_', .)))
 
 rawC <- rawCount %>%
+  .[rownames(rawCount) %in% degs$ID, , drop = FALSE] %>%
   as.data.frame %>%
   rownames_to_column('ID') %>%
   as_tibble %>%
   rename_at(-1, .funs = list(~paste0('Raw_', .)))
 
 degresC <- deganno %>%
-  select(ID, Col0_FeCl3_HK_Day8_vs_Col0_FeEDTA_HK_Day8_pvalue : f6h1_FeCl3_Live_Day8_vs_f6h1_FeCl3_HK_Day8_log2FoldChange)
+  select(ID, Col0_FeCl3_HK_vs_Col0_FeEDTA_HK_pvalue : f6h1_FeCl3_Live_vs_f6h1_FeCl3_HK_log2FoldChange)
 
 heatPlot <- rawC %>%
   inner_join(scaleC) %>%
   inner_join(degresC) %>%
   {
-    cl <- as.data.frame(cl) %>%
-      rownames_to_column(var = 'ID')
-    inner_join(., cl)
+    ## cl <- as.data.frame(cl) %>%
+    ##   rownames_to_column(var = 'ID')
+    ## inner_join(., cl)
+    inner_join(., degs %>% select(ID, cl))
   } %T>%
   {(sum(names(cl) == .$ID) == nrow(.)) %>% print} %>% ## check cl names and degresC row names
   slice(cl %>% order)
@@ -423,7 +427,7 @@ rawe <- ggplot(heatRawPlot, aes(x = x, y = y, fill = log2(raw))) +
 
 scalee <- ggplot(heatScalePlot, aes(x = x, y = y, fill = scale)) +
   geom_tile() +
-  scale_fill_gradientn(colours = colorRampPalette(rev(brewer.pal(n = 10, name = 'Spectral')))(10), name = 'scale(count)') +
+  scale_fill_gradientn(colours = colorRampPalette(rev(brewer.pal(n = 10, name = 'Spectral'))[c(-3, -4, -7, -8)])(10), name = 'scale(count)') +
   labs(x = NULL, y = NULL) +
   scale_y_continuous(expand = c(0, 0), breaks = NULL) +
   scale_x_continuous(expand = c(0, 0), breaks = NULL) +
@@ -507,8 +511,8 @@ g <- grid.arrange(groupne,
                   nrow = 1,
                   ncol = 4,
                   widths = c(3.5, 1, 0.5, 13) %>% {. / sum(.)})
-ggsave(file = paste0(prefix, '_heatmap_all.pdf'), plot = g)
-ggsave(file = paste0(prefix, '_heatmap_all.jpg'), plot = g)
+ggsave(file = paste0(prefix, '_heatmap_sig.pdf'), plot = g)
+ggsave(file = paste0(prefix, '_heatmap_sig.jpg'), plot = g)
 ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## write the cluster file

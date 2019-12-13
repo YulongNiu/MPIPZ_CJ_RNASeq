@@ -1,11 +1,16 @@
 ########################replot heatmap with DEGs and cluster############
 library('tidyverse')
 library('ComplexHeatmap')
+library('limma')
+library('DESeq2')
 
 setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/')
 
+load('eachGroup_mergeDay8.RData')
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~select DEGs~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 wholeDEG <- read_csv('eachGroup_mergeDay8.csv')
-kmeansRes <- read_csv('../results_sig/kmeans_10_mergeDay8.csv') %>%
+kmeansRes <- read_csv('kmeans_10_mergeDay8.csv') %>%
   select(ID, cl)
 
 fcsig <- wholeDEG %>%
@@ -25,8 +30,18 @@ heatsig <- (padjsig * fcsig) %>%
   rowSums %>%
   {. >= 1} %>%
   which %>%
-  slice(wholeDEG, .) %>%
+  dplyr::slice(wholeDEG, .) %>%
   inner_join(kmeansRes)
 
 write_csv(heatsig, 'eachGroup_mergeDay8_deg_sig.csv')
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~heatmap~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## rlog transformed
+heatPlogData <- rldData[rownames(rldData) %in% heatsig$ID, ]
+
+Heatmap(heatPlogData[1:10, ])
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 #######################################################################
