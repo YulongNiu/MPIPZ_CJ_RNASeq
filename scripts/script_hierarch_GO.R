@@ -1,3 +1,7 @@
+
+## originally by Yulong Niu
+## yulong.niu@hotmail.com
+
 library('ontologyIndex')
 library('ontologyPlot')
 library('tidyverse')

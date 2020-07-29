@@ -1,3 +1,7 @@
+
+## originally by Yulong Niu
+## yulong.niu@hotmail.com
+
 ##############################tile plot###############################
 library('tidyverse')
 library('foreach')

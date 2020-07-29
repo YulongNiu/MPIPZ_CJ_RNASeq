@@ -1,3 +1,7 @@
+
+## originally by Yulong Niu
+## yulong.niu@hotmail.com
+
 ########################replot heatmap with DEGs and cluster############
 library('tidyverse')
 library('ComplexHeatmap')

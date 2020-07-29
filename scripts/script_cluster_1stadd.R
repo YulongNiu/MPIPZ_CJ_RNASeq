@@ -1,3 +1,7 @@
+
+## originally by Yulong Niu
+## yulong.niu@hotmail.com
+
 ######################hierarchical clustering####################
 setwd('/extDisk1/RESEARCH/MPIPZ_CJ_RNASeq/results/')
 
