@@ -1,3 +1,9 @@
 *.RData filter=lfs diff=lfs merge=lfs -text
 results_sig/kmeans_10_mergeDay8.csv filter=lfs diff=lfs merge=lfs -text
 results_sig/eachGroup_mergeDay8.RData filter=lfs diff=lfs merge=lfs -text
+results/eachGroup_mergeDay15.RData filter=lfs diff=lfs merge=lfs -text
+results/eachGroup_mergeDay15.csv filter=lfs diff=lfs merge=lfs -text
+results/eachGroup_mergeDay8.RData filter=lfs diff=lfs merge=lfs -text
+results/eachGroup_mergeDay8.csv filter=lfs diff=lfs merge=lfs -text
+results/kmeans_10_mergeDay8.csv filter=lfs diff=lfs merge=lfs -text
+
